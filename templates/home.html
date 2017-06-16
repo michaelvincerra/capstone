@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+
+{% load static %}
+
+    <link href="{% static "css/styles.css" %}" rel="stylesheet" type="text/css">
+
+{% endblock %}
+
+
+<body>
+
+    <main>
+
+        <nav>
+        {% include "nav.html" %}
+        </nav>
+
+            <section>
+            <header>
+                {# Top #}
+                {% block headline %}
+                <h1>Welcome to Data Panino: The Economic Sandwich Maker!</h1>
+                {% endblock %}
+            </header>
+
+            <article>
+            {# Middle #} %}
+                {% block main %}
+                <ul>
+                    <li> Create your own data sandwich. </li>
+                </ul>
+                {% endblock %}
+            </article>
+
+
+            {# Bottom #}
+            <footer>
+                {% block footer %}
+                    <p>Contact Us.</p>
+                {% endblock %}
+            </footer>
+
+
+            </section>
+
+    </main>
+
+</body>

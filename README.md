@@ -1,4 +1,4 @@
-# ip_panino
+# data_panino
 
 Purpose: From World Bank data, create custom views of patent (intellectual property) sales for EU countries, 
 (compare foreign direct investments).  Calculate percentage of these that make up intellectual property use. 
