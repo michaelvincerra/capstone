@@ -17,6 +17,25 @@ def home(request):
 #     context = {'patent': patent}
 #     return render(request, 'home.html', context)
 
+# def about(request):
+#     """
+#     Landing page template view
+#     """
+#     return render(request, 'about.html')
+#
+# def login(request):
+#     """
+#     Landing page template view
+#     """
+#     return render(request, 'login.html')
+#
+# def contact(request):
+#     """
+#     Landing page template view
+#     """
+#     return render(request, 'contact.html')
+
+
 def create(request):
     """
     Create a user account for creating economic snapshot(s). 

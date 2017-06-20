@@ -20,9 +20,15 @@ class EconomicSnapshot(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+
+        super().save(*args, **kwargs)
+
+
 
 #
-# class Patents(models.Model):
+# class analytics(models.Model):
 #
 #     name = models.CharField(max_length=50)
 #     type = models.CharField(max_length=100, choices=INDICATORS)

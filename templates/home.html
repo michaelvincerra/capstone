@@ -12,9 +12,11 @@
 {#        INTRO PARA FOR DATAPANINO: DEFINE WHO, WHAT AND WHY#}
 {#        <p>#}
 {##}
-{#        DataPanino is a visualization tool that shows intellectual property sales (IP) in 7 European Union countries#}
-{#        from 1965 to 2015. It's intended to help users identify insights and trends, showing IP sales against a backdrop#}
-{#        of economic indicators. Users may include analysts, investors, companies, and governments. Anyone can sign up.#}
+{#          DataPanino is a visualization tool that shows intellectual property (IP) sales and applications in 7 #}
+{#          European Union countries from 1965 to 2015. It's intended to help users identify insights and trends, #}
+{#          showing IP sales against a backdrop of economic indicators. Users may include analysts, investors, #}
+{#          companies, and governments. Anyone can sign up.#}
+{#
 {##}
 {#        In our Data Deli, you can create a Snapshot, or "data sandwich," to help you understand growth patterns,#}
 {#        and see correlations, for specific periods of time.#}
@@ -58,8 +60,12 @@
     <section class="row2">
         <article id="introtext">
             <p>
-            DataPanino is a visualization tool to show intellectual property (IP) sales in 7 European Union countries from 1960 to 2015. Identify trends and insights for IP in the context of
-                major economic indicators&mdash;<i>so you can make informed decisions</i>. We serve analysts, investors, and governments. Anyone can sign up. Create custom views.
+                DataPanino is a visualization tool that shows intellectual property (IP) sales and applications for 7
+                European Union countries from 1960 to 2015. Our tool helps you identify
+                IP trends and find insights by stacking IP with major economic indicators.
+                <i>Now you can make more informed decisions</i>.  We serve analysts, investors, and governments.
+                Anyone can sign up.
+{#               {#<i>Now you can make more informed decisions</i>  Create your own data sandwich.#}
             </p>
         </article>
 
@@ -70,6 +76,22 @@
             </form>
             <svg width="960" height="500"></svg>
         </article>
+        <article id="table_countries">
+            <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Country</th>
+                          <th>Year</th>
+                          <th>IP Sales</th>
+                          <th>Patent Applications</th>
+                        </tr>
+                      </thead>
+
+                      <tbody id="country_stats">
+                      <!--This is populated with jquery-->
+                      </tbody>
+            </table>
+        </article>
 
     </section>
  {% endblock %}
@@ -78,7 +100,7 @@
 {% block footer %}
     <section class="row3">
         <footer>
-            <p>Contact Us.</p>
+            <button id="signup">Sign Up!</button>
         </footer>
     </section>
 {% endblock %}

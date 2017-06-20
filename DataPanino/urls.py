@@ -16,16 +16,30 @@ Including another URLconf
 
 from django.conf import settings
 from django.conf.urls.static import static
-
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from patents.views import home
+from analytics.views import home
+from rest_framework import routers
+from accounts.api import UserViewSet
+from analytics.api import EconomicSnapshotViewSet
+
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r'snapshots', EconomicSnapshotViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/v1/', include(router.urls)),
     url(r'^$', home, name='home'),
+    url(r'^detail/(?P<slug>\w+)/$', home, name='home'),  # URL parameter capturing using a kwarg
 
-    # url(r'^detail/(?P<slug>\w+)/$', home, name='home'),  # URL parameter capturing using a kwarg
+    # url(r'^templates/about', about, name='about'),
+    # url(r'^templates/login', login, name='login'),
+    # url(r'^templates/contact', contact, name='contact'),
+    # url(r'^templates/user_views', user, name='user')
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
