@@ -1,50 +1,91 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block extra_head %}
 
 {% load static %}
-
-    <link href="{% static "css/styles.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "static/css/styles.css" %}" rel="stylesheet" type="text/css">
 
 {% endblock %}
 
 
-<body>
 
-    <main>
-
-        <nav>
-        {% include "nav.html" %}
-        </nav>
-
-            <section>
-            <header>
-                {# Top #}
-                {% block headline %}
-                <h1>Welcome to Data Panino: The Economic Sandwich Maker!</h1>
-                {% endblock %}
-            </header>
-
-            <article>
-            {# Middle #} %}
-                {% block main %}
-                <ul>
-                    <li> Create your own data sandwich. </li>
-                </ul>
-                {% endblock %}
-            </article>
-
-
-            {# Bottom #}
-            <footer>
-                {% block footer %}
-                    <p>Contact Us.</p>
-                {% endblock %}
-            </footer>
+{#        INTRO PARA FOR DATAPANINO: DEFINE WHO, WHAT AND WHY#}
+{#        <p>#}
+{##}
+{#        DataPanino is a visualization tool that shows intellectual property sales (IP) in 7 European Union countries#}
+{#        from 1965 to 2015. It's intended to help users identify insights and trends, showing IP sales against a backdrop#}
+{#        of economic indicators. Users may include analysts, investors, companies, and governments. Anyone can sign up.#}
+{##}
+{#        In our Data Deli, you can create a Snapshot, or "data sandwich," to help you understand growth patterns,#}
+{#        and see correlations, for specific periods of time.#}
+{#        </p>#}
+{#        <h5> Why only 7 EU member countries?</h5>#}
+{#         <p>#}
+{#        France, Germany, Italy, Netherlands, Spain, Switzerland, and the United Kingdom are given priority because they#}
+{#        show the highest amount of patent applications and the highest ICT patent applications to the EOP by priority#}
+{#        year (REVISE!) from 2004 to 2015. As defined by "Eurostat," intellectual property rights (IPR) inlcude the#}
+{#        "assignment of property rights through patents, refers to the general term for the assignment of property#}
+{#        rights through patents, copyrights and trademarks. These property rights allow the holder to exercise a#}
+{#        monopoly on the use of the item for a set period."#}
+{#        <a href="http://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Intellectual_property_right">#}
+{#            Eurostat</a> </br>#}
+{#        <a href="http://ec.europa.eu/eurostat/statistics-explained/index.php?title=Intellectual_property_rights_statistics&stable=0#Context">#}
+{#        Eurostat</a>#}
+{#        </p>#}
 
 
-            </section>
 
-    </main>
+<nav>
+{% include "nav.html" %}
+</nav>
 
-</body>
+{% block title %}
+            <title>Home</title>
+{% endblock %}
+
+
+{# TOP #}
+{% block headline %}
+    <section class="row1">
+        <header>
+        </header>
+    </section>
+{% endblock %}
+
+
+{# MIDDLE #}
+{% block main %}
+    <section class="row2">
+        <article id="introtext">
+            <p>
+            DataPanino is a visualization tool to show intellectual property (IP) sales in 7 European Union countries from 1960 to 2015. Identify trends and insights for IP in the context of
+                major economic indicators&mdash;<i>so you can make informed decisions</i>. We serve analysts, investors, and governments. Anyone can sign up. Create custom views.
+            </p>
+        </article>
+
+        <article id="graph1">
+            <form>
+              <label><input type="radio" name="mode" value="grouped"> Grouped</label>
+              <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+            </form>
+            <svg width="960" height="500"></svg>
+        </article>
+
+    </section>
+ {% endblock %}
+
+{# BOTTOM #}
+{% block footer %}
+    <section class="row3">
+        <footer>
+            <p>Contact Us.</p>
+        </footer>
+    </section>
+{% endblock %}
+
+
+{% block extra_js %}
+{#    <script type="text/javascript" src="/static/vendor/d3.js"></script>#}
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="/static/js/stacked_bar.js"></script>
+{% endblock %}

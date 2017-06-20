@@ -1,4 +1,4 @@
-"""data_panino URL Configuration
+"""DataPanino URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -26,6 +26,6 @@ urlpatterns = [
 
     url(r'^$', home, name='home'),
 
-
+    # url(r'^detail/(?P<slug>\w+)/$', home, name='home'),  # URL parameter capturing using a kwarg
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

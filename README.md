@@ -1,7 +1,3 @@
-# data_panino
+# DataPanino
 
-Purpose: From World Bank data, create custom views of patent (intellectual property) sales for EU countries, 
-(compare foreign direct investments).  Calculate percentage of these that make up intellectual property use. 
-Then map the areas in EU to show which geographic centers show greatest impact on economic development 
-for intellectual property in high technology sector. Compare country's growth in intellectual property receipts 
-vs. the rest of the European Union in the period of 1990-2015.
+<P> Purpose: Provide historical data models and graphs showing World Bank data for France, Germany, Italy, Netherlands, Spain, Switzerland, UK as top 7 contributors to patents/designs. Also show impact of foreign direct investments, and calculate percentage of these that may correlate to intellectual property patents. Then map the areas in 7 countries to show which geographic centers show greatest impact on economic development for intellectual property in high technology sector. (OPTIONAL: Compare Italy's growth in intellectual property receipts vs. the rest of the European Union in the period of 1990-2015.) </p>
