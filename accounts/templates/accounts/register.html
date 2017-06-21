@@ -1,0 +1,36 @@
+
+{# This is the registration page #}
+{# You need to learn the native bootstrap CLASSES in order to override them in the templates!!! #}
+{#  https://www.w3schools.com/bootstrap/bootstrap_ref_all_classes.asp #}
+
+
+
+{% extends "base.html" %}
+
+
+
+{% block headline %}
+
+   <div class="text-center"> Thank you for registering! </div>
+
+{% endblock %}
+
+
+{% block content %}
+    <div class='row'>
+
+
+
+    {{ form.errors }}
+
+    <form action="" method="POST">
+
+        {% csrf_token %}    {# cross site request forgery; prohibits making a fake token #}
+
+        {{ form.as_p }}
+
+    <button class=".active .btn">Register</button>
+
+    </form>
+    </div>
+{% endblock %}
