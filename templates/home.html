@@ -60,11 +60,11 @@
     <section class="row2">
         <article id="introtext">
             <p>
-                DataPanino is a visualization tool that shows intellectual property (IP) sales and applications for 7
-                European Union countries from 1960 to 2015. Our tool helps you identify
-                IP trends and find insights by stacking IP with major economic indicators.
-                <i>Now you can make more informed decisions</i>.  We serve analysts, investors, and governments.
-                Anyone can sign up.
+                DataPanino is a visualization tool that shows intellectual property (IP) sales and patent applications
+                for 7 European Union countries from 1975 to 2015. Now you can identify
+                IP trends and discover insights by stacking IP data with major economic indicators&mdash;<i>helping you
+                make informed decisions</i>.  We serve analysts, investors, and governments.
+                Anyone can sign up. Create your own data sandwich.
 {#               {#<i>Now you can make more informed decisions</i>  Create your own data sandwich.#}
             </p>
         </article>
@@ -74,6 +74,7 @@
               <label><input type="radio" name="mode" value="grouped"> Grouped</label>
               <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
             </form>
+
             <svg width="960" height="500"></svg>
         </article>
         <article id="table_countries">
@@ -88,7 +89,8 @@
                       </thead>
 
                       <tbody id="country_stats">
-                      <!--This is populated with jquery-->
+                      <!--table populated-->
+                      <!--Can this be accessed directly from dB with Python? Or use Javascript?-->
                       </tbody>
             </table>
         </article>

@@ -24,12 +24,18 @@ from accounts.api import UserViewSet
 from analytics.api import EconomicSnapshotViewSet
 
 
+
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'snapshots', EconomicSnapshotViewSet)
 
 urlpatterns = [
+
+    # Accounts
+    url(r'accounts/', include('accounts.urls', namespace='accounts')),
+
+    # API
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v1/', include(router.urls)),
@@ -41,5 +47,4 @@ urlpatterns = [
     # url(r'^templates/contact', contact, name='contact'),
     # url(r'^templates/user_views', user, name='user')
 
-
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

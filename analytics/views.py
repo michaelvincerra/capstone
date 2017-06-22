@@ -101,5 +101,6 @@ def display(request):
     context = {}
     return render(request,'home.html', context)
 
+
 def thanks(request):
     return render(request, "thanks.html")

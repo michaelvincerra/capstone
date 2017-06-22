@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{% load static %}    {# static is similar to the import statement.  #}
+
 <head>
     <meta charset="UTF-8">
     <title>DataPanino</title>
@@ -14,10 +16,10 @@
 
 
     <!-- Bootstrap core CSS -->
-    <link href="/static/vendor/startbootstrap-bare-4-dev/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- My STYLESHEET for this template -->
-    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
 
     <!--FONTS--->
     <link href="https://fonts.googleapis.com/css?family=Dosis|Signika" rel="stylesheet">
@@ -31,80 +33,59 @@
     <body>
 
         <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-inverse bg-inverse">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="container">
-            <a class="navbar-brand" href="#">DataPanino</a>
-            <div class="collapse navbar-collapse" id="navbarExample">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
+        {%  include "nav.html" %}
+
+        <!-- Page Content -->
+
+         <div class="all_container">
+
+        {#This simply inputs the contents of the nav.html page. #}
+        {% include "nav.html" %}
+
+        {% block title %}
+                    <title>Title</title>
+        {% endblock %}
+
+        {# Top #}
+        {% block headline %}
+        {% endblock %}
+
+        {# Middle #}
+
+         <section class="container content">
+
+            {% block content %}
+            {% endblock %}
+
+        </section>
+
+
+        {% block main %}
+        {% endblock %}
+
+        {# Bottom #}
+        {% block footer %}
+        {% endblock %}
+
+        {# Graph #}
+        {% block graph %}
+        {% endblock %}
+
         </div>
-    </nav>
-
-    <!-- Page Content -->
-
-     <div class="all_container">
-
-    {#This simply inputs the contents of the nav.html page. #}
-    {% include "nav.html" %}
-
-    {% block title %}
-                <title>Title</title>
-    {% endblock %}
-
-    {# Top #}
-    {% block headline %}
-    {% endblock %}
-
-    {# Middle #}
-    {% block main %}
-    {% endblock %}
-
-    {# Bottom #}
-    {% block footer %}
-    {% endblock %}
-
-    {# Graph #}
-    {% block graph %}
-    {% endblock %}
-
-    </div>
-
-
-        <!---RESOLVE ERRORS TO LINKS BELOW-->
-
-
-{#{% block javascript %}#}
 
         <!-- Bootstrap core JavaScript -->
-    <script src="/static/vendor/startbootstrap-bare-4-dev/vendor/jquery/jquery.js"></script>
-    {#    <script src="static/vendor/jquery/jquery.min.js"></script>#}
+        <script src= "{% static 'vendor/jquery/jquery.js' %}"></script>
+        {#    <script src="static/vendor/jquery/jquery.min.js"></script>#}
 
-    <script src="/static/vendor/startbootstrap-bare-4-dev/vendor/tether/tether.js"></script>
-{#    <script src="static/vendor/tether/tether.min.js"></script>#}
+        <script src= "{% static 'vendor/tether/tether.js' %}"></script>
+        {#    <script src="static/vendor/tether/tether.min.js"></script>#}
 
-    <script src="/static/vendor/startbootstrap-bare-4-dev/vendor/bootstrap/js/bootstrap.js"></script>
-{#    <script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>#}
+        <script src= "{% static 'vendor/bootstrap/js/bootstrap.js' %}"></script>
+        {#    <script src="static/vendor/bootstrap/js/bootstrap.min.js"></script>#}
 
-{#{% endblock javascript %}#}
 
-{% block extra_js %}
-{% endblock %}
+        {% block extra_js %}
+        {% endblock %}
 
 
     </body>
