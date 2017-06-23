@@ -142,9 +142,33 @@ STATICFILES_DIRS = [
 ]
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
+    # Use Django's shttps://docs.djangoproject.com/en/1.11/topics/email/tandard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
+
+
+# Django outgoing email settings
+# https://docs.djangoproject.com/en/1.11/topics/email/
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'michaelvincerra'
+EMAIL_HOST_PASSWORD = 'llamas12'
+#EMAIL_HOST_PASSWORD = os.environ['GMAIL_PASSWORD']
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+# TODO: Fix this.
+# if DEBUG:
+#     DEFAULT_FROM_EMAIL = ('michael.vincerra@gmail.com')
+# else:
+#     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackends'
+
+ADMINS = [('Michael', 'michael.vincerra@gmail.com')]

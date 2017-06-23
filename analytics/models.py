@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-# Create your models here.
-
-
+from .countries import country_codes, FLAGS
 
 
 class EconomicSnapshot(models.Model):
@@ -15,8 +13,6 @@ class EconomicSnapshot(models.Model):
         ('FDI', 'Foreign Direct Investment'),
     )
 
-
-
     descriptor = models.CharField(max_length=50, editable=False, blank=True)
     year = models.PositiveSmallIntegerField()
     country = models.CharField(max_length=50)
@@ -25,6 +21,8 @@ class EconomicSnapshot(models.Model):
     value = models.FloatField(null=False, blank=True)
     description = models.CharField(max_length=500)
     source_url = models.URLField(null=True, blank=True)
+    # flag = models.CharField(max_length=5, null=True, blank=True)    # TODO: Verify this works; or use a models. structure?
+    country_code = models.CharField(max_length=3, null=True, blank=True)
 
     @property
     def truncate(self):
@@ -37,6 +35,8 @@ class EconomicSnapshot(models.Model):
         self.country = slugify(self.country)
         self.descriptor = f'{self.country}+{self.type}+{self.year}'
 
+        self.country_code = country_codes[self.country.title()]
+        self.flag = FLAGS[self.country_code]
         super().save(*args, **kwargs)
 
 
@@ -52,10 +52,6 @@ class EconomicSnapshot(models.Model):
 #     def __str__(self):
 #         return self.name
 #
-#
-#
-#
-#
 # class DataDetail(models.Model):
 #
 #     """
@@ -68,4 +64,4 @@ class EconomicSnapshot(models.Model):
 #     def save(self, *args, **kwargs):
 #         self.slug = slugify(self.name)
 #
-#         super().save(*args, **kwargs)
+#     super().save(*args, **kwargs)

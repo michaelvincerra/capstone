@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+
+    <table class="table_mastergrid">
+
+	    <thead>
+            <tr>
+                <th colspan="8" > Countries Overview: Economic Data<br/>
+                    Start by selecting a country's flag by its corresponding indicator.
+                    This is the first ingredient in your data sandwich.
+                </th><br/>
+            </tr>
+            <tr>
+
+            </tr>
+                <tr>
+                    <th>
+                        &nbsp;
+                    </th>
+                    {% for country in countries %}
+
+                        <th>
+                        {{ country|title }}
+                        </th>
+
+                    {% endfor %}
+		    </tr>
+	    </thead>
+
+	<tbody>
+        {%  for indicator, data in ordered_indicators.items  %}
+
+		<tr>
+			<td>
+				{{ indicator }}
+			</td>
+
+{#           {% for country, type in data %}#}
+{#            <td>#}
+{#				{{ country }}#}
+{#                <img src="{% static "img/france_flag.png" %}" class="fr_flag">#}
+{#			</td>#}
+{#			{% endfor %}#}
+
+		</tr>
+
+		{% endfor %}
+
+
+    </table>
+
+
+
+{#ordered_indicators#}
+
+            {%  for country_tuple in ordered_indicators %}
+                  <tr>
+                    {{ country_tuple }}
+                  </tr>
+
+            {% endfor %}
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+
+{#                <td>{% for country in composite %}#}
+{#                    {{ country}}    {# loop variable: economic_snapshot; pulls from economic_snapshots in views.py#}
+{#                {% endfor %}#}
+
+
+{#            {%  for economic_snapshot in economic_snapshots %}#}
+{#            <tr>#}
+{#                <td class="{% cycle 'row1' 'row2' as rowcolors %}">...</td>#}
+{#                    <td class="{{ economic_snapshot.country }}">...</td>#}
+{#                    </tr>#}
+{#                     <tr>#}
+{#                    <td class="{% cycle economic_snapshot.type %}">...</td>#}
+{#                    <td class="{{ economic_snapshot.year }}">...</td>#}
+{#            </tr>#}
+{#           {% endfor %}#}
+
+
+
+{##}
+{##}
+{#                country_alldata = {{ economic_snapshot.country, economic_snapshot.type, economic_snapshot.year }}#}
+{##}
+{#                <div class="country_all_data"></div>#}
+
+
+{#            {% for economic_snapshot in economic_snapshots %}#}
+{#                <tr>#}
+{#                    <td>{{ economic_snapshot.country}}<td/>   {# loop variable: economic_snapshot; pulls from views.py#}
+{#                    <td>{{ economic_snapshot.type}}</td>      {# is type iterable? How to get IP, GDP, GNI, FDI#}
+{#                    <td>{{ economic_snapshot.year}}</td>#}
+{#                </tr>#}
+{##}
+{##}
+{#            {% endfor %}#}
+
+
+
+
+
+

@@ -8,6 +8,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as django_login
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.mail import send_mail
+
+#Django email: https://docs.djangoproject.com/en/1.11/topics/email/#quick-example
 
 def login(request):
     if request.method == 'GET':
@@ -41,7 +44,17 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
 
+            send_mail(
+                subject = 'First test',
+                message = 'Steve is a rockstar!.',
+                from_email ='michael.vincerra@gmail.com',
+                recipient_list=[user.email],
+                fail_silently=False,
+            )
+
             # make any final changes to the user here.
+            # TODO: Ad a mail_managers function here. Per doc below:
+            # https://docs.djangoproject.com/en/1.11/topics/email/#mail-managers
             user.save()
 
             username = form.cleaned_data.get('username')
@@ -50,6 +63,10 @@ def register(request):
             django_login(request, user)
 
             return redirect('/')   # TODO: Find a better redirect
+
+
+
+
 
 
     context = {'form': form}

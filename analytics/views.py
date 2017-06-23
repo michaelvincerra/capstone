@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import EconomicSnapshot
+from collections import OrderedDict
 
 
 def home(request):
@@ -7,15 +8,6 @@ def home(request):
     Landing page template view
     """
     return render(request, 'home.html')
-
-
-# def home(request, pk):
-#     """
-#     Landing page template view
-#     """
-#     patent = Patent.objects.get(id=pk)
-#     context = {'patent': patent}
-#     return render(request, 'home.html', context)
 
 # def about(request):
 #     """
@@ -34,6 +26,50 @@ def home(request):
 #     Landing page template view
 #     """
 #     return render(request, 'contact.html')
+
+def list_economic_snapshots(request, country, type):
+    """ 
+    Returns  
+    """
+    panini = EconomicSnapshot.objects.filter(country=country.lower()).filter(type__iexact=type.upper()).order_by('country')
+    indicators = OrderedDict()
+    for snapshot in panini:
+        indicator = snapshot.type
+        try:
+            indicators[indicator].append(snapshot)
+        except KeyError:
+            indicators[indicator] = [snapshot]
+
+    context = {'ordered_indicators': indicators}    # Key: 'economic_snapshots'; only changes the param in the template
+    return render(request, 'mastergrid.html', context)
+
+
+
+def list_country_composite(request):
+    """
+    
+    """
+    composite = set(EconomicSnapshot.objects.all().values_list('country', 'type'))
+    countries = sorted(set(c[0] for c in composite))
+
+    indicators = OrderedDict()
+
+    for snapshot in composite:
+        indicator = snapshot[1]
+        try:
+            indicators[indicator].append(snapshot)
+        except KeyError:
+            indicators[indicator] = [snapshot]  # Def by negation: Finds first instance of loop variable, then repeats.
+
+    context = {'countries': countries,
+               'ordered_indicators': indicators}  # Key: 'economic_snapshots'; only changes the param in the template
+
+    return render(request, "mastergrid.html", context)
+
+
+
+# https://docs.djangoproject.com/en/1.11/ref/models/querysets/#values-list
+
 
 
 def create(request):

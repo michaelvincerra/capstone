@@ -4,6 +4,11 @@
 "use strict";
 
 
+
+
+
+
+
 function buildCountry(country_name, countryIP, year) {
     // Builds the table where it shows: a country name, country IP sales, and the year recorded.
 

@@ -1,28 +1,3 @@
-table, th , td {
-    /*border: 1px solid black;*/
-    text-align: center;
-
-}
-
-
-.fdi_flag, .ip_flag, .gdp_flag, .gni_flag {
-    background-image: ;
-
-}
-
-
-
-
-tr:hover{background-color:#C1C4C4}
-
-
-th {
-    /*flex: display;*/
-    /*!*flex-direction: row;*!*/
-    /*text-align:center;*/
-}
-
-}
 
 .content {
     display: flex;
