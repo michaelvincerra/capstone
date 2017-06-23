@@ -10,7 +10,7 @@
 	    <thead>
             <tr>
                 <th colspan="8" > Countries Overview: Economic Data<br/>
-                    Start by selecting a country's flag by its corresponding indicator.
+                    Select a country's flag and its corresponding indicator.
                     This is the first ingredient in your data sandwich.
                 </th><br/>
             </tr>
@@ -31,22 +31,25 @@
 		    </tr>
 	    </thead>
 
-	<tbody>
-        {%  for indicator, data in ordered_indicators.items  %}
+        {%  for indicator_name, data in ordered_indicators %}
 
 		<tr>
 			<td>
-				{{ indicator }}
+				{{ indicator_name }}
 			</td>
+            {% for country, indicator in data %}
+            <td>
+                {{ country }} / {{ indicator }}
+            </td>
 
-{#           {% for country, type in data %}#}
-{#            <td>#}
-{#				{{ country }}#}
-{#                <img src="{% static "img/france_flag.png" %}" class="fr_flag">#}
-{#			</td>#}
-{#			{% endfor %}#}
-
+            {% endfor %}
 		</tr>
+
+        <tr>
+            <td>
+            </td>
+        </tr>
+
 
 		{% endfor %}
 
@@ -55,25 +58,24 @@
 
 
 
-{#ordered_indicators#}
-
-            {%  for country_tuple in ordered_indicators %}
-                  <tr>
-                    {{ country_tuple }}
-                  </tr>
-
-            {% endfor %}
-
-
-
-
-
-
-
-
-
 
 {% endblock %}
+
+
+{#            {%  for country_tuple in ordered_indicators %}#}
+{#                  <tr>#}
+{#                    {{ country_tuple }}#}
+{#                  </tr>#}
+{##}
+{#            {% endfor %}#}
+
+
+{#           {% for country, type in data %}#}
+{#            <td>#}
+{#				{{ country }}#}
+{#                <img src="{% static "img/france_flag.png" %}" class="fr_flag">#}
+{#			</td>#}
+{#			{% endfor %}#}
 
 
 {#                <td>{% for country in composite %}#}

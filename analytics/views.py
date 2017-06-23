@@ -49,7 +49,7 @@ def list_country_composite(request):
     """
     
     """
-    composite = set(EconomicSnapshot.objects.all().values_list('country', 'type'))
+    composite = set(EconomicSnapshot.objects.all().values_list('country', 'type', 'flag'))
     countries = sorted(set(c[0] for c in composite))
 
     indicators = OrderedDict()
@@ -61,8 +61,9 @@ def list_country_composite(request):
         except KeyError:
             indicators[indicator] = [snapshot]  # Def by negation: Finds first instance of loop variable, then repeats.
 
+    ordered_indicators = [(name, sorted(data)) for name, data in indicators.items()]
     context = {'countries': countries,
-               'ordered_indicators': indicators}  # Key: 'economic_snapshots'; only changes the param in the template
+               'ordered_indicators': ordered_indicators}  # Key: 'economic_snapshots'; only changes the param in the template
 
     return render(request, "mastergrid.html", context)
 

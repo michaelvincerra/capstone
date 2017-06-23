@@ -13,7 +13,6 @@ class Command(BaseCommand):
         parser.add_argument('end_year', type=int)
         # parser.add_argument('indicators', type=str, help=self.indicators_help)
 
-
     def handle(self, *args, **options):
             indicator_prompt = '''
             IP  --> BX.GSR.ROYL.CD | Intellectual property sales and receipts
@@ -23,7 +22,7 @@ class Command(BaseCommand):
             '''
 
             print(indicator_prompt)
-            print("On which type of economic indicator do you want data?", sep='')
+            print("What type of economic indicator data do you want?", sep='')
 
             answer = input('>> ')
 
@@ -66,7 +65,8 @@ class Command(BaseCommand):
                                             value=result['value'],
                                             # value={currencyUS},
                                             type=answer,
-                                            source_url=url)
+                                            source_url=url,
+                                            country_code=options['country'].upper())
 
                 # locale.currency('value')
                 indicator.save()     # saves record to the sqlite3 database

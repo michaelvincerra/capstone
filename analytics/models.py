@@ -21,7 +21,7 @@ class EconomicSnapshot(models.Model):
     value = models.FloatField(null=False, blank=True)
     description = models.CharField(max_length=500)
     source_url = models.URLField(null=True, blank=True)
-    # flag = models.CharField(max_length=5, null=True, blank=True)    # TODO: Verify this works; or use a models. structure?
+    flag = models.CharField(max_length=5, null=True, blank=True)    # TODO: Verify this works; or use a models. structure?
     country_code = models.CharField(max_length=3, null=True, blank=True)
 
     @property
@@ -35,7 +35,10 @@ class EconomicSnapshot(models.Model):
         self.country = slugify(self.country)
         self.descriptor = f'{self.country}+{self.type}+{self.year}'
 
-        self.country_code = country_codes[self.country.title()]
+        if self.country_code is None:
+            clean_country = self.country.replace('-', ' ').title()
+            self.country_code = country_codes[clean_country]
+
         self.flag = FLAGS[self.country_code]
         super().save(*args, **kwargs)
 

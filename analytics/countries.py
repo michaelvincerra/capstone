@@ -1,4 +1,4 @@
-
+# flags contain the unicode, which will be accessible by method in other files with .FLAGS.
 
 flags = (
     ('FR', '🇫🇷'),
