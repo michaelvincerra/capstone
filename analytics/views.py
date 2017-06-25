@@ -27,21 +27,14 @@ def home(request):
 #     """
 #     return render(request, 'contact.html')
 
-def list_economic_snapshots(request, country, type):
+
+def list_economic_snapshots(request, country):
     """ 
     Returns  
     """
-    panini = EconomicSnapshot.objects.filter(country=country.lower()).filter(type__iexact=type.upper()).order_by('country')
-    indicators = OrderedDict()
-    for snapshot in panini:
-        indicator = snapshot.type
-        try:
-            indicators[indicator].append(snapshot)
-        except KeyError:
-            indicators[indicator] = [snapshot]
-
-    context = {'ordered_indicators': indicators}    # Key: 'economic_snapshots'; only changes the param in the template
-    return render(request, 'mastergrid.html', context)
+    panini = EconomicSnapshot.objects.filter(country=country.lower())
+    context = {'panini': panini}    # Key: 'economic_snapshots'; only changes the param in the template
+    return render(request, 'country.html', context)
 
 
 
@@ -53,6 +46,7 @@ def list_country_composite(request):
     countries = sorted(set(c[0] for c in composite))
 
     indicators = OrderedDict()
+
 
     for snapshot in composite:
         indicator = snapshot[1]

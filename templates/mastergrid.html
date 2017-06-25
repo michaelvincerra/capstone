@@ -37,9 +37,9 @@
 			<td>
 				{{ indicator_name }}
 			</td>
-            {% for country, indicator in data %}
+            {% for country, indicator, flag in data %}
             <td>
-                {{ country }} / {{ indicator }}
+                <a href="/country/{{ country }}/{{ indicator }}/">{{ flag }}</a>
             </td>
 
             {% endfor %}

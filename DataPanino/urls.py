@@ -42,7 +42,7 @@ urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
     url(r'^$', home, name='home'),
     url(r'^detail/(?P<slug>\w+)/$', home, name='home'),  # URL parameter capturing using a kwarg
-    url(r'^country_overview/(?P<country>\w+)/(?P<type>\w{,5})/', list_economic_snapshots, name='economic_snapshots'),   #when to use include
+    url(r'^country/(?P<country>\w+)/(?P<type>\w{0,5})/', list_economic_snapshots, name='economic_snapshots'),   #when to use include
     url(r'^country_overview/$', list_country_composite, name='composite'),  # when to use include
 
                   # url(r'^templates/about', about, name='about'),

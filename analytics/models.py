@@ -21,7 +21,7 @@ class EconomicSnapshot(models.Model):
     value = models.FloatField(null=False, blank=True)
     description = models.CharField(max_length=500)
     source_url = models.URLField(null=True, blank=True)
-    flag = models.CharField(max_length=5, null=True, blank=True)    # TODO: Verify this works; or use a models. structure?
+    flag = models.CharField(max_length=5, null=True, blank=True)    #TODO: Verify this works; or use a models. structure?
     country_code = models.CharField(max_length=3, null=True, blank=True)
 
     @property
@@ -44,7 +44,13 @@ class EconomicSnapshot(models.Model):
 
 
 
-#
+
+
+
+
+
+
+
 # class analytics(models.Model):
 #
 #     name = models.CharField(max_length=50)
