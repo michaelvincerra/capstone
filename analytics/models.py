@@ -15,8 +15,8 @@ class EconomicSnapshot(models.Model):
 
     descriptor = models.CharField(max_length=50, editable=False, blank=True)
     year = models.PositiveSmallIntegerField()
-    country = models.CharField(max_length=50)
-    type = models.CharField(max_length=100, choices=INDICATORS)
+    country = models.CharField(max_length=20)
+    type = models.CharField(max_length=30, choices=INDICATORS)
     # value = models.IntegerField(null=False, blank=True)
     value = models.FloatField(null=False, blank=True)
     description = models.CharField(max_length=500)

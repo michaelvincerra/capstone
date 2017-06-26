@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+    {% block country %}
+
+{#        <table class="country_detail">#}
+
+{#        <tr>#}
+{#            {% for code in country_code %}#}
+{#                {{ code }}#}
+{#            {% endfor %}#}
+{#        </tr>#}
+
+{#        <tr>#}
+            {% for pane in panini %}
+
+                {{ pane }}
+
+            {% endfor %}
+
+
+        {#        </tr>#}
+
+{#        </table>#}
+
+    {%  endblock %}
+
+
+

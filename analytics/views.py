@@ -28,19 +28,19 @@ def home(request):
 #     return render(request, 'contact.html')
 
 
-def list_economic_snapshots(request, country):
+def list_economic_snapshots(request, country, type):
     """ 
-    Returns  
+    Returns 1 country page with default economic indicator selected.  
     """
-    panini = EconomicSnapshot.objects.filter(country=country.lower())
-    context = {'panini': panini}    # Key: 'economic_snapshots'; only changes the param in the template
+    panini = EconomicSnapshot.objects.filter(country=country.lower(), type=type)
+    context = {'panini': panini}    # Key: 'panini'; only changes the param in the template
     return render(request, 'country.html', context)
 
 
 
 def list_country_composite(request):
     """
-    
+    Returns mastergrid table with 7 countries and their related indicators 
     """
     composite = set(EconomicSnapshot.objects.all().values_list('country', 'type', 'flag'))
     countries = sorted(set(c[0] for c in composite))
@@ -57,7 +57,7 @@ def list_country_composite(request):
 
     ordered_indicators = [(name, sorted(data)) for name, data in indicators.items()]
     context = {'countries': countries,
-               'ordered_indicators': ordered_indicators}  # Key: 'economic_snapshots'; only changes the param in the template
+               'ordered_indicators': ordered_indicators}  # Key: 'ordered_indicators'; only changes the param in the template
 
     return render(request, "mastergrid.html", context)
 

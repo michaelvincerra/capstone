@@ -9,9 +9,10 @@
 
 	    <thead>
             <tr>
-                <th colspan="8" > Countries Overview: Economic Data<br/>
-                    Select a country's flag and its corresponding indicator.
-                    This is the first ingredient in your data sandwich.
+                <th colspan="8" > <H4>Countries Overview: Economic Indicators</H4><br/>
+
+                    Start building your DataPanino. Select the country's flag that corresponds to the desired
+                    economic indicator.  <br/>Think of this as choosing the type of bread you want for your data sandwich.
                 </th><br/>
             </tr>
             <tr>
@@ -19,7 +20,7 @@
             </tr>
                 <tr>
                     <th>
-                        &nbsp;
+                        &nbsp;<div>&nbsp</div>
                     </th>
                     {% for country in countries %}
 
@@ -31,7 +32,7 @@
 		    </tr>
 	    </thead>
 
-        {%  for indicator_name, data in ordered_indicators %}
+        {%  for indicator_name, data in ordered_indicators %}   {# ordered_indicators accessed from views #}
 
 		<tr>
 			<td>
