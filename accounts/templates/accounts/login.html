@@ -1,0 +1,18 @@
+{% block content %}
+    <div class='row'>
+
+    {{ form.errors }}
+
+    <form action="" method="POST">
+
+        {% csrf_token %}    {# cross site request forgery; prohibits making a fake token #}
+
+        {{ form.as_p }}
+
+    <button class=".active .btn">Login</button>
+
+    </form>
+    </div>
+
+
+{% endblock %}

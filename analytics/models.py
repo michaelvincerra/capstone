@@ -1,6 +1,27 @@
 from django.db import models
 from django.utils.text import slugify
 from .countries import country_codes, FLAGS
+# from accounts.models import User
+
+
+class Country(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
+    code = models.CharField(max_length=4)
+    flag = models.CharField(max_length=5, null=True, blank=True)    #TODO: Verify this works; or use a models. structure?
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+
+        if self.code is None:
+            clean_country = self.name.replace('-', ' ').title()
+            self.code = country_codes[clean_country]
+
+        self.flag = FLAGS[self.code]
+        super().save(*args, **kwargs)
 
 
 class EconomicSnapshot(models.Model):
@@ -13,40 +34,27 @@ class EconomicSnapshot(models.Model):
         ('FDI', 'Foreign Direct Investment'),
     )
 
-    descriptor = models.CharField(max_length=50, editable=False, blank=True)
+    slug = models.SlugField(max_length=50)
     year = models.PositiveSmallIntegerField()
-    country = models.CharField(max_length=20)
+    country = models.ForeignKey(Country, related_name='snapshots')  # Foreign key: one-to-many only; name
     type = models.CharField(max_length=30, choices=INDICATORS)
-    # value = models.IntegerField(null=False, blank=True)
     value = models.FloatField(null=False, blank=True)
     description = models.CharField(max_length=500)
     source_url = models.URLField(null=True, blank=True)
-    flag = models.CharField(max_length=5, null=True, blank=True)    #TODO: Verify this works; or use a models. structure?
-    country_code = models.CharField(max_length=3, null=True, blank=True)
 
     @property
     def truncate(self):
         return self.description[:30]
 
     def __str__(self):
-        return self.descriptor    #country
+        return self.slug
 
     def save(self, *args, **kwargs):
-        self.country = slugify(self.country)
-        self.descriptor = f'{self.country}+{self.type}+{self.year}'
 
-        if self.country_code is None:
-            clean_country = self.country.replace('-', ' ').title()
-            self.country_code = country_codes[clean_country]
+        descriptor = f'{self.country.code}+{self.type}+{self.year}'
+        self.slug = descriptor
 
-        self.flag = FLAGS[self.country_code]
         super().save(*args, **kwargs)
-
-
-
-
-
-
 
 
 

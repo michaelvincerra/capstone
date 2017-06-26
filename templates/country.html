@@ -4,25 +4,34 @@
 
     {% block country %}
 
-{#        <table class="country_detail">#}
-
-{#        <tr>#}
-{#            {% for code in country_code %}#}
-{#                {{ code }}#}
-{#            {% endfor %}#}
-{#        </tr>#}
-
-{#        <tr>#}
-            {% for pane in panini %}
-
-                {{ pane }}
-
-            {% endfor %}
+        <table class="country_detail" xmlns="http://www.w3.org/1999/html">
+            <tr>
+                <td colspan="8">
+                    ROW FOR COUNTRY CODES!
+                {% for country in country_code %}
+                    {{ country }}
+                {% endfor %}
+                </td>
+            </tr>
 
 
-        {#        </tr>#}
 
-{#        </table>#}
+            <tr>
+                <td>
+                {% for select in selection %}    {# pane, data #}
+                    {{ select }}
+                {% endfor %}
+
+{#                <td>#}
+{#                    {% for data in country_code %}#}
+{#                       {{ data }}#}
+{#                    {%  endfor %}#}
+{#                </td>#}
+                </td>
+            </tr>
+
+
+        </table>
 
     {%  endblock %}
 

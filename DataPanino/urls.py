@@ -21,6 +21,7 @@ from django.contrib import admin
 from analytics.views import home
 from rest_framework import routers
 from accounts.api import UserViewSet
+from accounts.views import profile, login, logout
 from analytics.api import EconomicSnapshotViewSet
 from analytics.views import list_economic_snapshots, list_country_composite
 
@@ -40,12 +41,12 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v1/', include(router.urls)),
+
     url(r'^$', home, name='home'),
     url(r'^detail/(?P<slug>\w+)/$', home, name='home'),  # URL parameter capturing using a kwarg
     url(r'^country/(?P<country>[\w-]+)/(?P<type>\w{0,5})/$', list_economic_snapshots, name='economic_snapshots'),
     url(r'^country_overview/$', list_country_composite, name='composite'),  # see 'def list_country_composite in views.
-    # url(r'^country/(?P<country>\w+-\w+)/(?P<type>\w{0,5})/$', list_economic_snapshots,
-    #                   name='economic_snapshots'),
+
 
                   # url(r'^templates/about', about, name='about'),
     # url(r'^templates/login', login, name='login'),

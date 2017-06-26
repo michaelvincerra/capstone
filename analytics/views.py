@@ -28,12 +28,30 @@ def home(request):
 #     return render(request, 'contact.html')
 
 
-def list_economic_snapshots(request, country, type):
+def list_economic_snapshots(request, country, type):    # country_code,
     """ 
     Returns 1 country page with default economic indicator selected.  
     """
-    panini = EconomicSnapshot.objects.filter(country=country.lower(), type=type)
-    context = {'panini': panini}    # Key: 'panini'; only changes the param in the template
+    # country_code = EconomicSnapshot.objects.filter(country_code=country_code.upper(),)
+
+    selection = EconomicSnapshot.objects.filter(country=country.lower(), type=type)
+
+    composite = set(EconomicSnapshot.objects.all().values_list('country', 'type', 'flag'))
+    countries = sorted(set(c[0] for c in composite))
+
+    indicators = OrderedDict()
+
+
+    for snapshot in composite:
+        indicator = snapshot[1]
+        try:
+            indicators[indicator].append(snapshot)
+        except KeyError:
+            indicators[indicator] = [snapshot]  # Def by negation: Finds first instance of loop variable, then repeats.
+
+    ordered_indicators = [(name, sorted(data)) for name, data in indicators.items()]
+
+    context = {'selection': selection}                        # Key: 'selection'; only changes the param in the template
     return render(request, 'country.html', context)
 
 

@@ -3,12 +3,14 @@ https://simpleisbetterthancomplex.com/tutorial/2017/02/18/how-to-create-user-sig
 """
 
 from .forms import CustomUserCreationForm
+from .forms import CustomUserUpdateForm
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as django_login
 from django.contrib.auth import logout as django_logout
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
 #Django email: https://docs.djangoproject.com/en/1.11/topics/email/#quick-example
 
@@ -67,7 +69,15 @@ def register(request):
 
 
 
-
-
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
+
+@login_required(login_url='/accounts/login/')
+
+def profile(request):
+    password_form = PasswordChangeForm(user=request.user)
+    form = CustomUserUpdateForm(instance=request.user)
+
+    context = {'form': form, 'password_form': password_form}
+    return render(request, 'profile.html', context)
+

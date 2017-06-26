@@ -172,3 +172,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackends'
 
 ADMINS = [('Michael', 'michael.vincerra@gmail.com')]
+
+LOGIN_REDIRECT_URL = '/accounts/profile'

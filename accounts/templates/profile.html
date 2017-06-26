@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+    <div class='profile_form'>
+
+            {{ form.errors }}
+
+            <form action="" method="POST">
+
+                {% csrf_token %}    {# cross site request forgery; prohibits making a fake token #}
+
+                {{ form.as_p }}
+
+            <button class=".active .btn">Register</button>
+
+            </form>
+    </div>
+
+
+    <div class='password_form'>
+
+        {{ form.errors }}
+
+        <form action="" method="POST">
+
+            {% csrf_token %}    {# cross site request forgery; prohibits making a fake token #}
+
+            {{ password_form.as_p }}
+
+        <button class=".active .btn">Reset Password</button>
+
+        </form>
+
+    </div>
+
+
+
+{% endblock %}
