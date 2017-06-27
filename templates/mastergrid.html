@@ -3,8 +3,6 @@
 {% block content %}
 
 
-
-
     <table class="table_mastergrid">
 
 	    <thead>
@@ -27,31 +25,29 @@
 
                         <th>
                         {{ country|title }}
+
                         </th>
 
                     {% endfor %}
 		    </tr>
 	    </thead>
 
-        {%  for indicator_name, data in ordered_indicators %}   {# ordered_indicators accessed from views #}
+        {% for indicator_name, data in ordered_indicators %}   {# ordered_indicators accessed from views #}
 
-		<tr>
-			<td>
-				{{ indicator_name }}
-			</td>
-            {% for country, indicator, flag in data %}
-            <td>
-                <a href="/country/{{ country }}/{{ indicator }}/">{{ flag }}</a>
-            </td>
-
-            {% endfor %}
-            </tr>
-        <tr>
+            <tr>
                 <td>
+                    {{ indicator_name }}
                 </td>
-        </tr>
-
-
+                {% for country, indicator, flag in data %}
+                <td>
+                    <a href="/country/{{ country }}/{{ indicator }}/">{{ flag }}</a>
+                </td>
+                {% endfor %}
+            </tr>
+            <tr>
+                    <td>
+                    </td>
+            </tr>
 		{% endfor %}
 
 

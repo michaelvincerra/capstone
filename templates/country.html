@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static %}c
 
 
     {% block country %}
 
         <table class="country_detail" xmlns="http://www.w3.org/1999/html">
+
             <tr>
                 <td colspan="8">
                     ROW FOR COUNTRY CODES!
-                {% for country in country_code %}
-                    {{ country }}
+                {% for count in country %}
+                    {{ count }}
                 {% endfor %}
                 </td>
             </tr>

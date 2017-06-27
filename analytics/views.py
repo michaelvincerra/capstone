@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import EconomicSnapshot
+from .models import EconomicSnapshot, Country
 from collections import OrderedDict
 
 
@@ -29,8 +29,8 @@ def home(request):
 
 
 def list_economic_snapshots(request, country, type):    # country_code,
-    """ 
-    Returns 1 country page with default economic indicator selected.  
+    """
+    Returns 1 country page with default economic indicator selected.
     """
     # country_code = EconomicSnapshot.objects.filter(country_code=country_code.upper(),)
 
@@ -49,7 +49,7 @@ def list_economic_snapshots(request, country, type):    # country_code,
         except KeyError:
             indicators[indicator] = [snapshot]  # Def by negation: Finds first instance of loop variable, then repeats.
 
-    ordered_indicators = [(name, sorted(data)) for name, data in indicators.items()]
+    selection = [(name, sorted(data)) for name, data in indicators.items()]
 
     context = {'selection': selection}                        # Key: 'selection'; only changes the param in the template
     return render(request, 'country.html', context)
@@ -60,11 +60,11 @@ def list_country_composite(request):
     """
     Returns mastergrid table with 7 countries and their related indicators 
     """
-    composite = set(EconomicSnapshot.objects.all().values_list('country', 'type', 'flag'))
-    countries = sorted(set(c[0] for c in composite))
+    countries = sorted(Country.objects.all(), key=lambda c: c.name)
+
+    composite = set(EconomicSnapshot.objects.all().values_list('country__name', 'type', 'country__flag'))
 
     indicators = OrderedDict()
-
 
     for snapshot in composite:
         indicator = snapshot[1]
