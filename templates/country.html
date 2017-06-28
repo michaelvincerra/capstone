@@ -73,8 +73,8 @@
               var data = {{ chart_data }};
           {% endautoescape %}
       </script>
-
     <svg class="chart"></svg>
+
   </main>
 
 </section>
@@ -85,8 +85,10 @@
 {% block extra_js %}
 
 <script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
-<script src="{% static 'js/script_bar.js' %}"></script>
-{#<script src="{% static 'js/script_negbar.js' %}"></script>#}
+{#<script src="{% static 'js/script_bar.js' %}"></script>#}
+<script src="{% static 'js/script_negbar.js' %}"></script>
+{#<script src="{% static 'js/script_barmix.js' %}"></script>#}
+
 
 
 <script>
