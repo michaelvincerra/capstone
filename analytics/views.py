@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import EconomicSnapshot, Country
 from collections import OrderedDict
+from django.db.models import Max
 
 
 def home(request):
@@ -34,13 +35,17 @@ def list_economic_snapshots(request, country, type):    # country_code,
     """
     # country_code = EconomicSnapshot.objects.filter(country_code=country_code.upper(),)
 
-    selection = EconomicSnapshot.objects.filter(country=country.lower(), type=type)
+    # countries = sorted(Country.objects.all(), key=lambda c: c.name)
+    # https://stackoverflow.com/questions/844591/how-to-do-select-max-in-django
 
-    composite = set(EconomicSnapshot.objects.all().values_list('country', 'type', 'flag'))
-    countries = sorted(set(c[0] for c in composite))
+    selection = Country.objects.get(slug=country.lower())
+    latest_year = selection.snapshots.all().aggregate(Max('year'))['year__max']
+    chart_data = list(selection.snapshots.filter(year=latest_year).values_list('value', flat=True))
+
+    composite = set(EconomicSnapshot.objects.all().values_list('country__name', 'type', 'country__flag'))
+    countries = sorted(Country.objects.all(), key=lambda c: c.name)
 
     indicators = OrderedDict()
-
 
     for snapshot in composite:
         indicator = snapshot[1]
@@ -49,9 +54,14 @@ def list_economic_snapshots(request, country, type):    # country_code,
         except KeyError:
             indicators[indicator] = [snapshot]  # Def by negation: Finds first instance of loop variable, then repeats.
 
-    selection = [(name, sorted(data)) for name, data in indicators.items()]
+    # selection = [(name, sorted(data)) for name, data in indicators.items()]
 
-    context = {'selection': selection}                        # Key: 'selection'; only changes the param in the template
+    context = {'chart_data': chart_data,
+                'selection': selection,
+               'countries': countries,
+               'indicators': indicators,
+               }
+    # Key: 'selection'; only changes the param in the template
     return render(request, 'country.html', context)
 
 

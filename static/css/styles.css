@@ -1,28 +1,114 @@
-table, th , td {
+/*.table_mastergrid th:first-child {*/
+
+/*
+ADD8E6  lightblue, BODY
+6ACBEA  toy blue, accents
+2E5966  emerald green, dark accents
+87A8B3  sea blue, bars/dividers
+58CB75  chartreuse, bright
+8DC8C7  mint green
+85BEAD  sage green
+
+/////////
+#F29D35   terracotta
+*/
+/*.chart div {*/
+  /*font: 10px sans-serif;*/
+  /*background-color: steelblue;*/
+  /*text-align: right;*/
+  /*padding: 3px;*/
+  /*margin: 1px;*/
+  /*color: white;*/
+/*}*/
+
+
+
+h4 {
     /*border: 1px solid black;*/
+    text-align: center;
+}
+
+.table_header{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin:auto;
+
+
+}
+
+
+.table_mastergrid {
+    /*border: 1px solid black;*/
+    display: table;
     text-align: center;
 
 }
 
 
-.fdi_flag, .ip_flag, .gdp_flag, .gni_flag {
-    background-image: ;
+/*}*/
+.table_country_detail  {
+    /*display: table;*/
+    /*text-align: center!important;*/
+    /*border-spacing: 0.5rem!important;*/
+    /*border-collapse: collapse !important;*/
+    /*align-content: left !important;*/
+    width: 100%;
+}
+.country_code th{
+    /*width: 100%;*/
+    border: solid blue 2px;
+
+
+
+}
+
+.country_code {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin:auto;
+    padding: 5px;
+    margins: 5px;
+    /*width: 100px;*/
+    padding: 10px;
+    /*margin-left: 5px;*/
+    /*margin-right: 5px;*/
+}
+
+.country_code td {
+    flex: 1;
+    text-align: center;
+    /*background: gradient(to right #F5EDC9, #FDD56A);*/
+    background-color: #6ACBEA;   /* C9F5EB FCE37C FDEFB3 F5EDC9 FDEFB3 FCE37C #FDD56A; #FCE37C */
+    margin-left: 5px;
+    margin-right: 5px;
+    border:  2px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #888888;
+    background: #EEEEEE;
+
+/*;    # C4E8E6 C4DFE8 87A8B3
+!* For browsers that do not support gradients *!*/
+    /*background: -webkit-linear-gradient(#6ACBEA, #FCFCFC); !* For Safari 5.1 to 6.0 *!*/
+    /*background: -o-linear-gradient(#6ACBEA, #FCFCFC); !* For Opera 11.1 to 12.0 *!*/
+    /*background: -moz-linear-gradient(#6ACBEA, #FCFCFC); !* For Firefox 3.6 to 15 *!*/
+    /*background: linear-gradient(#6ACBEA, #FCFCFC);*/
 
 }
 
 
-
-
-tr:hover{background-color:#C1C4C4}
-
-
-th {
-    /*flex: display;*/
-    /*!*flex-direction: row;*!*/
-    /*text-align:center;*/
+/*.table_country_detail economic_indicator {*/
+    /*!*display: table;*!*/
+    /*!*text-align: left;*!*/
+    /*!*border-spacing: 0.5rem;*!*/
+    /*!*border-collapse:collapse;*!*/
+    /*!*!*align-content: left;*!*!*/
 }
 
-}
+
+tr:hover{background-color:#C1C4C4;
+        }
 
 .content {
     display: flex;
@@ -38,7 +124,7 @@ nav {
 
 body {
     padding-top: 100px;
-    background: lightblue;
+    background: #ADD8E6;
     font-family: "Signika", Verdana, Arial, sans-serif;
 
 }
@@ -150,3 +236,104 @@ label {
   text-align: center;
 
 }
+
+
+/*//////////////////////////*/
+
+#page {
+  display: grid;
+  width: 100%;
+  height: 300px;
+  grid-template:
+  /*[header-left] "head head" 30px [header-right]*!*/
+                 [main-left]   "nav  main" 1fr  [main-right]
+                 /*[footer-left] "nav  foot" 30px [footer-right]*/
+                 / 120px 1fr;
+}
+
+header {
+  background-color: #2E5966;
+  grid-area: head;
+  height: 10%;
+  /*margin: 10%;*/
+}
+
+nav {
+  display:flex;
+  flex-direction: column;
+  /*justify-content: flex-start;*/
+  vertical-align: text-top;
+  background-color: #8DC8C7;
+  grid-area: nav;
+  padding-bottom: 80%;
+  border-radius: 10px;
+}
+
+main {
+  background-color: #FFFFFF; /* #E5F9FC */
+  grid-area: main;
+  border-radius: 10px;
+
+}
+
+.indicator {
+
+    margin: 10px;
+    text-align: justify;
+    text-indent: 25px;
+    vertical-align: text-top;
+}
+
+
+.chart rect {
+  fill: steelblue;
+}
+
+.chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}
+
+
+.bar--positive {
+  fill: steelblue;
+}
+
+.bar--negative {
+  fill: darkorange;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+
+
+
+/*footer {*/
+  /*background-color: red;*/
+  /*grid-column: foot;*/
+/*}*/
+
+
+
+/*
+ADD8E6  lightblue, BODY
+6ACBEA  toy blue, accents
+2E5966  emerald green, dark accents
+87A8B3  sea blue, bars/dividers
+58CB75  chartreuse, bright
+8DC8C7  mint green
+85BEAD  sage green
+
+/////////
+#F29D35   terracotta
+*/

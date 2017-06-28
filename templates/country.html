@@ -1,40 +1,99 @@
-{% extends 'base.html' %}
-{% load static %}c
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 
 
-    {% block country %}
+<table class="table_country_detail" colspan="8">   {#  #}
 
-        <table class="country_detail" xmlns="http://www.w3.org/1999/html">
-
+	    <thead>
             <tr>
-                <td colspan="8">
-                    ROW FOR COUNTRY CODES!
-                {% for count in country %}
-                    {{ count }}
-                {% endfor %}
-                </td>
+                <H4>Start Building Your Own DataPanino</H4><br/>
             </tr>
 
+                <tr class="table_header">
 
+                    <th>
+                        You chose a default economic indicator for a country.
+                        Now add another indicator (or all) to find correlations between the data.
+                    </th>
+                </tr>
 
-            <tr>
-                <td>
-                {% for select in selection %}    {# pane, data #}
-                    {{ select }}
-                {% endfor %}
+            <tr class="country_code">
 
-{#                <td>#}
-{#                    {% for data in country_code %}#}
-{#                       {{ data }}#}
-{#                    {%  endfor %}#}
+                    {% for country in countries %}
+                        <td>
+                        {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
+                        </td>
+                    {% endfor %}
+            </tr>
+
+	    </thead>
+</table>
+{#        <tbody>#}
+{#            <tr>#}
+{#                {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
+{#                <td class="economic_indicator">#}
+{#                    {{ indicator }}  <input type="checkbox" >#}
 {#                </td>#}
-                </td>
-            </tr>
+{#                <td>#}
+{#                    <div class="chart">#}
+{#                    </div>#}
+{#                </td>#}
+{#            </tr>#}
+{##}
+{##}
+{#            {% endfor %}#}
+{#            <tr>#}
+{#                <td>#}
+{#                    <div class="chart">#}
+{#                    </div>#}
+{#                </td>#}
+{#            </tr>#}
 
 
-        </table>
 
-    {%  endblock %}
 
+<section id="page">
+
+  <header>
+  </header>
+
+  <nav>  {# class="economic_indicator" #}
+      {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
+      <div class="indicator">
+          {{ indicator }} &nbsp <input type="checkbox" >
+       </div>
+
+      {% endfor %}
+  </nav>
+
+  <main>
+      <script>
+          {% autoescape off %}
+              var data = {{ chart_data }};
+          {% endautoescape %}
+      </script>
+
+    <svg class="chart"></svg>
+  </main>
+
+</section>
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+<script src="{% static 'js/script_bar.js' %}"></script>
+{#<script src="{% static 'js/script_negbar.js' %}"></script>#}
+
+
+<script>
+  {# Test Area 51 #}
+</script>
+
+
+{% endblock %}
 
 

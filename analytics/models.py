@@ -16,9 +16,9 @@ class Country(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
 
-        if self.code is None:
+        if self.code is None:   # code
             clean_country = self.name.replace('-', ' ').title()
-            self.code = country_codes[clean_country]
+            self.code = country_codes[clean_country]   # code
 
         self.flag = FLAGS[self.code]
         super().save(*args, **kwargs)

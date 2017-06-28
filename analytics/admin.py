@@ -1,3 +1,10 @@
 from django.contrib import admin
+from .models import Country, EconomicSnapshot
 
-# Register your models here.
+
+# from django.contrib import admin
+# from django.contrib.auth.admin import UserAdmin
+
+
+admin.site.register(Country)
+admin.site.register(EconomicSnapshot)

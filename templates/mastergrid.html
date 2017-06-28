@@ -7,19 +7,21 @@
 
 	    <thead>
             <tr>
-                <th colspan="8" > <H4>Countries Overview: Economic Indicators</H4><br/>
+                 <H4>Countries Overview: Economic Indicators</H4><br/>
 
+                <th colspan="8">
                     Start building your DataPanino. Select the country's flag that corresponds to the desired
-                    economic indicator.  <br/>Think of this as the type of bread you want for your data sandwich.
+                    economic indicator.  Think of this as the type of bread you want for your data sandwich.
                     It's the basis on which you add other ingredients.
-                </th><br/>
+                </th>
+
             </tr>
             <tr>
 
             </tr>
                 <tr>
                     <th>
-                        &nbsp;<div>&nbsp</div>
+                        <div>&nbsp</div>
                     </th>
                     {% for country in countries %}
 
@@ -40,7 +42,7 @@
                 </td>
                 {% for country, indicator, flag in data %}
                 <td>
-                    <a href="/country/{{ country }}/{{ indicator }}/">{{ flag }}</a>
+                    <a href="/country/{{ country|slugify }}/{{ indicator }}/">{{ flag }}</a>   {# TODO: increase size of flags #}
                 </td>
                 {% endfor %}
             </tr>
