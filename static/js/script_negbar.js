@@ -10,7 +10,7 @@
 
 "use strict";
 
-var margin = {top: 50, right: 10, bottom: 10, left: 10},
+var margin = {top: 10, right: 10, bottom: 10, left: 10},
     width = 480 - margin.left - margin.right,
     height = 250 - margin.top - margin.bottom;
 

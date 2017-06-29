@@ -11,8 +11,6 @@ ADD8E6  lightblue, BODY
 F29D35 terracotta
 */
 
-
-
 h4 {
     /*border: 1px solid black;*/
     text-align: center;
@@ -23,8 +21,6 @@ h4 {
     flex-direction: row;
     width: 80%;
     margin:auto;
-
-
 }
 
 
@@ -32,7 +28,6 @@ h4 {
     /*border: 1px solid black;*/
     display: table;
     text-align: center;
-
 }
 
 
@@ -48,9 +43,6 @@ h4 {
 .country_code th{
     /*width: 100%;*/
     border: solid blue 2px;
-
-
-
 }
 
 .country_code {
@@ -77,28 +69,11 @@ h4 {
     border-radius: 5px;
     box-shadow: 2px 2px 2px #888888;
     background: #EEEEEE;
-
-/*;    # C4E8E6 C4DFE8 87A8B3
-!* For browsers that do not support gradients *!*/
-    /*background: -webkit-linear-gradient(#6ACBEA, #FCFCFC); !* For Safari 5.1 to 6.0 *!*/
-    /*background: -o-linear-gradient(#6ACBEA, #FCFCFC); !* For Opera 11.1 to 12.0 *!*/
-    /*background: -moz-linear-gradient(#6ACBEA, #FCFCFC); !* For Firefox 3.6 to 15 *!*/
-    /*background: linear-gradient(#6ACBEA, #FCFCFC);*/
-
-}
-
-
-/*.table_country_detail economic_indicator {*/
-    /*!*display: table;*!*/
-    /*!*text-align: left;*!*/
-    /*!*border-spacing: 0.5rem;*!*/
-    /*!*border-collapse:collapse;*!*/
-    /*!*!*align-content: left;*!*!*/
 }
 
 
 tr:hover{background-color:#C1C4C4;
-        }
+}
 
 .content {
     display: flex;
@@ -163,7 +138,6 @@ body {
     position: relative;
     /*border: 2px solid darkblue;*/
     border-radius: 10px;
-
 }
 
 .row3 {
@@ -174,7 +148,6 @@ body {
     color: darkblue;
     background:#E8F5F6;
     border-radius: 10px;
-
 }
 
 #introtext{
@@ -227,49 +200,43 @@ label {
 }
 
 #page {
-  display: grid;
-  width: 100%;
-  height: 500px;
-  grid-template:
-  /*[header-left] "head head" 30px [header-right]*!*/
-                 [main-left]   "nav  main" 1fr  [main-right]
-                 /*[footer-left] "nav  foot" 30px [footer-right]*/
-                 / 120px 1fr;
-}
-
-header {
-  background-color: #2E5966;
-  grid-area: head;
-  height: 10%;
-  /*margin: 10%;*/
-}
+    display: grid;
+    width: 100%;
+    height: 500px;
+    grid-template:
+    /*[header-left] "head head" 30px [header-right]*!*/
+    [main-left]   "nav  main" 1fr  [main-right]
+    /*!*[footer-left] "nav  foot" 30px [footer-right]*!*/
+    / 120px 1fr;   /* 120px 1fr; */
+    }
 
 nav {
-  display:flex;
-  flex-direction: column;
-  /*justify-content: flex-start;*/
-  vertical-align: text-top;
-  background-color: #45879b;  /* 9ad6ad 95c9a5 a9e5bc d5efe8 8DC8C7 */
-  grid-area: nav;
-  padding-bottom: 80%;
-  border-radius: 10px;
+    display:flex;
+    flex-direction: column;
+    /*justify-content: flex-start;*/
+    vertical-align: text-top;
+    background-color: #45879b;  /* 9ad6ad 95c9a5 a9e5bc d5efe8 8DC8C7 */
+    grid-area: nav;
+    padding-bottom: 80%;
+    border-radius: 10px;
 }
 
 main {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  background-color: #FFFFFF; /* #E5F9FC */
-  grid-area: main;
-  border-radius: 10px;
-  width: 100%;
-  height: 100%;
-    background: #FFFFFF; /* For browsers that do not support gradients    06aae0 */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-start;
+    /*flex-wrap: wrap;*/
+    padding-top: 5%;
+    grid-area: main;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF; /* #E5F9FC * For browsers that do not support gradients    06aae0 */
     background: -webkit-linear-gradient(#ADD8E6, #FFFFFF); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#ADD8E6, #FFFFFF); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#ADD8E6, #FFFFFF); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#ADD8E6, #FFFFFF); /* Standard syntax */
-
 }
 
 .indicator {
@@ -282,20 +249,20 @@ main {
     color: #FFFFFF;
 }
 
- .chart {
-    display: block;     /* Added 06.28.17  https://stackoverflow.com/questions/27833908/svg-element-not-coming-inside-a-div*/
+.chart {
+    /*display: block;     !* Added 06.28.17  https://stackoverflow.com/questions/27833908/svg-element-not-coming-inside-a-div*!*/
     /*float: left;*/
-    width: 480px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
+    /*width: 480px;*/
+    /*height: 250px;*/
  }
-
 
 
 .chart rect {
   fill: #69a4bf  ; /* 35b7b4 69a4bf  51a5cc 6fb0ce 69a4bf c7f9eb fce5b0 adf7e1; 85BEAD steelblue*/
 }
 
-.chart text {
 .chart text {
   fill: white;
   font: 10px sans-serif;
@@ -326,6 +293,11 @@ footer {
   grid-column: foot;
 }
 
+.svg-container{
+     height: 100%;
+     width: 100%;
+
+ }
 
 
 /*

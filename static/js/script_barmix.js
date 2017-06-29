@@ -3,107 +3,61 @@
  */
 "use strict";
 
-
-
-// var x = d3.scale.linear()
-//     .domain(d3.extent(data))
-//     .range([0, width]);
-
-// var width = d3.max(data);
-// var height = data.length;
-// var svg = d3.select('.chart')
-//     .attr("width", width)
-//     .attr("height", height * data.length);
-
-
-// var x = d3.scale.linear()
-//     .domain([0, d3.max(data)])
-//     .range([0, width])
-//     .nice();
+var margin = {top: 10, right: 30, bottom: 10, left: 10},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 var x = d3.scale.linear()
-    .domain([-30, 30])
-    .range([0, width])
-    .nice();
+    .range([0, width*.85]);
+///
 
 var y = d3.scale.ordinal()
-    .domain(d3.range(data.length))
-    .rangeRoundBands([0, height], .2);
+    .rangeRoundBands([0, height], 0.1);
 
-// var chart = d3.select(".chart")
-//     .attr("width", width)
-//     .attr("height", height * data.length);
+var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("top");
 
-svg.selectAll(".bar")
-    .data(data)
-  .enter().append("rect")
-    .attr("class", "chart")
-    .attr("x", function(d, i) { return x(Math.min(0, d)); })
-    .attr("y", function(d, i) { return y(i); })
-    .attr("width", function(d, i) { return Math.abs(x(d) - x(0)); })
-    .attr("height", y.rangeBand());
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .orient("left")
+    .tickSize(0)
+    .tickPadding(6);
 
+var svg = d3.select(".chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+// d3.tsv("data.tsv", type, function(error, data) {
 
-
-
-// function buildCountry(country_name, countryIP, year) {
-//     // Builds the table where it shows: a country name, country IP sales, and the year recorded.
-//
-//     let country = $('<td>').text(country.country.value);
-//     let year = $('<td>').text(country.date);
-//     let ipSales = $('<tr>').text(country.value);
-//
-//     let countryYearipSales = $('<tr>').append(country, year, ipSales);
-//     jQuery('#country_stats').append(countryYearipSales);
-// }
-//
-//
-//
-// // function makeInfoWindow(country_name, countryIP, year){
-// //
-// //     let $heading = $('<h4>').text(`${country_name.dir}`);
-// //     let $description = $('<p>').text(`${countryIP.desc}`);
-// //     let $year = $('')
-// //     let $body = $ ('<section>').append($heading, $description);
-// //     buildCountry(country)
-// // }
-//
-// function fetchCountry(country_name, countryIP, year) {
-//     // Fetches the charges for the use of IP for one country in one year
-//
-//     let request_params = {
-//                             'format': 'json',
-//                             'page': '1',
-//                             'date': '2008:2009',
-//                             'MRV':  '5',
-//                             'Gapfill': 'Y',
-//                             'Frequency': 'Y',
-//     };
-//
-//     let ajax_options = {type: 'GET',
-//                         data: request_params,
-//                         url: 'http://api.worldbank.org/countries/fr/indicators/BX.GSR.ROYL.CD'};
-//
-//         buildCountry(country_name, countryIP, year)
-//
-// // --------- AJAX call on Response------------//
-//
-//     $.ajax(ajax_options).done(function(response) {
-//         console.log(response);
-//         let country_name = response.country.value;  // Should there be a Object name that follows response per API??
-//         let countryIP = response.value;    // Should there be a Object name that follows response per API??
-//         let year = response.date;
-//         makeInfoWindow(country_name,countryIP, year);
-//
-//     }).fail(function(error){
-//         console.log(error);
-// });
-// }
+  x.domain(d3.extent(data, function(d) { return d.value; })).nice();   /* ? .value from where? */
+  y.domain(data.map(function(d) { return d.value; }));
 
 
+  svg.selectAll(".bar")
+      .data(data)
+    .enter().append("rect")
+      .attr("class", function(d) { return "bar bar--" + (d.value < 0 ? "negative" : "positive"); })
+      .attr("x", function(d) { return x(Math.min(0, d.value)); })
+      .attr("y", function(d)
+      {console.log(d);
 
-// // function countryData(country_name, countryIP) {
-// //     pass
-// //     return
-// // }
+        return y(d.slug); })
+      .attr("width", function(d) { return Math.abs(x(d.value) - x(0)); })
+      .attr("height", y.rangeBand());
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+  svg.append("g")
+      .attr("class", "y axis")
+      .attr("transform", "translate(" + x(0) + ",0)")
+      .call(yAxis)
+
+
+function type(d) {
+  d.value = +d.value;
+  return d;
+}

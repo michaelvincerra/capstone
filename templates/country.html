@@ -29,29 +29,6 @@
 
 	    </thead>
 </table>
-{#        <tbody>#}
-{#            <tr>#}
-{#                {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
-{#                <td class="economic_indicator">#}
-{#                    {{ indicator }}  <input type="checkbox" >#}
-{#                </td>#}
-{#                <td>#}
-{#                    <div class="chart">#}
-{#                    </div>#}
-{#                </td>#}
-{#            </tr>#}
-{##}
-{##}
-{#            {% endfor %}#}
-{#            <tr>#}
-{#                <td>#}
-{#                    <div class="chart">#}
-{#                    </div>#}
-{#                </td>#}
-{#            </tr>#}
-
-
-
 
 <section id="page">
 
@@ -67,6 +44,7 @@
       {% endfor %}
   </nav>
 
+
   <main>
       <script>
           {% autoescape off %}
@@ -75,8 +53,13 @@
 
 
       </script>
-    <svg class="chart"></svg>
 
+
+          <div id="container" class="svg-container">  <!--preserveAspectRatio="xMaxYMax meet"  -->
+            <svg viewBox="0 0 960 500" class="chart">
+
+            </svg>
+          </div>
   </main>
 
 </section>
@@ -87,8 +70,8 @@
 {% block extra_js %}
 <script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
 {#<script src="{% static 'js/script_bar.js' %}"></script>#}
-<script src="{% static 'js/script_negbar.js' %}"></script>
-{#<script src="{% static 'js/script_barmix.js' %}"></script>#}
+{#<script src="{% static 'js/script_negbar.js' %}"></script>#}
+<script src="{% static 'js/script_barmix.js' %}"></script>
 {% endblock %}
 
 
