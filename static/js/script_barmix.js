@@ -3,7 +3,7 @@
  */
 "use strict";
 
-var margin = {top: 10, right: 30, bottom: 10, left: 10},
+var margin = {top: 20, right: 30, bottom: 40, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -43,14 +43,17 @@ var svg = d3.select(".chart").append("svg")
       .attr("x", function(d) { return x(Math.min(0, d.value)); })
       .attr("y", function(d)
       {console.log(d);
+      return y(d.value); })
 
-        return y(d.slug); })
       .attr("width", function(d) { return Math.abs(x(d.value) - x(0)); })
       .attr("height", y.rangeBand());
+
   svg.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height + ")")
+      .attr("type" , function(d){return data.type})
       .call(xAxis);
+
   svg.append("g")
       .attr("class", "y axis")
       .attr("transform", "translate(" + x(0) + ",0)")
