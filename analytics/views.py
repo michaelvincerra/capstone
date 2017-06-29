@@ -40,7 +40,7 @@ def list_economic_snapshots(request, country, type):    # country_code,
 
     selection = Country.objects.get(slug=country.lower())
     latest_year = selection.snapshots.all().aggregate(Max('year'))['year__max']
-    chart_data = list(selection.snapshots.filter(year=latest_year).values())
+    chart_data = list(selection.snapshots.filter(year=latest_year).values())    # changed from from values_list to values(): need a dictionary.
 
     composite = set(EconomicSnapshot.objects.all().values_list('country__name', 'type', 'country__flag'))
     countries = sorted(Country.objects.all(), key=lambda c: c.name)

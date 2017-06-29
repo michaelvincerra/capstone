@@ -4,14 +4,15 @@
  *
  * Refactor 06.28.2017, 16:00:
  * https://stackoverflow.com/questions/16260285/d3-removing-elements
+ *
  */
 
 
 "use strict";
 
-var margin = {top: 20, right: 30, bottom: 40, left: 30},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+var margin = {top: 50, right: 10, bottom: 10, left: 10},
+    width = 480 - margin.left - margin.right,
+    height = 250 - margin.top - margin.bottom;
 
 var x = d3.scale.linear()
     .range([0, width*.85]);

@@ -8,18 +8,8 @@ ADD8E6  lightblue, BODY
 58CB75  chartreuse, bright
 8DC8C7  mint green
 85BEAD  sage green
-
-/////////
-#F29D35   terracotta
+F29D35 terracotta
 */
-/*.chart div {*/
-  /*font: 10px sans-serif;*/
-  /*background-color: steelblue;*/
-  /*text-align: right;*/
-  /*padding: 3px;*/
-  /*margin: 1px;*/
-  /*color: white;*/
-/*}*/
 
 
 
@@ -234,16 +224,12 @@ label {
 
 . reg_message {
   text-align: center;
-
 }
-
-
-/*//////////////////////////*/
 
 #page {
   display: grid;
   width: 100%;
-  height: 300px;
+  height: 500px;
   grid-template:
   /*[header-left] "head head" 30px [header-right]*!*/
                  [main-left]   "nav  main" 1fr  [main-right]
@@ -263,16 +249,26 @@ nav {
   flex-direction: column;
   /*justify-content: flex-start;*/
   vertical-align: text-top;
-  background-color: #8DC8C7;
+  background-color: #45879b;  /* 9ad6ad 95c9a5 a9e5bc d5efe8 8DC8C7 */
   grid-area: nav;
   padding-bottom: 80%;
   border-radius: 10px;
 }
 
 main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   background-color: #FFFFFF; /* #E5F9FC */
   grid-area: main;
   border-radius: 10px;
+  width: 100%;
+  height: 100%;
+    background: #FFFFFF; /* For browsers that do not support gradients    06aae0 */
+    background: -webkit-linear-gradient(#ADD8E6, #FFFFFF); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#ADD8E6, #FFFFFF); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#ADD8E6, #FFFFFF); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#ADD8E6, #FFFFFF); /* Standard syntax */
 
 }
 
@@ -282,13 +278,24 @@ main {
     text-align: justify;
     text-indent: 25px;
     vertical-align: text-top;
+    /*text-emphasis: triangle;*/
+    color: #FFFFFF;
 }
+
+ .chart {
+    display: block;     /* Added 06.28.17  https://stackoverflow.com/questions/27833908/svg-element-not-coming-inside-a-div*/
+    /*float: left;*/
+    width: 480px;
+    height: 250px;
+ }
+
 
 
 .chart rect {
-  fill: steelblue;
+  fill: #69a4bf  ; /* 35b7b4 69a4bf  51a5cc 6fb0ce 69a4bf c7f9eb fce5b0 adf7e1; 85BEAD steelblue*/
 }
 
+.chart text {
 .chart text {
   fill: white;
   font: 10px sans-serif;
@@ -297,11 +304,11 @@ main {
 
 
 .bar--positive {
-  fill: steelblue;
+  fill: #69a4bf;
 }
 
 .bar--negative {
-  fill: darkorange;
+  fill: #f9c984;
 }
 
 .axis text {
@@ -314,18 +321,15 @@ main {
   stroke: #000;
   shape-rendering: crispEdges;
 }
-
-
-
-
-/*footer {*/
-  /*background-color: red;*/
-  /*grid-column: foot;*/
-/*}*/
+footer {
+  background-color: #f0ad4e;
+  grid-column: foot;
+}
 
 
 
 /*
+45879b  turquoise dark
 ADD8E6  lightblue, BODY
 6ACBEA  toy blue, accents
 2E5966  emerald green, dark accents
@@ -333,7 +337,7 @@ ADD8E6  lightblue, BODY
 58CB75  chartreuse, bright
 8DC8C7  mint green
 85BEAD  sage green
-
 /////////
 #F29D35   terracotta
+#f0ad4e   light orange
 */
