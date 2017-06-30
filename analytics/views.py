@@ -40,6 +40,7 @@ def list_economic_snapshots(request, country, type):    # country_code,
 
     selection = Country.objects.get(slug=country.lower())
     latest_year = selection.snapshots.all().aggregate(Max('year'))['year__max']
+    # all_years = selection.snapshots.all().aggregate('year')
     chart_data = list(selection.snapshots.filter(year=latest_year).values())    # changed from from values_list to values(): need a dictionary.
 
     composite = set(EconomicSnapshot.objects.all().values_list('country__name', 'type', 'country__flag'))
@@ -57,7 +58,7 @@ def list_economic_snapshots(request, country, type):    # country_code,
     # selection = [(name, sorted(data)) for name, data in indicators.items()]
 
     context = {'chart_data': chart_data,
-                'selection': selection,
+               'selection': selection,
                'countries': countries,
                'indicators': indicators,
                }
@@ -89,9 +90,13 @@ def list_country_composite(request):
 
     return render(request, "mastergrid.html", context)
 
-
-
 # https://docs.djangoproject.com/en/1.11/ref/models/querysets/#values-list
+
+
+def make_panini(request):
+
+    context = {}
+    return render(request, "country_panini.html", context)
 
 
 

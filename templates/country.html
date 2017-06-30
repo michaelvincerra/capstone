@@ -38,8 +38,10 @@
   <nav>  {# class="economic_indicator" #}
       {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
       <div class="indicator">
-          {{ indicator }} &nbsp <input type="checkbox" >
+          {{ indicator }} &nbsp
+            <input type="checkbox" class="indicator_checkbox">
        </div>
+
 
       {% endfor %}
   </nav>
@@ -47,8 +49,29 @@
 
   <main>
       <script>
-          {% autoescape off %}
+          {% autoescape off %}    {#    #}
+
               var data = {{ chart_data }};
+
+{#                  [#}
+{#                  {"label": "apples",#}
+{#                      "value": 20#}
+{#                    },#}
+{#                    {#}
+{#                      "label": "oranges",#}
+{#                      "value": -30#}
+{#                    },#}
+{#                    {#}
+{#                      "label": "bananas",#}
+{#                      "value": 10#}
+{#                    },#}
+{#                    {#}
+{#                      "label": "plums",#}
+{#                      "value": 5#}
+{#                    }#}
+{#                    ];#}
+
+
           {% endautoescape %}
 
 
@@ -64,11 +87,14 @@
 
 </section>
 
+
+
 {% endblock %}
 
 
 {% block extra_js %}
 <script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+
 {#<script src="{% static 'js/script_bar.js' %}"></script>#}
 {#<script src="{% static 'js/script_negbar.js' %}"></script>#}
 <script src="{% static 'js/script_barmix.js' %}"></script>

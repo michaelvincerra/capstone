@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<section id="page">
+
+  <header>
+  </header>
+
+  <nav>
+
+  </nav>
+
+
+  <main>
+
+    {% autoescape off %}
+
+        <script>
+
+{#            var data = {{ data }};#}
+
+        </script>
+
+    {% endautoescape %}
+
+
+
+    <div class="container">
+        <div id="div1"></div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+{#    <script src="http://d3js.org/stacked_bar.js"></script>#}
+    <script src="{% static 'js/lodash.js' %}"></script>   {# Has to be loaded before it's executed.  #}
+    <script src="{% static 'js/script_historybar.js' %}"></script>
+
+{% endblock %}

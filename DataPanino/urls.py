@@ -23,7 +23,7 @@ from rest_framework import routers
 from accounts.api import UserViewSet
 from accounts.views import profile, login, logout
 from analytics.api import EconomicSnapshotViewSet
-from analytics.views import list_economic_snapshots, list_country_composite
+from analytics.views import list_economic_snapshots, list_country_composite, make_panini
 
 
 
@@ -47,6 +47,7 @@ urlpatterns = [
     # url(r'^country/(?P<country>\w+(?<=\D)-(?=\D)\w+/(?P<type>\w{0,5})/$', list_economic_snapshots, name='economic_snapshots'),
     url(r'^country_overview/$', list_country_composite, name='composite'),  # see 'def list_country_composite in views.
     url(r'^country/(?P<country>[\w-]+)/(?P<type>\w{0,5})/$', list_economic_snapshots, name='economic_snapshots'),
+    url(r'^country_panini/$', make_panini, name='make_panini'),
 
                   # url(r'^templates/about', about, name='about'),
     # url(r'^templates/login', login, name='login'),

@@ -49,9 +49,9 @@ h4 {
     display: flex;
     flex-direction: row;
     width: 80%;
-    margin:auto;
-    padding: 5px;
-    margins: 5px;
+    /*margin: auto;*/
+    /*padding: 5px;*/
+    margin: 5px;
     /*width: 100px;*/
     padding: 10px;
     /*margin-left: 5px;*/
@@ -195,9 +195,9 @@ label {
 }
 
 
-. reg_message {
-  text-align: center;
-}
+/*. reg_message {*/
+  /*text-align: center;*/
+/*}*/
 
 #page {
     display: grid;
@@ -217,6 +217,7 @@ nav {
     vertical-align: text-top;
     background-color: #45879b;  /* 9ad6ad 95c9a5 a9e5bc d5efe8 8DC8C7 */
     grid-area: nav;
+    padding-top: 100%;
     padding-bottom: 80%;
     border-radius: 10px;
 }
@@ -299,6 +300,29 @@ footer {
     width: 100%;
 
  }
+
+svg text.label {
+  fill:black;
+  font: 15px;
+  font-weight: 400;
+  text-anchor: middle;
+}
+
+.bartext {
+	fill: #000000;
+	opacity: .6;
+	font-weight: 200%;
+	font-size : .9em;
+}
+
+
+.indicator_checkbox {
+    /*display: flex;*/
+    text-align: end ;
+
+}
+
+
 
 
 /*
