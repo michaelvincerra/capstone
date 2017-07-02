@@ -8,151 +8,69 @@
 	    <thead>
             <tr>
                 <td>
-                <H4>Start Building Your Own DataPanino</H4><br/>
+                <H4>Start Building Your Own DataPanino</H4>
                 </td>
             </tr>
-                <tr class="table_header">
-                    <th>
-                        You chose a default economic indicator for a country.
-                        Now add another indicator (or all) to find correlations between the data.
-                    </th>
-                </tr>
+            <tr class="table_header">
+                <th>
+                    You chose a default economic indicator for a country.
+                    Now add another indicator (or all) to find correlations between the data.
+                </th>
+            </tr>
 
             <tr class="country_code">
-                    {% for country in countries %}
-                        <td>
-                        {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
-                        </td>
-                    {% endfor %}
+
+                {% for country in countries %}
+                    <td>
+                    {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
+                    </td>
+                {% endfor %}
             </tr>
 	    </thead>
 </table>
 
-{#<section id="page">#}
-{##}
-{#  <header>#}
-{#      <table>#}
-{#      <tr>#}
-{#        <th id="latest_year">#}
-{#            {{ latest_year }}#}
-{#        </th>#}
-{#      </tr>#}
-{#      </table>#}
-{#  </header>#}
-{##}
-{#  <nav>  {# class="economic_indicator" #}
-{#      {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
-{##}
-{#          <div class="indicator">#}
-{#            {{ indicator }} &nbsp#}
-{#            <input type="checkbox" class="indicator_checkbox">#}
-{#          </div>#}
-{##}
-{##}
-{#      {% endfor %}#}
-{#  </nav>#}
-{##}
-{##}
-{#  <main>#}
-{#      <script>#}
-{#          {% autoescape off %}    {#    #}
-{##}
-{#              var data = {{ chart_data }};#}
-{##}
-{#          {% endautoescape %}#}
-{##}
-{##}
-{#      </script>#}
-{##}
-{#      <table>#}
-{#      <tr>#}
-{#        <th id="latest_year">#}
-{#            {{ latest_year }}#}
-{#        </th>#}
-{#      </tr>#}
-{#      </table>        #}
-{##}
-{#      </table>#}
-{##}
-{#          <div class="svg-container">  <!--preserveAspectRatio="xMaxYMax meet"  -->#}
-{#            <svg viewBox="0 0 960 500" class="chart">#}
-{#            </svg>#}
-{##}
-{#          </div>#}
-{##}
-{##}
-{#  </main>#}
-{##}
-{#</section>#}
-{##}
-{##}
-{##}
-{##}
-{#<section>#}
-{##}
-{#     <header>#}
-{#      <table>#}
-{#      <tr>#}
-{#        <th id="latest_year">#}
-{#            {{ latest_year }}#}
-{#        </th>#}
-{#      </tr>#}
-{#      </table>#}
-{#  </header>#}
-{#//////////#}
+
+<div class="wrapper">
+
+  <div class="one"> FR
 
 
+{#    {%  for country  in countries %}    TODO: Retrieve country code that matches URL generated for page. #}
+{#    {{ country.code }}#}
+{#    {%  endfor %}#}
+  </div>
 
-  <div class="wrapper">
+  <div class="two">
+    {#Two#}
+      <script>
+          {% autoescape off %}    {#    #}
 
-      <div class="one">
-            Country Code Here
-      </div>
+              var data = {{ chart_data }};
 
-      <div class="two">
-          <script>
-              {% autoescape off %}    {#    #}
+          {% endautoescape %}
+      </script>
 
-                  var data = {{ chart_data }};
+          <div class="svg-container">  <!--preserveAspectRatio="xMaxYMax meet"  -->
+            <svg viewBox="0 0 960 500" class="chart">
+            </svg>
 
-              {% endautoescape %}
-          </script>
+          </div>
+  </div>
 
-              <div class="svg-container">  <!--preserveAspectRatio="xMaxYMax meet"  -->
-                <svg viewBox="0 0 960 500" class="chart">
-                </svg>
-
-              </div>
-      </div>
-
-      <div class="three"> Three
-
-          {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
-
-              <div class="indicator">
-                {{ indicator }} &nbsp
-                <input type="checkbox" class="indicator_checkbox">
-              </div>
-
-          {% endfor %}
+  <div class="three indicator">
+{#Three#}
+      {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
+          <div>
+            {{ indicator }} &nbsp
+            <input type="checkbox" class="indicator_checkbox">
+          </div>
+      {% endfor %}
+  </div>
 
 
-      </div>
-      <div class="four">{{ latest_year }}</div>
-
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
+  <div class="four">
+      {{ latest_year }}
+  </div>
 
 
 {% endblock %}
@@ -165,26 +83,3 @@
 {#<script src="{% static 'js/script_negbar.js' %}"></script>#}
 <script src="{% static 'js/script_barmix.js' %}"></script>
 {% endblock %}
-
-
-
-
-{#                  [#}
-{#                  {"label": "apples",#}
-{#                      "value": 20#}
-{#                    },#}
-{#                    {#}
-{#                      "label": "oranges",#}
-{#                      "value": -30#}
-{#                    },#}
-{#                    {#}
-{#                      "label": "bananas",#}
-{#                      "value": 10#}
-{#                    },#}
-{#                    {#}
-{#                      "label": "plums",#}
-{#                      "value": 5#}
-{#                    }#}
-{#                    ];#}
-
-
