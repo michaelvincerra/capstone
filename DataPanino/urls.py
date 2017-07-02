@@ -47,7 +47,7 @@ urlpatterns = [
     # url(r'^country/(?P<country>\w+(?<=\D)-(?=\D)\w+/(?P<type>\w{0,5})/$', list_economic_snapshots, name='economic_snapshots'),
     url(r'^country_overview/$', list_country_composite, name='composite'),  # see 'def list_country_composite in views.
     url(r'^country/(?P<country>[\w-]+)/(?P<type>\w{0,5})/$', list_economic_snapshots, name='economic_snapshots'),
-    url(r'^country_panini/$', make_panini, name='make_panini'),
+    url(r'^country_panini/(?P<slug>[a-zA-Z\-]+)$', make_panini, name='make_panini'),
 
                   # url(r'^templates/about', about, name='about'),
     # url(r'^templates/login', login, name='login'),

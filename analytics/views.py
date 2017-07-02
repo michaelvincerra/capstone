@@ -61,6 +61,7 @@ def list_economic_snapshots(request, country, type):    # country_code,
                'selection': selection,
                'countries': countries,
                'indicators': indicators,
+               'latest_year': latest_year,
                }
     # Key: 'selection'; only changes the param in the template
     return render(request, 'country.html', context)
@@ -93,9 +94,38 @@ def list_country_composite(request):
 # https://docs.djangoproject.com/en/1.11/ref/models/querysets/#values-list
 
 
-def make_panini(request):
+def make_panini(request, slug):
+    """
+    Returns 1 country showing all 4 economic indicators for 1975  2015. 
+    View should include a slider bar if user wants to select a time period. 
+    1 dataset should include the country name, country code, type, year, and value of IP, GDP, GNI, FDI
+    """
+    country = Country.objects.get(slug=slug)
 
-    context = {}
+    gdp = country.snapshots.filter(type='GDP')
+    gdp_dataset = {es.year: es.value for es in gdp}
+
+    fdi = country.snapshots.filter(type='FDI')
+    fdi_dataset = {es.year: es.value for es in fdi}
+
+    gni = country.snapshots.filter(type='GNI')
+    gni_dataset = {es.year: es.value for es in gni}
+
+    ip = country.snapshots.filter(type='IP')
+    ip_dataset = {es.year: es.value for es in ip}
+
+    indicators = list([gdp_dataset, fdi_dataset, gni_dataset, ip_dataset])
+
+    column_data = list()
+    # column_data.append({"type": "object", "name": "store", "order": "0"})
+    column_data.append([{"type": es.type, "name": es.year, "order": country.code} for es in indicators[0:4]])
+    # column_data.append([{"type": "float64", "name": es.year, "order": es.id} for es in gdp])
+
+
+    chart_data = {'data': indicators,
+                  'columns': column_data}
+
+    context = {'chart_data': chart_data}
     return render(request, "country_panini.html", context)
 
 
@@ -146,7 +176,7 @@ def update(request, pk):
     return render(request,'home.html', context)
 
 
-def delete(request):
+def delete(request, pk):
     """
     Delete user account.
     Delete user's custom economic snapshot. 

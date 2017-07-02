@@ -7,11 +7,11 @@
 
 	    <thead>
             <tr>
+                <td>
                 <H4>Start Building Your Own DataPanino</H4><br/>
+                </td>
             </tr>
-
                 <tr class="table_header">
-
                     <th>
                         You chose a default economic indicator for a country.
                         Now add another indicator (or all) to find correlations between the data.
@@ -19,39 +19,155 @@
                 </tr>
 
             <tr class="country_code">
-
                     {% for country in countries %}
                         <td>
                         {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
                         </td>
                     {% endfor %}
             </tr>
-
 	    </thead>
 </table>
 
-<section id="page">
+{#<section id="page">#}
+{##}
+{#  <header>#}
+{#      <table>#}
+{#      <tr>#}
+{#        <th id="latest_year">#}
+{#            {{ latest_year }}#}
+{#        </th>#}
+{#      </tr>#}
+{#      </table>#}
+{#  </header>#}
+{##}
+{#  <nav>  {# class="economic_indicator" #}
+{#      {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
+{##}
+{#          <div class="indicator">#}
+{#            {{ indicator }} &nbsp#}
+{#            <input type="checkbox" class="indicator_checkbox">#}
+{#          </div>#}
+{##}
+{##}
+{#      {% endfor %}#}
+{#  </nav>#}
+{##}
+{##}
+{#  <main>#}
+{#      <script>#}
+{#          {% autoescape off %}    {#    #}
+{##}
+{#              var data = {{ chart_data }};#}
+{##}
+{#          {% endautoescape %}#}
+{##}
+{##}
+{#      </script>#}
+{##}
+{#      <table>#}
+{#      <tr>#}
+{#        <th id="latest_year">#}
+{#            {{ latest_year }}#}
+{#        </th>#}
+{#      </tr>#}
+{#      </table>        #}
+{##}
+{#      </table>#}
+{##}
+{#          <div class="svg-container">  <!--preserveAspectRatio="xMaxYMax meet"  -->#}
+{#            <svg viewBox="0 0 960 500" class="chart">#}
+{#            </svg>#}
+{##}
+{#          </div>#}
+{##}
+{##}
+{#  </main>#}
+{##}
+{#</section>#}
+{##}
+{##}
+{##}
+{##}
+{#<section>#}
+{##}
+{#     <header>#}
+{#      <table>#}
+{#      <tr>#}
+{#        <th id="latest_year">#}
+{#            {{ latest_year }}#}
+{#        </th>#}
+{#      </tr>#}
+{#      </table>#}
+{#  </header>#}
+{#//////////#}
 
-  <header>
-  </header>
-
-  <nav>  {# class="economic_indicator" #}
-      {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
-      <div class="indicator">
-          {{ indicator }} &nbsp
-            <input type="checkbox" class="indicator_checkbox">
-       </div>
 
 
-      {% endfor %}
-  </nav>
+  <div class="wrapper">
+
+      <div class="one">
+            Country Code Here
+      </div>
+
+      <div class="two">
+          <script>
+              {% autoescape off %}    {#    #}
+
+                  var data = {{ chart_data }};
+
+              {% endautoescape %}
+          </script>
+
+              <div class="svg-container">  <!--preserveAspectRatio="xMaxYMax meet"  -->
+                <svg viewBox="0 0 960 500" class="chart">
+                </svg>
+
+              </div>
+      </div>
+
+      <div class="three"> Three
+
+          {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
+
+              <div class="indicator">
+                {{ indicator }} &nbsp
+                <input type="checkbox" class="indicator_checkbox">
+              </div>
+
+          {% endfor %}
 
 
-  <main>
-      <script>
-          {% autoescape off %}    {#    #}
+      </div>
+      <div class="four">{{ latest_year }}</div>
 
-              var data = {{ chart_data }};
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+
+{#<script src="{% static 'js/script_bar.js' %}"></script>#}
+{#<script src="{% static 'js/script_negbar.js' %}"></script>#}
+<script src="{% static 'js/script_barmix.js' %}"></script>
+{% endblock %}
+
+
+
 
 {#                  [#}
 {#                  {"label": "apples",#}
@@ -70,34 +186,5 @@
 {#                      "value": 5#}
 {#                    }#}
 {#                    ];#}
-
-
-          {% endautoescape %}
-
-
-      </script>
-
-
-          <div class="svg-container">  <!--preserveAspectRatio="xMaxYMax meet"  -->
-            <svg viewBox="0 0 960 500" class="chart">
-
-            </svg>
-          </div>
-  </main>
-
-</section>
-
-
-
-{% endblock %}
-
-
-{% block extra_js %}
-<script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
-
-{#<script src="{% static 'js/script_bar.js' %}"></script>#}
-{#<script src="{% static 'js/script_negbar.js' %}"></script>#}
-<script src="{% static 'js/script_barmix.js' %}"></script>
-{% endblock %}
 
 

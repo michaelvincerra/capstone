@@ -33,7 +33,9 @@ h4 {
 
 /*}*/
 .table_country_detail  {
-    /*display: table;*/
+    display: table;
+    align-items: center;
+    justify-content: center;
     /*text-align: center!important;*/
     /*border-spacing: 0.5rem!important;*/
     /*border-collapse: collapse !important;*/
@@ -72,7 +74,7 @@ h4 {
 }
 
 
-tr:hover{background-color:#C1C4C4;
+td:hover{background-color:#C1C4C4;
 }
 
 .content {
@@ -204,31 +206,36 @@ label {
     width: 100%;
     height: 500px;
     grid-template:
-    /*[header-left] "head head" 30px [header-right]*!*/
+    [header-left] "head head" 30px [header-right]
     [main-left]   "nav  main" 1fr  [main-right]
     /*!*[footer-left] "nav  foot" 30px [footer-right]*!*/
     / 120px 1fr;   /* 120px 1fr; */
+    }
+header{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
     }
 
 nav {
     display:flex;
     flex-direction: column;
-    /*justify-content: flex-start;*/
+    justify-content: flex-start;
     vertical-align: text-top;
     background-color: #45879b;  /* 9ad6ad 95c9a5 a9e5bc d5efe8 8DC8C7 */
     grid-area: nav;
     padding-top: 100%;
     padding-bottom: 80%;
-    border-radius: 10px;
-}
+    border-radius: 0px;
+    }
 
 main {
     display: flex;
     flex-direction: row;
-    /*justify-content: center;*/
+    justify-content: center;
     /*align-content: flex-start;*/
     /*flex-wrap: wrap;*/
-    padding-left: 10%;
+    padding-left: 5%;
     padding-top: 5%;
     grid-area: main;
     border-radius: 10px;
@@ -252,8 +259,8 @@ main {
 }
 
 .chart {
-    /*display: block;     !* Added 06.28.17  https://stackoverflow.com/questions/27833908/svg-element-not-coming-inside-a-div*!*/
-    /*float: left;*/
+    display: block;     /* Added 06.28.17  https://stackoverflow.com/questions/27833908/svg-element-not-coming-inside-a-div*/
+    float: right;
     width: 100%;
     height: 100%;
     /*width: 480px;*/
@@ -321,6 +328,64 @@ svg text.label {
     text-align: end ;
 
 }
+
+.latest_year{
+    text-align: center;
+}
+
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+.one {
+  grid-column: 1 / 6;
+  grid-row: 1;
+  background-color: grey;
+  color: black;
+  opacity: .05;
+
+}
+.two {
+  grid-column: 2 / 7;
+  grid-row: 1 / 7;
+  background-color: grey;
+  color: black;
+/*   width: 1000px; */
+  opacity: .05;
+}
+.three {
+  grid-row: 2 / 7;
+  grid-column: 1;
+  background-color: grey;
+  color: black;
+  opacity: .05;
+/*   width: 250px; */
+}
+.four {
+  display:flex;
+  align-items: center;
+  justify-content: center;  /*vertical-align: middle;*/
+  grid-column: 6 / 7;
+  grid-row: 1 / 1;
+  background-color: grey;
+  color: black;
+  opacity: .5;
+  /*padding-right: 20px;*/
+  /*padding-top: 20px;*/
+}
+
+/*.five {*/
+  /*grid-column: 2 / 8;*/
+  /*grid-row: 3 / 8;*/
+  /*background-color: grey;*/
+  /*opacity: .25;*/
+/*}*/
+
+
+
 
 
 

@@ -7,23 +7,19 @@
   <header>
   </header>
 
-  <nav>
-
-  </nav>
+<section id="page">
 
 
-  <main>
+
+    <main>
+    </main>
+
 
     {% autoescape off %}
-
         <script>
-
-{#            var data = {{ data }};#}
-
+            var data = {{ chart_data }};
         </script>
-
     {% endautoescape %}
-
 
 
     <div class="container">
@@ -31,7 +27,7 @@
     </div>
 
 
-
+</section>
 {% endblock %}
 
 {% block extra_js %}
