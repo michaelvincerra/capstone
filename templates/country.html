@@ -8,13 +8,15 @@
 	    <thead>
             <tr>
                 <td>
-                <H4>Start Building Your Own DataPanino</H4>
+                <H5> Build Your Own DataPanino</H5>
                 </td>
             </tr>
             <tr class="table_header">
                 <th>
+                    <p>
                     You chose a default economic indicator for a country.
                     Now add another indicator (or all) to find correlations between the data.
+                    </p>
                 </th>
             </tr>
 
@@ -22,7 +24,9 @@
 
                 {% for country in countries %}
                     <td>
+                    <button class="button_iso2">
                     {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
+                    </button>
                     </td>
                 {% endfor %}
             </tr>
@@ -32,12 +36,10 @@
 
 <div class="wrapper">
 
-  <div class="one"> FR
-
-
-{#    {%  for country  in countries %}    TODO: Retrieve country code that matches URL generated for page. #}
-{#    {{ country.code }}#}
-{#    {%  endfor %}#}
+  <div class="one"> FR    {# TODO: How to programatically match 2-digit country code with URL page? #}
+        {#    {%  for country  in countries %}  #}
+        {#    {{ country.code }}#}
+        {#    {%  endfor %}#}
   </div>
 
   <div class="two">

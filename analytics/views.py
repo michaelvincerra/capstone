@@ -10,12 +10,12 @@ def home(request):
     """
     return render(request, 'home.html')
 
-# def about(request):
-#     """
-#     Landing page template view
-#     """
-#     return render(request, 'about.html')
-#
+def about(request):
+    """
+    Explanation of purpose, background.
+    """
+    return render(request, 'about.html')
+
 # def login(request):
 #     """
 #     Landing page template view
@@ -96,7 +96,7 @@ def list_country_composite(request):
 
 def make_panini(request, slug):
     """
-    Returns 1 country showing all 4 economic indicators for 1975  2015. 
+    Returns 1 country showing all 4 economic indicators from 1975 2015. 
     View should include a slider bar if user wants to select a time period. 
     1 dataset should include the country name, country code, type, year, and value of IP, GDP, GNI, FDI
     """
@@ -114,12 +114,14 @@ def make_panini(request, slug):
     ip = country.snapshots.filter(type='IP')
     ip_dataset = {es.year: es.value for es in ip}
 
-    indicators = list([gdp_dataset, fdi_dataset, gni_dataset, ip_dataset])
+    comb_indicators = set([gdp_dataset, fdi_dataset, gni_dataset, ip_dataset]
+
+    indicators = list()
+    indicators.append([{"date": es.year, "total": es.value, "store": es.name} for es in indicators])
 
     column_data = list()
     # column_data.append({"type": "object", "name": "store", "order": "0"})
-    column_data.append([{"type": es.type, "name": es.year, "order": country.code} for es in indicators[0:4]])
-    # column_data.append([{"type": "float64", "name": es.year, "order": es.id} for es in gdp])
+    column_data.append([{"type": es.type, "name": es.country, "order": es.id} for es in comb_indicators])
 
 
     chart_data = {'data': indicators,

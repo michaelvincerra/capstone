@@ -1,83 +1,87 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block content %}
 
+<h5> Intellectual property sales</h5>
 
+{#http://ec.europa.eu/eurostat/statistics-explained/index.php/Intellectual_property_rights_statistics#}
+{#<--! START HERE: Flesh out rationale for choosing the seven countries. Complete analysis of eurostat numbers. -->#}
 
+<p>
+With an explosive growth rate of 5435.6% from 1975-2016, patents, copyrights, and trademarks have outpaced
+other economic sectors. World Bank data shows "charges for the use of intellectual property, receipts", or IP sales,
+grew from $5.9B USD in 1975 to $326.6B USD in 2016. Compared with other economic indicators, IP sales presents
+an interesting bellwether for understanding how countries across the world innovate, develop, design, and engineer new
+ideas&mdash;<i>as well as license and sell branding, design, and creativity in the arts.</i> &nbsp;
+</p>
 
-{% content block %}
+<p>
+DataPanino provides you with data visualizations, a tool for insight into IP sales in context of other economic
+indicators. We give analysts a tool to see the right data in the right context. It's that simple.
+The rest of the data are, well, mostly condiments. DataPanino allows you to see four major economic indicators:
+</p>
 
-
-
-<H3> Why choose these seven European countries?</H3>
-
-http://ec.europa.eu/eurostat/statistics-explained/index.php?title=Intellectual_property_rights_statistics&stable=0#Context
-<--! START HERE: Flesh out rationale for choosing the seven countries. Complete analysis of eurostat numbers. -->
-
-
-
-"Charges for the use of intellectual property, receipts", or IP sales, grew from
-5.9 Billion in 1975 to 326.6 in 2016, per the World Bank,.  An  explosive growth rate of 5435.6%
-in 41 years shows how technology, including patents, copyrights, and trademarks, has outpaced other sectors.
-In context of other economic indicators, IP sales presents an interesting bellwether for understanding how
-countries across the world innovate, develop, design, and engineer new ideas, and license and
-sell usage in branding, design, and creativity in the arts.  DataPanino's target audience is analysts,
-economists, and investors. But of course, anyone can use it.
-
-
-<h3> Why choose these seven European countries?</h3>
-
-In that same period, the European Union saw an increase from 1.4 Billion in 1975 to 125.5 Billion in 2016.
-That's a 8864.3% increase. While other countries around the world show higher figures of IP sales,
-the European Union has shown explosive growth, and subsequently become highly competitive
-compared with the United States, China, and India in IP sales.
-
-
-
-<h3> Why DataPanino? </h3>
-
-'Stacked' bar charts look like tall sandwiches. "Panino" in Italian, means "sandwich." Our
-name, "DataPanino," makes data quickly understandable in context of other indicators. If our charts make you hungry,
-we're sorry. We understand that staring at charts to understand the impact of data points and trends can get boring.
-So we developed a new way for you to build your own DataPanino, or "data sandwich."
-
-
-
-
-
-DataPanino provides you with data visualizations, as a tool for insight into IP sales in context of other economic
-indicators. DataPanino allows you to see four major economic indicators:
-
-<ul> IP, 'Intellectual Property Sales' </ul>
-<ul> GNI, 'Gross National Income' </ul>
-<ul> GDP, 'Gross Domestic Product' </ul>
-<ul> FDI, 'Foreign Direct Investment'</ul>
-
-
-
-
-
+<li> IP, &nbsp;Intellectual Property Sales </li>
+<li> GNI, &nbsp;Gross National Income </li>
+<li> GDP, &nbsp;Gross Domestic Product </li>
+<li> FDI, &nbsp;Foreign Direct Investment</li>
 {#  Define EUTM  #}
-{# http://ec.europa.eu/eurostat/statistics-explained/index.php/Intellectual_property_rights_statistics #}
+&nbsp;
+<p>
+DataPanino's target audience is analysts, economists, and investors. But of course, anyone can use it.
+</p>
+<h5> Why choose these seven European countries?</h5>
 
-Based on the number of trademark applications made in 1996-2015, the
+<p>
+In that same period, 1975-2016, the European Union (EU) saw an increase from $1.4B USD to $125.5B USD. That's a 8864.3% increase.
+While other countries around the world show higher figures of IP sales, the European Union has
+become highly competitive with other global leaders like the United States, China, and India in IP sales.
+
+Eurostat states: "Based on the number of trademark applications made in 1996-2015, the
 leading European countries in terms of EUTM protection are
-Germany, the United Kingdom, Italy, Spain, France, the Netherlands and Switzerland.
-
+Germany, the United Kingdom, Italy, Spain, France, the Netherlands and Switzerland."
+</p>
 {#  Define COMMUNITY DESIGN #}
 {#   http://appsso.eurostat.ec.europa.eu/nui/submitViewTableAction.do  #}
+<p>
+For "community designs filed," from 2006 to 2016, the same 7 countries cited above hold the highest
+average in the European Union, with one exception. (For that same period, Poland averaged 2611
+community designs filed whereas Switzerland averaged 2227 and the Netherlands averaged 2193.)
 
-* http://appsso.eurostat.ec.europa.eu/nui/submitViewTableAction.do
+We chose these seven countries based on two criteria (EUTM and IP /Community designs filed).
+Germany, the United Kingdom, Italy, Spain, France, the Netherlands and Switzerland were selected because
+they ranked highest in both criteria combined.
 
-
-
-
-
-
-
-
-
-
+</p>
 
 
+<h5> Why DataPanino? </h5>
 
-{% end block%}
+<p>
+'Stacked' bar charts look like tall sandwiches. "Panino" in Italian, means "sandwich." Our
+name, "DataPanino," makes data quickly "digestible" in context of other indicators. Hence, the name.
+If our charts make you hungry, we recommend you patronize your favorite neighborhood restaurant. We understand
+staring at charts can be boring. That's why our unique model, like a data delicatessen,
+provides you with a way to build your own "data sandwich."  You can save your views as part of your research if you like.
+</p>
+
+{# http://ec.europa.eu/eurostat/statistics-explained/index.php/Intellectual_property_rights_statistics #}
+
+
+
+{#http://appsso.eurostat.ec.europa.eu/nui/submitViewTableAction.do#}
+{##}
+{#https://ec.europa.eu/growth/industry/intellectual-property_en#}
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
