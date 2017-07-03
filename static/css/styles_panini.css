@@ -29,25 +29,25 @@ body{
 #page {
     display: grid;
     width: 100%;
-    height: 500px;
+    height: 100%;
     grid-template:
-    /*[header-left] "head head" 30px [header-right]*!*/
+    /*[header-left] "head head" 30px [header-right]*/*/
     [main-left]   "nav  main" 1fr  [main-right]
-    /*!*[footer-left] "nav  foot" 30px [footer-right]*!*/
+    /*/*[footer-left] "nav  foot" 30px [footer-right]*/*/
     / 120px 1fr;   /* 120px 1fr; */
     }
 
-nav {
-    display:flex;
-    flex-direction: column;
-    /*justify-content: flex-start;*/
-    vertical-align: text-top;
-    background-color: #45879b;  /* 9ad6ad 95c9a5 a9e5bc d5efe8 8DC8C7 */
-    grid-area: nav;
-    padding-top: 100%;
-    padding-bottom: 80%;
-    border-radius: 10px;
-}
+/*nav {*/
+    /*display:flex;*/
+    /*flex-direction: column;*/
+    /*!*justify-content: flex-start;*!*/
+    /*vertical-align: text-top;*/
+    /*background-color: #45879b;  !* 9ad6ad 95c9a5 a9e5bc d5efe8 8DC8C7 *!*/
+    /*grid-area: nav;*/
+    /*padding-top: 100%;*/
+    /*padding-bottom: 80%;*/
+    /*border-radius: 10px;*/
+/*}*/
 
 main {
     display: flex;

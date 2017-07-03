@@ -114,14 +114,14 @@ def make_panini(request, slug):
     ip = country.snapshots.filter(type='IP')
     ip_dataset = {es.year: es.value for es in ip}
 
-    comb_indicators = set([gdp_dataset, fdi_dataset, gni_dataset, ip_dataset]
+    # comb_indicators = gdp_dataset, fdi_dataset, gni_dataset, ip_dataset
 
     indicators = list()
-    indicators.append([{"date": es.year, "total": es.value, "store": es.name} for es in indicators])
+    indicators.append([{"date": es.year, "total": es.value, "store": country.name} for es in indicators])
 
     column_data = list()
     # column_data.append({"type": "object", "name": "store", "order": "0"})
-    column_data.append([{"type": es.type, "name": es.country, "order": es.id} for es in comb_indicators])
+    column_data.append([{"name": es.country, "order": es.id, "type": es.type, } for es in column_data])
 
 
     chart_data = {'data': indicators,

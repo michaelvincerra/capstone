@@ -1,3 +1,5 @@
+// "use strict";
+
 function StackedBar() {
 
   var margin = {top: 0, right: 5, bottom: 20, left: 50},
@@ -68,7 +70,7 @@ function StackedBar() {
                        'x': key,
                        'name': name }
            });
-           //values = _.sortBy(values, function(o) { return o.x; });
+           values = _.sortBy(values, function(o) { return o.x; });
            return {'name': name, 'values': values};
        });
 
@@ -298,7 +300,7 @@ function StackedBar() {
                   var x_val = x(d.x) + x.rangeBand()/2.0;
                   //console.log(x_val);
                   focus.attr("transform", "translate(" + x_val  + "," + y(d.y0) + ")");
-                  //focus.attr("transform", "translate(" + 20 + "," + 20 + ")");
+                  focus.attr("transform", "translate(" + 20 + "," + 20 + ")");
                   focus.style("display", null);
                });
 
@@ -306,43 +308,43 @@ function StackedBar() {
 
         bars_enter.on("mouseout", function(d){
             focus.style("display", "none");
-        });
+        })
 
 
 
-                  // .attr("d", function(d) { return stack_area(d.values); })
-                  // .attr("width", x.rangeBand())
-                  // .attr("y", function(d) {
-                  //   console.log(x(d.x), y(d.y), y(d.y0));
-                  //   return y(d.y); })
-                  // .attr("height", function(d) { return y(d.y0) + y(d.y); })
-                  // .style("fill", function(d) { return color(d.name); })
-                  // .style("stroke", function(d) { return color(d.name); } )
-                  // .style("fill-opacity", 0.7)
-                  // .style("stroke-opacity", 0.2)
-                  // .style("stroke-width", 0.05)
-                  // .attr("id", function(d) { return d.name; });
+                  .attr("d", function(d) { return stack_area(d.values); })
+                  .attr("width", x.rangeBand())
+                  .attr("y", function(d) {
+                    console.log(x(d.x), y(d.y), y(d.y0));
+                    return y(d.y); })
+                  .attr("height", function(d) { return y(d.y0) + y(d.y); })
+                  .style("fill", function(d) { return color(d.name); })
+                  .style("stroke", function(d) { return color(d.name); } )
+                  .style("fill-opacity", 0.7)
+                  .style("stroke-opacity", 0.2)
+                  .style("stroke-width", 0.05)
+                  .attr("id", function(d) { return d.name; });
 
-        //           layer.selectAll("rect")
-        //    .data(function(d) { return d; })
-        //  .enter().append("rect")
-        //    .attr("x", function(d) { return x(d.x); })
-        //    .attr("y", function(d) { return y(d.y + d.y0); })
-        //    .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
-        //    .attr("width", x.rangeBand() - 1);
-
-
-            //==============================================================
-            // Update
-            //==============================================================
-            // bars_enter.transition()
-            //           .attr("d", function(d) { return stack_area(d.values); });
+                  layer.selectAll("rect")
+           .data(function(d) { return d; })
+         .enter().append("rect")
+           .attr("x", function(d) { return x(d.x); })
+           .attr("y", function(d) { return y(d.y + d.y0); })
+           .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
+           .attr("width", x.rangeBand() - 1);
 
 
-            //==============================================================
-            // exit
-            //==============================================================
-            // bars_enter.exit().remove();
+            // ==============================================================
+            Update
+            // ==============================================================
+            bars_enter.transition()
+                      .attr("d", function(d) { return stack_area(d.values); });
+
+
+            // ==============================================================
+            exit
+            // ==============================================================
+            bars_enter.exit().remove();
 
 
       });
@@ -400,8 +402,6 @@ function StackedBar() {
 }
 
 // ===========================================
-
-
 
 function plot_area(){
 

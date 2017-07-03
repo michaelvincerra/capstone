@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block content %}
-
+{% block content  %}
 <section id="page">
 
   <header>
@@ -9,31 +8,31 @@
 
 <section id="page">
 
-
-
     <main>
+
+        {% autoescape off %}
+            <script>
+                var data = {{ chart_data }};
+            </script>
+        {% endautoescape %}
+
+
+        <div class="container">
+            <div id="div1"></div>
+        </div>
+
     </main>
 
-
-    {% autoescape off %}
-        <script>
-            var data = {{ chart_data }};
-        </script>
-    {% endautoescape %}
-
-
-    <div class="container">
-        <div id="div1"></div>
-    </div>
-
-
 </section>
+
 {% endblock %}
 
+
 {% block extra_js %}
+
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-{#    <script src="http://d3js.org/stacked_bar.js"></script>#}
-    <script src="{% static 'js/lodash.js' %}"></script>   {# Has to be loaded before it's executed.  #}
+    <script src="http://d3js.org/stacked_bar.js"></script>
+    <script src="{% static 'js/lodash.js' %}"></script>   {# Has to be loaded before below is executed.  #}
     <script src="{% static 'js/script_historybar.js' %}"></script>
 
 {% endblock %}
