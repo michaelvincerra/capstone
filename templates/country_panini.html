@@ -20,7 +20,8 @@
         <div class="container">
             <div id="div1"></div>
         </div>
-
+{#            <svg viewBox="0 0 960 500" class="chart">#}
+{#            </svg>#}
     </main>
 
 </section>
@@ -31,7 +32,7 @@
 {% block extra_js %}
 
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="http://d3js.org/stacked_bar.js"></script>
+      <script src="https://d3js.org/stacked_bar.js"></script>
     <script src="{% static 'js/lodash.js' %}"></script>   {# Has to be loaded before below is executed.  #}
     <script src="{% static 'js/script_historybar.js' %}"></script>
 

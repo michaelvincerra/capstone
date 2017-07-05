@@ -269,20 +269,32 @@ label {
   fill: #f9c984;
 }
 
-.axis text {
-  font: 10px sans-serif;
-}
+/*.axis text {*/
+  /*font: 10px sans-serif;*/
+/*}*/
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
+/*.axis path,*/
+/*.axis line {*/
+  /*fill: none;*/
+  /*stroke: #000;*/
+  /*shape-rendering: crispEdges;*/
+/*}*/
 /*footer {*/
   /*background-color: #f0ad4e;*/
   /*grid-column: foot;*/
 /*}*/
+
+
+.axis text {
+font: 10px sans-serif;
+}
+.axis path, .axis line {
+fill: none;
+stroke: #000;
+shape-rendering: crispEdges;
+}
+
+
 
 .svg-container{
     display: flex;

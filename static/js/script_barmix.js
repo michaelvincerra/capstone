@@ -12,7 +12,7 @@ var x = d3.scale.linear()
     .range([0, width*.85]);
 
 var y = d3.scale.ordinal()
-    .domain(['1','2', '3', '4'])
+    .domain(['FDI','GDP', 'GNI', 'IP'])
     .rangeRoundBands([0, height], 0.1);
 
 var xAxis = d3.svg.axis()

@@ -121,7 +121,7 @@ def make_panini(request, slug):
 
     column_data = list()
     # column_data.append({"type": "object", "name": "store", "order": "0"})
-    column_data.append([{"name": es.country, "order": es.id, "type": es.type, } for es in column_data])
+    column_data.append([{"type": es.type, "name": es.country, "order": es.id } for es in column_data])
 
 
     chart_data = {'data': indicators,

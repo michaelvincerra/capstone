@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<table class="table_country_detail" colspan="8">   {#  #}
+
+	    <thead>
+            <tr>
+                <td>
+                <H5> Build Your Own DataPanino</H5>
+                </td>
+            </tr>
+            <tr class="table_header">
+                <th>
+                    <p>
+                    You chose a default economic indicator for a country.
+                    You can add indicator(s) to find correlations between the data.
+                    </p>
+                </th>
+            </tr>
+
+            <tr class="country_code">
+
+                {% for country in countries %}
+                    <td>
+                    <button class="button_iso2">
+                    {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
+                    </button>
+                    </td>
+                {% endfor %}
+            </tr>
+	    </thead>
+</table>
+
+
+<div class="wrapper">
+
+  <div class="one"> FR    {# TODO: How to programatically match 2-digit country code with URL page? #}
+        {#    {%  for country  in countries %}  #}
+        {#    {{ country.code }}#}
+        {#    {%  endfor %}#}
+  </div>
+
+  <div class="two">
+    {#Two#}
+      <script>
+          {% autoescape off %}    {#    #}
+            var data = {{ data }};
+{#              var data = {{ chart_data }};#}
+          {% endautoescape %}
+      </script>
+
+          <div class="svg-container">  <!--preserveAspectRatio="xMaxYMax meet"  -->
+            <svg viewBox="0 0 960 500" class="chart">
+            </svg>
+          </div>
+  </div>
+
+  <div class="three indicator">
+{#Three#}
+      {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
+          <div>
+            {{ indicator }} &nbsp
+            <input type="checkbox" class="indicator_checkbox">
+          </div>
+      {% endfor %}
+  </div>
+
+
+  <div class="four">
+      {{ latest_year }}
+  </div>
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="https://d3js.org/d3.v3.min.js"  charset="utf-8"></script>
+
+{#<script src="{% static 'js/script_bar.js' %}"></script>#}
+{#<script src="{% static 'js/script_negbar.js' %}"></script>#}
+<script src="{% static 'js/script_barstackneg.js' %}"></script>
+{% endblock %}
