@@ -7,7 +7,7 @@ from .countries import country_codes, FLAGS
 class Country(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
-    code = models.CharField(max_length=4)
+    code = models.CharField(max_length=2)
     flag = models.CharField(max_length=5, null=True, blank=True)    #TODO: Verify this works; or use a models. structure?
 
     def __str__(self):
