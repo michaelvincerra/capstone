@@ -101,31 +101,39 @@ def make_panini(request, slug):
     1 dataset should include the country name, country code, type, year, and value of IP, GDP, GNI, FDI
     """
     country = Country.objects.get(slug=slug)
+    # economicsnapshot = EconomicSnapshot.objects.get(slug=slug)
 
-    gdp = country.snapshots.filter(type='GDP')
-    gdp_dataset = {es.year: es.value for es in gdp}
+    data = list()
+    for indicator_code in ('IP', 'FDI', 'GDP', 'FDI'):
+        snapshots = country.snapshots.filter(type=indicator_code)    # reverse fk lookup
+        dataset = {es.year: es.value for es in snapshots}
+        dataset.update({"total": "42", "store": f'{slug}'})          # TODO: Finish this!!
+        data.append(dataset)
 
-    fdi = country.snapshots.filter(type='FDI')
-    fdi_dataset = {es.year: es.value for es in fdi}
+    # fdi = country.snapshots.filter(type='FDI')
+    # fdi_dataset = {es.year: es.value for es in fdi}
+    # fdi_dataset.update({"total": "42", "store": "llamas"})
+    #
+    # gni = country.snapshots.filter(type='GNI')
+    # gni_dataset = {es.year: es.value for es in gni}
+    # gni_dataset.update({"total": "42", "store": "llamas"})
+    #
+    # ip = country.snapshots.filter(type='IP')
+    # ip_dataset = {es.year: es.value for es in ip}
+    # ip_dataset.update({"total": "42", "store": "llamas"})
 
-    gni = country.snapshots.filter(type='GNI')
-    gni_dataset = {es.year: es.value for es in gni}
+    # data = [gdp_dataset, fdi_dataset, gni_dataset, ip_dataset]
+    # indicators = [gdp, fdi, gni, ip]
 
-    ip = country.snapshots.filter(type='IP')
-    ip_dataset = {es.year: es.value for es in ip}
+    columns = [{"type": "object", "name": "year", "order": "0"}, ]    #{"type": "object", "name": "year", "order": "0"}
+    counter = 0
+    for es in snapshots:
+        column_data = {"type": "float64", "name": es.year, "order": es.year}
+        columns.append(column_data)
+        counter += 1
 
-    # comb_indicators = gdp_dataset, fdi_dataset, gni_dataset, ip_dataset
-
-    indicators = list()
-    indicators.append([{"date": es.year, "total": es.value, "store": country.name} for es in indicators])
-
-    column_data = list()
-    # column_data.append({"type": "object", "name": "store", "order": "0"})
-    column_data.append([{"type": es.type, "name": es.country, "order": es.id } for es in column_data])
-
-
-    chart_data = {'data': indicators,
-                  'columns': column_data}
+    chart_data = {'data': data,
+                  'columns': columns}
 
     context = {'chart_data': chart_data}
     return render(request, "country_panini.html", context)

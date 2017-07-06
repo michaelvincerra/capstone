@@ -535,10 +535,13 @@ function plot_area(){
     //         "type": "float64",
     //         "name": "Mar-16",
     //         "order": "11"
-    //     }, {"type": "float64", "name": "Apr-16", "order": "12"}, {"type": "float64", "name": "total", "order": "13"}]
+    //     }, {"type": "float64", "name": "Apr-16", "order": "12"},
+    //        {"type": "float64", "name": "total", "order": "13"}]
     // };
 
 
+    // var x = d3.time.scale()
+    //     .range([width, 0]);
 
     var config = {};
     config.query = {};
