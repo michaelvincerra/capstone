@@ -1,6 +1,20 @@
 // "use strict";
 
+// function colores_google(n) {
+//   var colores_g = ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
+//   return colores_g[n % colores_g.length];
+
+// https://gist.github.com/mlunacek/8431eed93c26c3a30434dd5e02a1652c#file-d3-v3-min-js
+//ta.scale.category10=function(){return ta.scale.ordinal().range(bl)},
+//ta.scale.category20=function(){return ta.scale.ordinal().range(_l)},//
+
 function StackedBar() {
+
+  // var c20 = d3.scale.category20();
+  // var svg1 = d3.select("#c20")
+  // var colores = ["#45879B", "647AD5", "58CB75", "#f0ad4e"]
+
+  // var color_index = {'fdi': '#58CB75', 'gdp': '#2E5966', 'gni': '#647AD5', 'ip': '#85BEAD' };
 
   var margin = {top: 0, right: 5, bottom: 20, left: 50},
       width = 400 - margin.left - margin.right,
@@ -9,15 +23,54 @@ function StackedBar() {
   var duration = 1000;
   var x = d3.scale.ordinal();
   var y = d3.scale.linear();
+
   var columns;
   var config;
 
   var x_voronoi = d3.scale.linear();
   var y_voronoi = d3.scale.linear();
 
+
   var color = d3.scale.category20();
   var xAxis = d3.svg.axis();
   var yAxis = d3.svg.axis();
+
+  // var color = d3.scale.ordinal()                             07.06.17
+  //     .domain(["FDI", "GDP", "GNP", "IP"])
+  //     .range(["#2E5966", "#647AD5", "#6ACBEA","#F0AD4E"]);   07.06.17
+
+  //   // selection.style('fill', function(d, i) {return color(i);});
+  //   .domain([1, 2, 3, 4, 5, 6])
+  //   .range([color_index]);
+  //   .range(["#2E5966", "#647AD5", "#6ACBEA", "#F0AD4E", "#58CB75", "#85BEAD"]);
+
+
+
+  // var color = d3.scale.ordinal()
+  //       .domain([d3.min(data), (d3.max(data)-d3.min(data))/2, d3.max(data)])
+          //
+
+
+  // var color = d3.scale.ordinal()
+  //   .domain(["FDI", "FDI", "GDP", "IP"])
+  //   .range(["#45879B", "#6ACBEA" , "#647AD5", "#F0AD4E"]);
+  // var xAxis = d3.svg.axis();
+  // var yAxis = d3.svg.axis();
+
+
+
+// 647AD5  periwinkle blue
+// 45879b  turquoise dark
+// ADD8E6  lightblue, BODY
+// 6ACBEA  toy blue, accents
+// 2E5966  emerald green, dark accents
+// 87A8B3  sea blue, bars/dividers
+// 58CB75  chartreuse, bright
+// 8DC8C7  mint green
+// 85BEAD  sage green
+// #F29D35 terracotta
+// #f0ad4e light orange
+
 
   var stack_area = d3.svg.area()
       //  .interpolate("basis")
@@ -137,9 +190,9 @@ function StackedBar() {
            var total = prepare_total(data);
 
            // 1. Flatten the data....
-           var flatten = data.map(function(obj){
+          var flatten = data.map(function(obj){
               return obj.values.map(function(item){
-                  item.color = color(obj.name);
+                  item.color = color.gdp;
                   return item;
               });
            });
@@ -156,6 +209,7 @@ function StackedBar() {
 
            y.domain(d3.extent(y_flat_values.concat(y_values))).range([height, 0]);
            x.domain(x_values).rangeRoundBands([0, width], .1);
+
 
            yAxis.scale(y)
                    .orient("left")
@@ -550,8 +604,8 @@ function plot_area(){
 
     // Plots the data as an area chart
     var chart = StackedBar()
-                    .width(820)
-                    .height(450)
+                    .width(1230)     /* 820  original*/
+                    .height(675)    /* 450  original*/
                     .columns(data.columns)
                     .config(config)
                     .margin({top: 30, right: 20, bottom: 20, left: 60})

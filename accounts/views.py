@@ -73,7 +73,6 @@ def register(request):
     return render(request, 'accounts/register.html', context)
 
 @login_required(login_url='/accounts/login/')
-
 def profile(request):
     password_form = PasswordChangeForm(user=request.user)
     form = CustomUserUpdateForm(instance=request.user)

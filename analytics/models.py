@@ -36,7 +36,7 @@ class EconomicSnapshot(models.Model):
 
     slug = models.SlugField(max_length=50)
     year = models.PositiveSmallIntegerField()
-    country = models.ForeignKey(Country, related_name='snapshots')  # Foreign key: one-to-many only; name
+    country = models.ForeignKey(Country, related_name='snapshots')  #Foreign key: one-to-many only; from Country, fk: "snapshots"
     type = models.CharField(max_length=30, choices=INDICATORS)
     value = models.FloatField(null=False, blank=True)
     description = models.CharField(max_length=500)

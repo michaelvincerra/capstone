@@ -5,28 +5,25 @@
 
 <section id="page">
 
-  <header>
-  </header>
+<header>
+</header>
 
-<section id="page">
+<section class=".wrapper">
 
-    <main>
-
-        {% autoescape off %}
-            <script>
-                var data = {{ chart_data }};
-            </script>
-        {% endautoescape %}
+    {% autoescape off %}
+        <script>
+            var data = {{ chart_data }};
+        </script>
+    {% endautoescape %}
 
 
-        <div class="container">
-            <div id="div1"></div>
-        </div>
-{#            <svg viewBox="0 0 960 500" class="chart">#}
-{#            </svg>#}
-    </main>
+    <div id="div1">
+        <svg viewBox="0 0 1230 675" class="svg-container">
+        </svg>
+    </div>
 
 </section>
+
 
 {% endblock %}
 
@@ -34,8 +31,9 @@
 {% block extra_js %}
 
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-      <script src="https://d3js.org/stacked_bar.js"></script>
+    <script src="https://d3js.org/stacked_bar.js"></script>
     <script src="{% static 'js/lodash.js' %}"></script>   {# Has to be loaded before below is executed.  #}
     <script src="{% static 'js/script_historybar.js' %}"></script>
+{#    <script src="{% static 'js/colores.js' %}"></script>#}
 
 {% endblock %}

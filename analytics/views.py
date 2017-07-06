@@ -100,30 +100,18 @@ def make_panini(request, slug):
     View should include a slider bar if user wants to select a time period. 
     1 dataset should include the country name, country code, type, year, and value of IP, GDP, GNI, FDI
     """
+
     country = Country.objects.get(slug=slug)
     # economicsnapshot = EconomicSnapshot.objects.get(slug=slug)
+    # reordered= selection.snapshots.aggregate(reversed('year'))
 
     data = list()
-    for indicator_code in ('IP', 'FDI', 'GDP', 'FDI'):
-        snapshots = country.snapshots.filter(type=indicator_code)    # reverse fk lookup
+    for indicator_code in ('FDI', 'FDI', 'GDP', 'IP'):
+        snapshots = country.snapshots.filter(type=indicator_code)    # reverse fk lookup: snapshots to EconomicSnapshot
+
         dataset = {es.year: es.value for es in snapshots}
         dataset.update({"total": "42", "store": f'{slug}'})          # TODO: Finish this!!
         data.append(dataset)
-
-    # fdi = country.snapshots.filter(type='FDI')
-    # fdi_dataset = {es.year: es.value for es in fdi}
-    # fdi_dataset.update({"total": "42", "store": "llamas"})
-    #
-    # gni = country.snapshots.filter(type='GNI')
-    # gni_dataset = {es.year: es.value for es in gni}
-    # gni_dataset.update({"total": "42", "store": "llamas"})
-    #
-    # ip = country.snapshots.filter(type='IP')
-    # ip_dataset = {es.year: es.value for es in ip}
-    # ip_dataset.update({"total": "42", "store": "llamas"})
-
-    # data = [gdp_dataset, fdi_dataset, gni_dataset, ip_dataset]
-    # indicators = [gdp, fdi, gni, ip]
 
     columns = [{"type": "object", "name": "year", "order": "0"}, ]    #{"type": "object", "name": "year", "order": "0"}
     counter = 0

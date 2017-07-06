@@ -5,7 +5,7 @@ import re, random
 pytestmark = pytest.mark.django_db  # pytestmark allows to write to db.
 
 
-class TestCountry:
+class  TestCountry:
     def test_country(self):
         codes = (
             ('FR', '🇫🇷'),
