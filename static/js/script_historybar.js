@@ -8,21 +8,80 @@
 //ta.scale.category10=function(){return ta.scale.ordinal().range(bl)},
 //ta.scale.category20=function(){return ta.scale.ordinal().range(_l)},//
 
+
+
+$("#slider-range").slider({
+    range: true,
+    min: 1975,
+    max: 2015,
+    values: [1995, 2015],
+
+    slide: function (event, ui) {
+        $("#amount").val("Year " + ui.values[0] + " Year " + ui.values[1]);
+    },
+    stop: function (event, ui) {
+        console.log('Slider dropped');
+        $("svg").empty();
+        StackedBar();
+        plot_area()
+
+    }
+
+});
+
+
+// function plot_area(){
+//
+//     var config = {};
+//     config.query = {};
+//     config.number_of_rows = 10;
+//     config.query.select = ['store'];
+//
+//     // Plots the data as an area chart
+//     var chart = StackedBar()
+//                     .width(1230)            /* 820  original*/
+//                     .height(675)            /* 450  original*/
+//                     .columns(data.columns)
+//                     .config(config)
+//                     .margin({top: 30, right: 20, bottom: 20, left: 60})
+//                     .x(d3.scale.ordinal())
+//                     .y(d3.scale.linear());
+//
+//
+//   console.log(data['data']);
+//   d3.select("#div1").datum(data).call(chart);
+//
+// }
+
+
+// plot_area();
+
+
+// function time_filter() {
+//     "use strict";
+//     _.filter()    /* takes an iterable, then function*/
+//
+// }
+
+
 function StackedBar() {
 
   // var c20 = d3.scale.category20();
   // var svg1 = d3.select("#c20")
   // var colores = ["#45879B", "647AD5", "58CB75", "#f0ad4e"]
 
-  // var color_index = {'fdi': '#58CB75', 'gdp': '#2E5966', 'gni': '#647AD5', 'ip': '#85BEAD' };
+  // var color_index = {'fdi': '#58CB75', 'gdp': '#58CB75', 'gni': '#647AD5', 'ip': '#85BEAD' };
 
   var margin = {top: 0, right: 5, bottom: 20, left: 50},
       width = 400 - margin.left - margin.right,
       height = 300 - margin.top - margin.bottom;
 
   var duration = 1000;
+
+
   var x = d3.scale.ordinal();
   var y = d3.scale.linear();
+
 
   var columns;
   var config;
@@ -30,10 +89,58 @@ function StackedBar() {
   var x_voronoi = d3.scale.linear();
   var y_voronoi = d3.scale.linear();
 
+  var color = d3.scale.ordinal()
+      .domain(d3.range(0,4))
+      .range(["#BBCDA3", "#055C81", "#B13C3D", "#CCB40C"]);
 
-  var color = d3.scale.category20();
+  console.log(color.domain());
+  console.log(color(0));
+  console.log(color(1));
+  console.log(color(2));
+  console.log(color(3));
   var xAxis = d3.svg.axis();
   var yAxis = d3.svg.axis();
+
+  // var color = d3.scale.category10().domain(d3.range(0, 10));
+  // var myColors = d3.scale.ordinal()
+  //     .domain(["#45879B", "647AD5", "58CB75", "#f0ad4e"])
+
+  // var xAxis = d3.svg.axis();
+  // var yAxis = d3.svg.axis();
+
+  // var colors = ["#58CB75", "#58CB75", "#647AD5", "#85BEAD",];
+  // var color = d3.scale.category20().domain(d3.range(0,3));
+  //      // for (color = 0; color < 5; color++){
+  //      // }
+
+  // var color = d3.scale.category10().domain(d3.range(0,10));
+  // for (var i =0; i < 10; i++){
+  //     color(i)
+  // var color = d3.scale.category10().domain(d3.range(0,10));
+  // var domain = ["bbb", "ddd", "ccc", "23", "hello"];
+
+  // var color = d3.scale.ordinal()
+  //     .domain("IP", "GDP", "GNI", "IP", "total", "score")
+  //     .range(["#2E5966", "#647AD5", "#6ACBEA","#F0AD4E", "#8DC8C7", "#80D3ED"]);
+
+
+// var color = d3.scale.quantile()
+//     .domain([0, colors.length - 1, d3.max(data, function(d) {
+//     return d;
+//     })])
+//     .range(colors);
+
+    //
+    //
+    //
+    // function redraw(data) {
+    //     var color = d3.scale.category20(); //< NOT USED HERE
+    //     var svg = d3.select("svg");
+    //     var circles = svg.selectAll("rect")
+    //         .data(data).enter().append("rect")
+    //         .style("fill", function () {
+    //             return $color(getRandomInt(0, 19));
+    //         });
 
   // var color = d3.scale.ordinal()                             07.06.17
   //     .domain(["FDI", "GDP", "GNP", "IP"])
@@ -62,7 +169,7 @@ function StackedBar() {
 // 647AD5  periwinkle blue
 // 45879b  turquoise dark
 // ADD8E6  lightblue, BODY
-// 6ACBEA  toy blue, accents
+// 80D3ED  toy blue, accents
 // 2E5966  emerald green, dark accents
 // 87A8B3  sea blue, bars/dividers
 // 58CB75  chartreuse, bright
@@ -192,7 +299,7 @@ function StackedBar() {
            // 1. Flatten the data....
           var flatten = data.map(function(obj){
               return obj.values.map(function(item){
-                  item.color = color.gdp;
+                  item.color = color(obj.name);
                   return item;
               });
            });
@@ -208,7 +315,7 @@ function StackedBar() {
            var x_values = _.map(total['values'], 'x');
 
            y.domain(d3.extent(y_flat_values.concat(y_values))).range([height, 0]);
-           x.domain(x_values).rangeRoundBands([0, width], .1);
+           x.domain(x_values).rangeRoundBands([width, 0], .1);    /* prev: ([0, width], .1); 07.06.17    */
 
 
            yAxis.scale(y)
@@ -392,7 +499,8 @@ function StackedBar() {
             Update
             // ==============================================================
             bars_enter.transition()
-                      .attr("d", function(d) { return stack_area(d.values); });
+                      .attr("d", function(d) { return stack_area(d.values); })
+
 
 
             // ==============================================================
@@ -457,7 +565,7 @@ function StackedBar() {
 
 // ===========================================
 
-function plot_area(){
+// function plot_area(){
 
     // var data = {
     //     "data": [{
@@ -591,11 +699,10 @@ function plot_area(){
     //         "order": "11"
     //     }, {"type": "float64", "name": "Apr-16", "order": "12"},
     //        {"type": "float64", "name": "total", "order": "13"}]
-    // };
+// };
 
 
-    // var x = d3.time.scale()
-    //     .range([width, 0]);
+function plot_area(){
 
     var config = {};
     config.query = {};
@@ -604,23 +711,29 @@ function plot_area(){
 
     // Plots the data as an area chart
     var chart = StackedBar()
-                    .width(1230)     /* 820  original*/
-                    .height(675)    /* 450  original*/
+                    .width(1230)            /* 820  original*/
+                    .height(675)            /* 450  original*/
                     .columns(data.columns)
                     .config(config)
                     .margin({top: 30, right: 20, bottom: 20, left: 60})
                     .x(d3.scale.ordinal())
-                    .y(d3.scale.linear());
+                    .y(d3.scale.linear())
+
 
   console.log(data['data']);
   d3.select("#div1").datum(data).call(chart);
 
 }
 
-
 plot_area();
 
-//
+var q = d3.queue();
+    q.defer(plot_area());
+    q.await(function(error) {
+      if (error) throw error;
+      console.log("Queue Completed!");
+    });
+
 // d3.json(data, function(error, d) {
 //   data = d;
 //   plot_area(data);

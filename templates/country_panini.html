@@ -12,7 +12,15 @@
 
     {% autoescape off %}
         <script>
-            var data = {{ chart_data }};
+
+
+
+
+
+          var data = {{ chart_data }};
+          var q = d3.queue();
+
+
         </script>
     {% endautoescape %}
 
@@ -22,8 +30,19 @@
         </svg>
     </div>
 
+    <div id="slider-range"></div>
+
+<p>
+  <label for="amount"></label>
+  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+</p>
+
+
+
 </section>
 
+<script>
+</script>
 
 {% endblock %}
 
@@ -34,6 +53,8 @@
     <script src="https://d3js.org/stacked_bar.js"></script>
     <script src="{% static 'js/lodash.js' %}"></script>   {# Has to be loaded before below is executed.  #}
     <script src="{% static 'js/script_historybar.js' %}"></script>
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+
 {#    <script src="{% static 'js/colores.js' %}"></script>#}
 
 {% endblock %}

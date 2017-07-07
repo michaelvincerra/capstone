@@ -96,7 +96,7 @@ def list_country_composite(request):
 
 def make_panini(request, slug):
     """
-    Returns 1 country showing all 4 economic indicators from 1975 2015. 
+    Returns 1 country showing all 4 economic indicators from 1975 2015, or available range of dates.
     View should include a slider bar if user wants to select a time period. 
     1 dataset should include the country name, country code, type, year, and value of IP, GDP, GNI, FDI
     """
