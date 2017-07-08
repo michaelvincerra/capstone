@@ -8,13 +8,36 @@
 //ta.scale.category10=function(){return ta.scale.ordinal().range(bl)},
 //ta.scale.category20=function(){return ta.scale.ordinal().range(_l)},//
 
+/* http://api.jquery.com/jquery.each/ */
+
+function filter_date (min, max){
+
+    let newdata = [];                           /* List building pattern  */
+    $.each(data.data, function(index, bar){     /* find the date via the data key */
+        "use strict";
+
+        let newbar = Object();
+        $.each(bar, function(year, value){      /* for loop within a for loop to extract */
+            if (year >= min && year <= max){
+                newbar[year] = value;
+            }
+            newdata.push(newbar)
+        });
+    });
+    data = newdata;
+    console.log(data);
+}
+
+
+
 
 
 $("#slider-range").slider({
     range: true,
+    step: 1,
     min: 1975,
-    max: 2015,
-    values: [1995, 2015],
+    max: 2016,
+    // values: [1995, 2015],
 
     slide: function (event, ui) {
         $("#amount").val("Year " + ui.values[0] + " Year " + ui.values[1]);
@@ -22,11 +45,11 @@ $("#slider-range").slider({
     stop: function (event, ui) {
         console.log('Slider dropped');
         $("svg").empty();
-        StackedBar();
-        plot_area()
+        filter_date(ui.values[0], ui.values[1] );
+        plot_area();
 
     }
-
+,
 });
 
 
@@ -90,7 +113,7 @@ function StackedBar() {
   var y_voronoi = d3.scale.linear();
 
   var color = d3.scale.ordinal()
-      .domain(d3.range(0,4))
+      .domain(d3.range(0,3))
       .range(["#BBCDA3", "#055C81", "#B13C3D", "#CCB40C"]);
 
   console.log(color.domain());
