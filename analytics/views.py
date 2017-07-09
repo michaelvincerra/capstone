@@ -106,7 +106,7 @@ def make_panini(request, slug):
     # reordered= selection.snapshots.aggregate(reversed('year'))
 
     data = list()
-    for indicator_code in ('FDI', 'FDI', 'GDP', 'IP'):
+    for indicator_code in ('FDI', 'GNI', 'GDP', 'IP'):
         snapshots = country.snapshots.filter(type=indicator_code)    # reverse fk lookup: snapshots to EconomicSnapshot
 
         dataset = {es.year: es.value for es in snapshots}
@@ -116,7 +116,9 @@ def make_panini(request, slug):
     columns = [{"type": "object", "name": "year", "order": "0"}, ]    #{"type": "object", "name": "year", "order": "0"}
     counter = 0
     for es in snapshots:
-        column_data = {"type": "float64", "name": es.year, "order": es.year}
+        # column_data = {"type": "float64", "name": es.year, "order": es.year}
+        column_data = {"type": es.type, "name": es.year, "order": es.year}
+
         columns.append(column_data)
         counter += 1
 

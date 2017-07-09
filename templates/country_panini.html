@@ -8,20 +8,20 @@
 <header>
 </header>
 
-<section class=".wrapper">
+<section class=".wrapper2">
 
     {% autoescape off %}
         <script>
 
           var data = {{ chart_data }};
-          var q = d3.queue();
+{#          var q = d3.queue();#}
 
         </script>
     {% endautoescape %}
 
 
     <div id="div1">
-        <svg viewBox="0 0 1230 675" class="svg-container">
+        <svg viewBox="0 0 1230 675" class="svg-container2">
         </svg>
     </div>
 
@@ -45,7 +45,7 @@
 {% block extra_js %}
 
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="https://d3js.org/stacked_bar.js"></script>
+{#    <script src="https://d3js.org/stacked_bar.js"></script>#}
     <script src="{% static 'js/lodash.js' %}"></script>   {# Has to be loaded before below is executed.  #}
     <script src="{% static 'js/script_historybar.js' %}"></script>
     <script src="https://d3js.org/d3-queue.v3.min.js"></script>

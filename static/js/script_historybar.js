@@ -9,24 +9,24 @@
 //ta.scale.category20=function(){return ta.scale.ordinal().range(_l)},//
 
 /* http://api.jquery.com/jquery.each/ */
-
-function filter_date (min, max){
-
-    let newdata = [];                           /* List building pattern  */
-    $.each(data.data, function(index, bar){     /* find the date via the data key */
-        "use strict";
-
-        let newbar = Object();
-        $.each(bar, function(year, value){      /* for loop within a for loop to extract */
-            if (year >= min && year <= max){
-                newbar[year] = value;
-            }
-            newdata.push(newbar)
-        });
-    });
-    data = newdata;
-    console.log(data);
-}
+//
+// function filter_date (min, max){
+//
+//     let newdata = [];                           /* List building pattern  */
+//     $.each(data.data, function(index, bar){     /* find the date via the data key */
+//         "use strict";
+//
+//         let newbar = Object();
+//         $.each(bar, function(year, value){      /* for loop within a for loop to extract */
+//             if (year >= min && year <= max){
+//                 newbar[year] = value;
+//             }
+//             newdata.push(newbar)
+//         });
+//     });
+//     data = newdata;
+//     console.log(data);
+// }
 
 
 
@@ -52,32 +52,6 @@ $("#slider-range").slider({
 ,
 });
 
-
-// function plot_area(){
-//
-//     var config = {};
-//     config.query = {};
-//     config.number_of_rows = 10;
-//     config.query.select = ['store'];
-//
-//     // Plots the data as an area chart
-//     var chart = StackedBar()
-//                     .width(1230)            /* 820  original*/
-//                     .height(675)            /* 450  original*/
-//                     .columns(data.columns)
-//                     .config(config)
-//                     .margin({top: 30, right: 20, bottom: 20, left: 60})
-//                     .x(d3.scale.ordinal())
-//                     .y(d3.scale.linear());
-//
-//
-//   console.log(data['data']);
-//   d3.select("#div1").datum(data).call(chart);
-//
-// }
-
-
-// plot_area();
 
 
 // function time_filter() {
@@ -112,15 +86,23 @@ function StackedBar() {
   var x_voronoi = d3.scale.linear();
   var y_voronoi = d3.scale.linear();
 
+  // COLORS! 07.08.17
+  var length = 4;
   var color = d3.scale.ordinal()
-      .domain(d3.range(0,3))
-      .range(["#BBCDA3", "#055C81", "#B13C3D", "#CCB40C"]);
+      .domain([1,length])
+      // .range(["#45879B", "#45879B", "#B13C3D", "#CCB40C"]);
+      .range([d3.rgb('#45879B'), d3.rgb('#80D3ED'), d3.rgb('#85BEAD'), d3.rgb('#f0AD4E')]);
+
 
   console.log(color.domain());
-  console.log(color(0));
   console.log(color(1));
   console.log(color(2));
   console.log(color(3));
+  console.log(color(4));
+
+  // var color = d3.scale.category20();
+  var xAxis = d3.svg.axis();
+  var yAxis = d3.svg.axis();
   var xAxis = d3.svg.axis();
   var yAxis = d3.svg.axis();
 
@@ -322,6 +304,7 @@ function StackedBar() {
            // 1. Flatten the data....
           var flatten = data.map(function(obj){
               return obj.values.map(function(item){
+                  console.log(obj)
                   item.color = color(obj.name);
                   return item;
               });
@@ -496,40 +479,40 @@ function StackedBar() {
 
 
 
-                  .attr("d", function(d) { return stack_area(d.values); })
-                  .attr("width", x.rangeBand())
-                  .attr("y", function(d) {
-                    console.log(x(d.x), y(d.y), y(d.y0));
-                    return y(d.y); })
-                  .attr("height", function(d) { return y(d.y0) + y(d.y); })
-                  .style("fill", function(d) { return color(d.name); })
-                  .style("stroke", function(d) { return color(d.name); } )
-                  .style("fill-opacity", 0.7)
-                  .style("stroke-opacity", 0.2)
-                  .style("stroke-width", 0.05)
-                  .attr("id", function(d) { return d.name; });
-
-                  layer.selectAll("rect")
-           .data(function(d) { return d; })
-         .enter().append("rect")
-           .attr("x", function(d) { return x(d.x); })
-           .attr("y", function(d) { return y(d.y + d.y0); })
-           .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
-           .attr("width", x.rangeBand() - 1);
-
-
-            // ==============================================================
-            Update
-            // ==============================================================
-            bars_enter.transition()
-                      .attr("d", function(d) { return stack_area(d.values); })
-
-
-
-            // ==============================================================
-            exit
-            // ==============================================================
-            bars_enter.exit().remove();
+                  // .attr("d", function(d) { return stack_area(d.values); })
+                  // .attr("width", x.rangeBand())
+                  // .attr("y", function(d) {
+                  //   console.log(x(d.x), y(d.y), y(d.y0));
+                  //   return y(d.y); })
+                  // .attr("height", function(d) { return y(d.y0) + y(d.y); })
+                  // .style("fill", function(d) { return color(d.name); })
+                  // .style("stroke", function(d) { return color(d.name); } )
+                  // .style("fill-opacity", 0.7)
+                  // .style("stroke-opacity", 0.2)
+                  // .style("stroke-width", 0.05)
+                  // .attr("id", function(d) { return d.name; });
+         //
+         //          layer.selectAll("rect")
+         //   .data(function(d) { return d; })
+         // .enter().append("rect")
+         //   .attr("x", function(d) { return x(d.x); })
+         //   .attr("y", function(d) { return y(d.y + d.y0); })
+         //   .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
+         //   .attr("width", x.rangeBand() - 1);
+         //
+         //
+         //    // ==============================================================
+         //    Update
+         //    // ==============================================================
+         //    bars_enter.transition()
+         //              .attr("d", function(d) { return stack_area(d.values); })
+         //
+         //
+         //
+         //    // ==============================================================
+         //    exit
+         //    // ==============================================================
+         //    bars_enter.exit().remove();
 
 
       });
@@ -750,12 +733,12 @@ function plot_area(){
 
 plot_area();
 
-var q = d3.queue();
-    q.defer(plot_area());
-    q.await(function(error) {
-      if (error) throw error;
-      console.log("Queue Completed!");
-    });
+// var q = d3.queue();
+//     q.defer(plot_area());
+//     q.await(function(error) {
+//       if (error) throw error;
+//       console.log("Queue Completed!");
+//     });
 
 // d3.json(data, function(error, d) {
 //   data = d;

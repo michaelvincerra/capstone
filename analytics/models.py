@@ -4,6 +4,24 @@ from .countries import country_codes, FLAGS
 # from accounts.models import User
 
 
+class Collection(models.Model):
+    title = models.CharField(max_length=100)    # title = title of saved collection.
+    updated = models.DateField(auto_now=True)
+    viewer = models.ManyToManyField(EconomicSnapshot, related_name='type')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-updated',)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+
+        super().save(*args, **kwargs)
+
+
+
 class Country(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
@@ -28,15 +46,15 @@ class EconomicSnapshot(models.Model):
 
     INDICATORS = (
         ('IP', 'Intellectual Property Sales'),
-        ('PAT', 'Patent Applications'),
         ('GNI', 'Gross National Income'),
         ('GDP', 'Gross Domestic Product'),
         ('FDI', 'Foreign Direct Investment'),
     )
+    # ('PAT', 'Patent Applications'),
 
     slug = models.SlugField(max_length=50)
     year = models.PositiveSmallIntegerField()
-    country = models.ForeignKey(Country, related_name='snapshots')  #Foreign key: one-to-many only; from Country, fk: "snapshots"
+    country = models.ForeignKey(Country, related_name='snapshots')  #Foreign key: many-to-one; from Country, fk: "snapshots"
     type = models.CharField(max_length=30, choices=INDICATORS)
     value = models.FloatField(null=False, blank=True)
     description = models.CharField(max_length=500)
