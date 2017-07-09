@@ -9,38 +9,42 @@
 //ta.scale.category20=function(){return ta.scale.ordinal().range(_l)},//
 
 /* http://api.jquery.com/jquery.each/ */
-//
-// function filter_date (min, max){
-//
-//     let newdata = [];                           /* List building pattern  */
-//     $.each(data.data, function(index, bar){     /* find the date via the data key */
-//         "use strict";
-//
-//         let newbar = Object();
-//         $.each(bar, function(year, value){      /* for loop within a for loop to extract */
-//             if (year >= min && year <= max){
-//                 newbar[year] = value;
-//             }
-//             newdata.push(newbar)
-//         });
-//     });
-//     data = newdata;
-//     console.log(data);
-// }
 
 
+function filter_date (min, max){
 
+    let newdata = [];                           /* List building pattern  */
+    $.each(data.data, function(index, bar){     /* for each to find the date via the data key */
+        "use strict";
+
+        let newbar = Object();
+        $.each(bar, function(year, value){      /* for loop within a for loop to extract */
+            if (year >= min && year <= max){
+                newbar[year] = year;
+                newbar[value] = value;
+            }
+            newdata.push(newbar)
+        });
+    });
+    data = newdata;
+    console.log(data);
+}
+
+//
+// let minYear = data.data.year[0];
+// let maxYear = data.data.year[1];
 
 
 $("#slider-range").slider({
     range: true,
     step: 1,
-    min: 1975,
-    max: 2016,
-    // values: [1995, 2015],
+    min: 1975,    /* minYear TODO: Program value based on JSON min date; not hardcoded */
+    max: 2015,    /*maxYear TODO: Program value based on JSON max date; not hardcoded */
+    values: [1975, 2015],
 
     slide: function (event, ui) {
-        $("#amount").val("Year " + ui.values[0] + " Year " + ui.values[1]);
+        $("#amount").val(ui.values[0] + ' - ' + ui.values[1]);
+        // data.year=val;
     },
     stop: function (event, ui) {
         console.log('Slider dropped');
@@ -51,6 +55,8 @@ $("#slider-range").slider({
     }
 ,
 });
+
+
 
 
 
@@ -103,8 +109,6 @@ function StackedBar() {
   // var color = d3.scale.category20();
   var xAxis = d3.svg.axis();
   var yAxis = d3.svg.axis();
-  var xAxis = d3.svg.axis();
-  var yAxis = d3.svg.axis();
 
   // var color = d3.scale.category10().domain(d3.range(0, 10));
   // var myColors = d3.scale.ordinal()
@@ -135,9 +139,7 @@ function StackedBar() {
 //     })])
 //     .range(colors);
 
-    //
-    //
-    //
+
     // function redraw(data) {
     //     var color = d3.scale.category20(); //< NOT USED HERE
     //     var svg = d3.select("svg");
@@ -292,6 +294,7 @@ function StackedBar() {
       }
     return d
   };
+
 
   function chart(selection) {
       selection.each(function(tmp) {
@@ -681,30 +684,20 @@ function StackedBar() {
     //         "store": "c5022cc2-1bd7-11e6-86f8-3c15c2ceba18"
     //     }],
     //     "columns": [
-    //         {"type": "object", "name": "store", "order": "0"},
-    //         {"type": "float64","name": "May-15","order": "1"
-    //     }, {"type": "float64", "name": "Jun-15", "order": "2"}, {
-    //         "type": "float64",
-    //         "name": "Jul-15",
-    //         "order": "3"
-    //     }, {"type": "float64", "name": "Aug-15", "order": "4"}, {
-    //         "type": "float64",
-    //         "name": "Sep-15",
-    //         "order": "5"
-    //     }, {"type": "float64", "name": "Oct-15", "order": "6"}, {
-    //         "type": "float64",
-    //         "name": "Nov-15",
-    //         "order": "7"
-    //     }, {"type": "float64", "name": "Dec-15", "order": "8"}, {
-    //         "type": "float64",
-    //         "name": "Jan-16",
-    //         "order": "9"
-    //     }, {"type": "float64", "name": "Feb-16", "order": "10"}, {
-    //         "type": "float64",
-    //         "name": "Mar-16",
-    //         "order": "11"
-    //     }, {"type": "float64", "name": "Apr-16", "order": "12"},
-    //        {"type": "float64", "name": "total", "order": "13"}]
+    //      {"type": "object", "name": "store", "order": "0"},
+    //      {"type": "float64","name": "May-15","order": "1"},
+    //      {"type": "float64", "name": "Jun-15", "order": "2"},
+    //      {"type": "float64", "name": "Jul-15", "order": "3"},
+    //      {"type": "float64", "name": "Aug-15", "order": "4"},
+    //      {"type": "float64", "name": "Sep-15", "order": "5"},
+    //      {"type": "float64", "name": "Oct-15", "order": "6"},
+    //      {"type": "float64", "name": "Nov-15", "order": "7"},
+    //      {"type": "float64", "name": "Dec-15", "order": "8"},
+    //      {"type": "float64", "name": "Jan-16","order": "9"},
+    //      {"type": "float64", "name": "Feb-16", "order": "10"},
+    //      {"type": "float64", "name": "Mar-16", "order": "11"
+    //      {"type": "float64", "name": "Apr-16", "order": "12"},
+    //      {"type": "float64", "name": "total", "order": "13"}]
 // };
 
 

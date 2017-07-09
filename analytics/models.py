@@ -4,24 +4,6 @@ from .countries import country_codes, FLAGS
 # from accounts.models import User
 
 
-class Collection(models.Model):
-    title = models.CharField(max_length=100)    # title = title of saved collection.
-    updated = models.DateField(auto_now=True)
-    viewer = models.ManyToManyField(EconomicSnapshot, related_name='type')
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        ordering = ('-updated',)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-
-        super().save(*args, **kwargs)
-
-
-
 class Country(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=100)
@@ -75,9 +57,27 @@ class EconomicSnapshot(models.Model):
         super().save(*args, **kwargs)
 
 
+class Collection(models.Model):
+    title = models.CharField(max_length=100)  # title = title of saved collection.
+    updated = models.DateField(auto_now=True)
+    viewer = models.ManyToManyField(EconomicSnapshot, related_name='collections')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('-updated',)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+
+        super().save(*args, **kwargs)
 
 
-# class analytics(models.Model):
+
+
+
+                # class analytics(models.Model):
 #
 #     name = models.CharField(max_length=50)
 #     type = models.CharField(max_length=100, choices=INDICATORS)

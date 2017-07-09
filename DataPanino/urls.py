@@ -43,15 +43,14 @@ urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
     url(r'^$', home, name='home'),
     url(r'^detail/(?P<slug>\w+)/$', home, name='home'),  # URL parameter capturing using a kwarg
-    # url(r'^country/(?P<country>\w+(?<=\D)-(?=\D)\w+/(?P<type>\w{0,5})/$', list_economic_snapshots, name='economic_snapshots'),
     url(r'^country_overview/$', list_country_composite, name='composite'),  # see 'def list_country_composite in views.
     url(r'^country/(?P<country>[\w-]+)/(?P<type>\w{0,5})/$', list_economic_snapshots, name='economic_snapshots'),
     url(r'^country_panini/(?P<slug>[a-zA-Z\-]+)$', make_panini, name='make_panini'),
-    url(r'^about$', about, name='about')
-    # url(r'^templates/login', login, name='login'),
+    url(r'^about$', about, name='about'),
+    url(r'^accounts/login', login, name='login'),
+    # url(r'^accounts/login', login, name='login'),   # TODO: Complete login.html page
+    # url(r'^contact', contact, name='contact'),      # TODO: Complete contact.html page
 
-                  # url(r'^templates/about', about, name='about'),
-    # url(r'^templates/contact', contact, name='contact'),
     # url(r'^templates/user_views', user, name='user')
 
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

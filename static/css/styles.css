@@ -288,11 +288,8 @@ label {
 .axis text {
 font: 10px sans-serif;
 }
-.axis path, .axis line {
-fill: none;
-stroke: #000;
-shape-rendering: crispEdges;
-}
+
+
 
 
 
@@ -418,7 +415,7 @@ svg text.label {
 
 /*
 003973  dark blue headers
-#003366 dark navy blue; body text if background:#E8F5F6; otherwise body text black
+003366 dark navy blue; body text if background:#E8F5F6; otherwise body text black
 
 647AD5  periwinkle blue
 

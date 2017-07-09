@@ -7,10 +7,11 @@ class User(AbstractUser):
     """
     All users. Hungry data sandwich eaters who crunch and munch.
     """
-    custom_view = models.ManyToManyField(Collection, related_name='title')
+    custom_view = models.ManyToManyField(Collection, related_name='vista')
     nickname = models.CharField(max_length=250)
     # date_of_birth = models.DateField()
     REQUIRED_FIELDS = ['nickname', 'email']
+
 
 
 

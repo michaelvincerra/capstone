@@ -8,23 +8,30 @@ body{
     margin-right: auto;
 }
 
+.axis path, .axis line {
+fill: none;
+stroke: rgb(170,255,50);   /* 88,203,117 */
+shape-rendering: crispEdges;
+}
+
+
 .axis text {
   font-size: 10px;
   font-family: Signika;
-  fill: rgb(169, 178, 189);
+  fill: rgb(69,135,155);
 }
 
-.axis path {
- fill: none;
- stroke: rgb(169, 178, 189);
- shape-rendering: crispEdges;
-}
+/*.axis path {*/
+ /*fill: none;*/
+ /*stroke: rgb(100,122,213);*/
+ /*shape-rendering: crispEdges;*/
+/*}*/
 
-.axis line {
-  fill: none;
-  stroke: rgb(169, 178, 189);
-  shape-rendering: crispEdges;
-}
+/*.axis line {*/
+  /*fill: none;*/
+  /*stroke: rgb(100,122,213);*/
+  /*shape-rendering: crispEdges;*/
+/*}*/
 
 #page {
     display: flex;

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import EconomicSnapshot, Country
 from collections import OrderedDict
 from django.db.models import Max
-
+# from accounts.models import User
 
 def home(request):
     """
@@ -35,7 +35,6 @@ def list_economic_snapshots(request, country, type):    # country_code,
     """
     # country_code = EconomicSnapshot.objects.filter(country_code=country_code.upper(),)
 
-    # countries = sorted(Country.objects.all(), key=lambda c: c.name)
     # https://stackoverflow.com/questions/844591/how-to-do-select-max-in-django
 
     selection = Country.objects.get(slug=country.lower())
@@ -97,8 +96,8 @@ def list_country_composite(request):
 def make_panini(request, slug):
     """
     Returns 1 country showing all 4 economic indicators from 1975 2015, or available range of dates.
-    View should include a slider bar if user wants to select a time period. 
-    1 dataset should include the country name, country code, type, year, and value of IP, GDP, GNI, FDI
+    View includes a slider bar to select a time range.
+    1 dataset shows: country name, country code, type, years-range, and stacked values of IP, GDP, GNI, FDI
     """
 
     country = Country.objects.get(slug=slug)
@@ -110,7 +109,7 @@ def make_panini(request, slug):
         snapshots = country.snapshots.filter(type=indicator_code)    # reverse fk lookup: snapshots to EconomicSnapshot
 
         dataset = {es.year: es.value for es in snapshots}
-        dataset.update({"total": "42", "store": f'{slug}'})          # TODO: Finish this!!
+        dataset.update({"total": "42", "store": f'{slug}'})          # TODO: Finish this!! How is indicator_code used?
         data.append(dataset)
 
     columns = [{"type": "object", "name": "year", "order": "0"}, ]    #{"type": "object", "name": "year", "order": "0"}
@@ -127,6 +126,21 @@ def make_panini(request, slug):
 
     context = {'chart_data': chart_data}
     return render(request, "country_panini.html", context)
+
+
+
+def make_custom_panini(request, slug):
+    """
+    Returns 1 or more countries for a user-defined range of years with type (indicators) selected or deselected.
+    CRUDL: This is an Update
+    """
+    # viewfinder =  ...  TODO: Need to learn how to call make_panini and save a custom view from it.
+    #
+    #
+    # context = {'chart_custom', chart_custom}
+    # return make_panini(request, "customview.html", context)
+
+
 
 
 
