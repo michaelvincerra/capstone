@@ -18,7 +18,7 @@ p {
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 300;
-	line-height: 25px;
+	line-height: 23px;
 }
 
 li {
@@ -36,6 +36,34 @@ h5 {
     text-align: center;
     color: #003973;  /*  003366 003973 */
 }
+
+.headline {
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+	font-family: Signika;
+	font-size: 20px;
+	font-style: italic;
+    color: #013E85;
+}
+
+/*.carousel {*/
+
+/*}*/
+
+.slick-dots {
+  top: 87%;
+  center: 50%;
+  margin-bottom:-50% ;
+}
+/*.slick-slide*/
+/*{*/
+  /*display: none;*/
+  /*float: none;*/
+  /*position: relative;*/
+  /*height: 100%;*/
+  /*min-height: 1px;*/
+/*}*/
 
 .table_header{
     display: flex;
@@ -183,22 +211,28 @@ body {
     padding: 10px;
     justify-content:center;
     color: darkblue;
-    background:#E8F5F6;
     border-radius: 10px;
 }
 
 #introtext{
     display:flex;
+    flex-direction: column;
     align-items: center;
+    margin-top: -2%;
     background:#E8F5F6;
     /*#E8F5F6*/
     color: #003973;
     /*04016D*/
-    padding: 10px;
+    padding: 8px;
     -webkit-border-radius:10px;
     -moz-border-radius:10px;
     border-radius: 10px;
     align-content: center;
+    background-color: #E8F5F6; /* #E5F9FC * For browsers that do not support gradients    06aae0 */
+    background: -webkit-linear-gradient(#FFFFFF, #E8F5F6); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#FFFFFF, #E8F5F6); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#FFFFFF, #E8F5F6); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#FFFFFF, #E8F5F6); /* Standard syntax */
 }
 
 #graph1{
@@ -405,17 +439,15 @@ svg text.label {
   /*grid-row: 3 / 8;*/
   /*background-color: grey;*/
   /*opacity: .25;*/
-/*}*/
-
-
-
-
-
-
+/*/}
 
 /*
+
+BODY TEXT W/ BACKGROUND.
+E8F5F6  background for blue text;
+003366  dark navy blue; body text IF! background:#E8F5F6; otherwise body text black
+
 003973  dark blue headers
-003366 dark navy blue; body text if background:#E8F5F6; otherwise body text black
 
 647AD5  periwinkle blue
 

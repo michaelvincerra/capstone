@@ -145,10 +145,10 @@ REST_FRAMEWORK = {
     # Use Django's shttps://docs.djangoproject.com/en/1.11/topics/email/tandard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.AllowAny'
     ]
 }
-
+# TODO: Pre-deployment, change DEFAULT_PERMISSION BACK: 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 
 # Django outgoing email settings
 # https://docs.djangoproject.com/en/1.11/topics/email/

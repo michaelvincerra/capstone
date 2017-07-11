@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import EconomicSnapshot, Country
+from .models import EconomicSnapshot, Country, Collection
 from collections import OrderedDict
 from django.db.models import Max
 # from accounts.models import User
@@ -95,7 +95,7 @@ def list_country_composite(request):
 
 def make_panini(request, slug):
     """
-    Returns 1 country showing all 4 economic indicators from 1975 2015, or available range of dates.
+    CRUDL:LIST. Returns 1 country showing all 4 economic indicators from 1975 2015, or available range of dates.
     View includes a slider bar to select a time range.
     1 dataset shows: country name, country code, type, years-range, and stacked values of IP, GDP, GNI, FDI
     """
@@ -131,14 +131,20 @@ def make_panini(request, slug):
 
 def make_custom_panini(request, slug):
     """
-    Returns 1 or more countries for a user-defined range of years with type (indicators) selected or deselected.
-    CRUDL: This is an Update
+    CRUDL: CREATE
+    Returns 1 country for a user-defined range of years with type (indicators) selected.
     """
+    # Item.objects.create()
+    #
+    # bracketed = EconomicSnapshot.objects.get()
+    #
+
+
     # viewfinder =  ...  TODO: Need to learn how to call make_panini and save a custom view from it.
-    #
-    #
-    # context = {'chart_custom', chart_custom}
-    # return make_panini(request, "customview.html", context)
+
+    context = {'chart_custom', chart_custom}
+    return make_panini(request, "customview.html", context)
+    # make_panini()    TODO: Invoke changed view from above?
 
 
 

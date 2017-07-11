@@ -19,25 +19,62 @@
         </script>
     {% endautoescape %}
 
-
-    <div id="div1">
-        <svg viewBox="0 0 1230 675" class="svg-container2">
-        </svg>
+    <div id="two_panini">
+        <svg viewBox="0 0 1230 675" class="svg-container2"></svg>
     </div>
 
     <div id="slider-range"></div>
 
-<p>
-  <label for="amount"></label>
-  <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-</p>
+<item class="three_panini">
+
+{#<table>#}
+{#        <thead>#}
+{#            <tr class="country_code">#}
+{##}
+{#                {% for country in countries %}#}
+{#                    <td>#}
+{#                    <button class="button_iso2">#}
+{#                    {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
+{#                    </button>#}
+{#                    </td>#}
+{#                {% endfor %}#}
+{#            </tr>#}
+{#	    </thead>#}
+{#</table>#}
+{#</item>#}
 
 
+    <item class="three_panini">
+
+        <div class="btn-group-lg" role="group" aria-label="...">
+          <button type="button" class="iso_btn btn btn-default"></button>
+          <button type="button" class="iso_btn btn btn-default"></button>
+          <button type="button" class="iso_btn btn btn-default"></button>
+          <button type="button" class="iso_btn btn btn-default"></button>
+          <button type="button" class="iso_btn btn btn-default"></button>
+          <button type="button" class="iso_btn btn btn-default"></button>
+          <button type="button" class="iso_btn btn btn-default"></button>
+        </div>
+
+    </item>
+
+{#        <table>#}
+{#   <tr class="country_code">#}
+{#  #}
+{#        {% for country in countries %}#}
+{#        <td>#}
+{#        <button class="button_iso2">#}
+{#        {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
+{#        </button>#}
+{#         </td>#}
+{#        {% endfor %}#}
+{#   </tr>#}
+{#   </table>#}
+{#  #}
+{#  </div>#}
 
 </section>
 
-<script>
-</script>
 
 {% endblock %}
 
@@ -45,11 +82,9 @@
 {% block extra_js %}
 
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-{#    <script src="https://d3js.org/stacked_bar.js"></script>#}
     <script src="{% static 'js/lodash.js' %}"></script>   {# Has to be loaded before below is executed.  #}
     <script src="{% static 'js/script_historybar.js' %}"></script>
+    <script src="{% static 'js/script_renderchart.js' %}"></script>
     <script src="https://d3js.org/d3-queue.v3.min.js"></script>
-
-{#    <script src="{% static 'js/colores.js' %}"></script>#}
 
 {% endblock %}

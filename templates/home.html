@@ -1,41 +1,17 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block extra_head %}
 
 {% load static %}
-    <link href="{% static "static/css/styles.css" %}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'static/css/styles.css' %}">
+
+    <!--SLICK carousel-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slick/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slick/slick-theme.css'%}">
 
 {% endblock %}
-
-
-
-{#        INTRO PARA FOR DATAPANINO: DEFINE WHO, WHAT AND WHY#}
-{#        <p>#}
-{##}
-{#          DataPanino is a visualization tool that shows intellectual property (IP) sales and applications in 7 #}
-{#          European Union countries from 1965 to 2015. It's intended to help users identify insights and trends, #}
-{#          showing IP sales against a backdrop of economic indicators. Users may include analysts, investors, #}
-{#          companies, and governments. Anyone can sign up.#}
-{#
-{##}
-{#        In our Data Deli, you can create a Snapshot, or "data sandwich," to help you understand growth patterns,#}
-{#        and see correlations, for specific periods of time.#}
-{#        </p>#}
-{#        <h5> Why only 7 EU member countries?</h5>#}
-{#         <p>#}
-{#        France, Germany, Italy, Netherlands, Spain, Switzerland, and the United Kingdom are given priority because they#}
-{#        show the highest amount of patent applications and the highest ICT patent applications to the EOP by priority#}
-{#        year (REVISE!) from 2004 to 2015. As defined by "Eurostat," intellectual property rights (IPR) inlcude the#}
-{#        "assignment of property rights through patents, refers to the general term for the assignment of property#}
-{#        rights through patents, copyrights and trademarks. These property rights allow the holder to exercise a#}
-{#        monopoly on the use of the item for a set period."#}
-{#        <a href="http://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Intellectual_property_right">#}
-{#            Eurostat</a> </br>#}
-{#        <a href="http://ec.europa.eu/eurostat/statistics-explained/index.php?title=Intellectual_property_rights_statistics&stable=0#Context">#}
-{#        Eurostat</a>#}
-{#        </p>#}
-
-
 
 <nav>
 {% include "nav.html" %}
@@ -49,46 +25,61 @@
 {# TOP #}
 {% block headline %}
     <section class="row1">
-        <header>
-        </header>
     </section>
-{% endblock %}
 
+{% endblock %}
 
 {# MIDDLE #}
 {% block main %}
     <section class="row2">
-        <article id="introtext">
-            <p>
-                DataPanino is a visualization tool that shows intellectual property (IP) sales and patent applications
-                for 7 European Union countries from 1975 to 2015. Now you can identify
-                IP trends and discover insights by stacking IP data with major economic indicators&mdash;<i>helping you
-                make informed decisions</i>.  We serve analysts, investors, and governments.
-                Anyone can sign up. Create your own data sandwich.
+
+<div class="carousel">
+    <div><img src="static/img/france_full_sample.png" alt=""  style="width:100%"> <div class="headline">France: IP Sales 1975-2015</div></div>
+    <div><img src="static/img/italy_full_sample.png" alt="" style="width:100%"> <div class=" headline">Italy: IP Sales 1975-2015</div></div>
+    <div><img src="static/img/uk_full_sample.png" alt="" style="width:100%"> <div class="headline">United-Kingdom(GB): IP Sales 1975-2015</div></div>
+</div>
+
+     <article id="introtext">
+
+            <b>Don't just crunch your data. Munch your data. </b><p>DataPanino provides a tool for analyzing
+            trends in intellectual property in context of other economic indicators. We understand "number crunching" can be tedious.
+            That's why our unique visualization tool helps you make custom historical views of economic data.
+            Our focus is on intellectual property (IP) sales in 7 European Union countries from 1975 to 2015.
+            DataPanino's "Data Deli" lets you stack IP with other major economic indicators &mdash;like GDP&mdash;<i>helping you
+            helps you to identify IP trends and make more informed decisions</i>. Visit our Data Deli. Create and save your own DataPanino.
 {#               {#<i>Now you can make more informed decisions</i>  Create your own data sandwich.#}
             </p>
-        </article>
+     </article>
 
-        <article id="graph1">
-            <form>
-              <label><input type="radio" name="mode" value="grouped"> Grouped</label>
-              <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>
-            </form>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="{% static 'vendor/slick/slick.min.js'%}"></script>
 
-            <svg width="960" height="500"></svg>
-        </article>
+<script>
+    $(document).ready(function(){
+      $('.carousel').slick({
+    arrows: false,
+    dots: true,
+    autoplay:  true,
+    autoplaySpeed: 8000,
+});
+});
 
-        <article id="table_countries">
-            <table class="table">
+</script>
 
 
-                      <tbody id="country_stats">
-                      <!--table populated-->
-                      <!--Can this be accessed directly from dB with Python? Or use Javascript?-->
-                      </tbody>
-            </table>
-        </article>
-    </section>
+
+{#$('.autoplay').slick({#}
+{#  slidesToShow: 3,#}
+{#  slidesToScroll: 1,#}
+{#  autoplay: true,#}
+{#  autoplaySpeed: 2000,#}
+{#});#}
+
+{#</script>#}
+
+
+
  {% endblock %}
 
 {# BOTTOM #}
@@ -102,7 +93,33 @@
 
 
 {% block extra_js %}
-{#    <script type="text/javascript" src="/static/vendor/d3.js"></script>#}
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="/static/js/stacked_bar.js"></script>
+
+
+
+
 {% endblock %}
+
+
+
+{# PREVIOUS PLACEHOLDER CHART #}
+{#        <article id="graph1">#}
+{#            <form>#}
+{#              <label><input type="radio" name="mode" value="grouped"> Grouped</label>#}
+{#              <label><input type="radio" name="mode" value="stacked" checked> Stacked</label>#}
+{#            </form>#}
+{##}
+{#            <svg width="960" height="500"></svg>#}
+{#        </article>#}
+{##}
+{#        <article id="table_countries">#}
+{#            <table class="table">#}
+{##}
+{##}
+{#                      <tbody id="country_stats">#}
+{#                      <!--table populated-->#}
+{#                      <!--Can this be accessed directly from dB with Python? Or use Javascript?-->#}
+{#                      </tbody>#}
+{#            </table>#}
+{#        </article>#}
+{#    </section>#}
+{#    #}

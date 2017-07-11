@@ -1,0 +1,26 @@
+
+
+{#        INTRO PARA FOR DATAPANINO: DEFINE WHO, WHAT AND WHY#}
+{#        <p>#}
+{##}
+{#          DataPanino is a visualization tool that shows intellectual property (IP) sales and applications in 7 #}
+{#          European Union countries from 1965 to 2015. It's intended to help users identify insights and trends, #}
+{#          showing IP sales against a backdrop of economic indicators. Users may include analysts, investors, #}
+{#          companies, and governments. Anyone can sign up.#}
+{#
+{##}
+{
+{#        </p>#}
+{#        <h5> Why only 7 EU member countries?</h5>#}
+{#         <p>#}
+{#        France, Germany, Italy, Netherlands, Spain, Switzerland, and the United Kingdom are given priority because they#}
+{#        show the highest amount of patent applications and the highest ICT patent applications to the EOP by priority#}
+{#        year (REVISE!) from 2004 to 2015. As defined by "Eurostat," intellectual property rights (IPR) inlcude the#}
+{#        "assignment of property rights through patents, refers to the general term for the assignment of property#}
+{#        rights through patents, copyrights and trademarks. These property rights allow the holder to exercise a#}
+{#        monopoly on the use of the item for a set period."#}
+{#        <a href="http://ec.europa.eu/eurostat/statistics-explained/index.php/Glossary:Intellectual_property_right">#}
+{#            Eurostat</a> </br>#}
+{#        <a href="http://ec.europa.eu/eurostat/statistics-explained/index.php?title=Intellectual_property_rights_statistics&stable=0#Context">#}
+{#        Eurostat</a>#}
+{#        </p>#}

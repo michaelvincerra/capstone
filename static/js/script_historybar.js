@@ -73,7 +73,7 @@ function StackedBar() {
   // var svg1 = d3.select("#c20")
   // var colores = ["#45879B", "647AD5", "58CB75", "#f0ad4e"]
 
-  // var color_index = {'fdi': '#58CB75', 'gdp': '#58CB75', 'gni': '#647AD5', 'ip': '#85BEAD' };
+  var color_index = {'fdi': '#45879B', 'gdp': '#80D3ED', 'gni': '#85BEAD', 'ip': '#f0AD4E' };
 
   var margin = {top: 0, right: 5, bottom: 20, left: 50},
       width = 400 - margin.left - margin.right,
@@ -95,16 +95,16 @@ function StackedBar() {
   // COLORS! 07.08.17
   var length = 4;
   var color = d3.scale.ordinal()
-      .domain([1,length])
+      .domain([1,length]);
       // .range(["#45879B", "#45879B", "#B13C3D", "#CCB40C"]);
-      .range([d3.rgb('#45879B'), d3.rgb('#80D3ED'), d3.rgb('#85BEAD'), d3.rgb('#f0AD4E')]);
+      // .range([d3.rgb('#45879B'), d3.rgb('#80D3ED'), d3.rgb('#85BEAD'), d3.rgb('#f0AD4E')]);
 
 
-  console.log(color.domain());
-  console.log(color(1));
-  console.log(color(2));
-  console.log(color(3));
-  console.log(color(4));
+  // console.log(color.domain());
+  // console.log(color(1));
+  // console.log(color(2));
+  // console.log(color(3));
+  // console.log(color(4));
 
   // var color = d3.scale.category20();
   var xAxis = d3.svg.axis();
@@ -228,8 +228,9 @@ function StackedBar() {
     //console.log(display_data);
 
     var tmp = display_data.map(function(row){
-          //  console.log(row);
-           var name = get_key(row);
+           console.log(row);
+           // var name = get_key(row);
+          //  var name =
            var values = x_values.map(function(key){
                var y_val =  +_.get(row, key, 0);
                if (isNaN(y_val) === true){ y_val = 0;}
@@ -306,9 +307,10 @@ function StackedBar() {
 
            // 1. Flatten the data....
           var flatten = data.map(function(obj){
+              console.log(obj.type);
               return obj.values.map(function(item){
-                  console.log(obj)
-                  item.color = color(obj.name);
+                  console.log(obj);
+                  item.color = color_index['fdi'];
                   return item;
               });
            });
@@ -706,7 +708,7 @@ function plot_area(){
     var config = {};
     config.query = {};
     config.number_of_rows = 10;
-    config.query.select = ['store'];
+    config.query.select = ['code'];
 
     // Plots the data as an area chart
     var chart = StackedBar()
@@ -720,7 +722,7 @@ function plot_area(){
 
 
   console.log(data['data']);
-  d3.select("#div1").datum(data).call(chart);
+  d3.select("#two_panini").datum(data).call(chart);
 
 }
 
