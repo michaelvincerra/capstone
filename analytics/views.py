@@ -109,7 +109,7 @@ def make_panini(request, slug):
         snapshots = country.snapshots.filter(type=indicator_code)    # reverse fk lookup: snapshots to EconomicSnapshot
 
         dataset = {es.year: es.value for es in snapshots}
-        dataset.update({"total": "42", "store": f'{slug}'})          # TODO: Finish this!! How is indicator_code used?
+        dataset.update({"total": "42", "store": f'{slug}', "code": country.name})          # TODO: Finish this!! How is indicator_code used?
         data.append(dataset)
 
     columns = [{"type": "object", "name": "year", "order": "0"}, ]    #{"type": "object", "name": "year", "order": "0"}
@@ -124,7 +124,9 @@ def make_panini(request, slug):
     chart_data = {'data': data,
                   'columns': columns}
 
-    context = {'chart_data': chart_data}
+    countries = Country.objects.all().order_by('code')
+    context = {'chart_data': chart_data,
+               'countries': countries}
     return render(request, "country_panini.html", context)
 
 

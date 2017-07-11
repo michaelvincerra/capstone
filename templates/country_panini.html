@@ -4,76 +4,47 @@
 {% block content  %}
 
 <section id="page">
-
-<header>
-</header>
-
+{#<header>#}
+{#</header>#}
 <section class=".wrapper2">
 
-    {% autoescape off %}
-        <script>
+        {% autoescape off %}
+            <script>
+              var data = {{ chart_data }};
+            </script>
+        {% endautoescape %}
 
-          var data = {{ chart_data }};
-{#          var q = d3.queue();#}
+        <div id="two_panini">
+            <svg viewBox="0 0 1230 675" class="svg-container2"></svg>
+        </div>
 
-        </script>
-    {% endautoescape %}
-
-    <div id="two_panini">
-        <svg viewBox="0 0 1230 675" class="svg-container2"></svg>
-    </div>
-
-    <div id="slider-range"></div>
-
-<item class="three_panini">
-
-{#<table>#}
-{#        <thead>#}
-{#            <tr class="country_code">#}
-{##}
-{#                {% for country in countries %}#}
-{#                    <td>#}
-{#                    <button class="button_iso2">#}
-{#                    {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
-{#                    </button>#}
-{#                    </td>#}
-{#                {% endfor %}#}
-{#            </tr>#}
-{#	    </thead>#}
-{#</table>#}
-{#</item>#}
+        <div id="slider-range"></div>
 
 
     <item class="three_panini">
 
-        <div class="btn-group-lg" role="group" aria-label="...">
-          <button type="button" class="iso_btn btn btn-default"></button>
-          <button type="button" class="iso_btn btn btn-default"></button>
-          <button type="button" class="iso_btn btn btn-default"></button>
-          <button type="button" class="iso_btn btn btn-default"></button>
-          <button type="button" class="iso_btn btn btn-default"></button>
-          <button type="button" class="iso_btn btn btn-default"></button>
-          <button type="button" class="iso_btn btn btn-default"></button>
-        </div>
+{#        <p>#}
+{#          <label for="year_range">Year Range</label>#}
+{#          <input type="text" id="year_range" value="1975-2015" readonly style="border:0; color:#f6931f; font-weight:bold;">#}
+{#        </p>#}
 
-    </item>
+    <article class="three_panini">
+            <label for="year_range"></label>  <!--Year Range-->
+            <input type="text" id="year_range" value="1975-2015" readonly style="font-weight:bold;" >
 
-{#        <table>#}
-{#   <tr class="country_code">#}
-{#  #}
-{#        {% for country in countries %}#}
-{#        <td>#}
-{#        <button class="button_iso2">#}
-{#        {{ country.code|upper}}{{ country.flag }}    {# TODO: increase size of flags #}
-{#        </button>#}
-{#         </td>#}
-{#        {% endfor %}#}
-{#   </tr>#}
-{#   </table>#}
-{#  #}
-{#  </div>#}
+
+        {% for country in countries %}
+            <div class="btn-group-lg" role="group" aria-label="...">
+              <button type="button" class="iso_btn btn btn-default" data-country="{{ country.slug }}">{{ country.code }}{{ country.flag }}</button>
+             <!--'data-country' is an HTML data attribute--https://www.w3schools.com/tags/att_global_data.asp-->
+            </div>
+        {% endfor %}
+    </article>
 
 </section>
+</section>
+
+
 
 
 {% endblock %}

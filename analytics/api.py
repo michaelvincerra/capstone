@@ -4,6 +4,7 @@ from .models import EconomicSnapshot, Country
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from datetime import datetime
 
 
 
@@ -26,7 +27,7 @@ def render_custom_chart(request):
     countries = request.GET.get('countries').split(',')
     start_date = int(request.GET.get('start_date'))
     end_date = int(request.GET.get('end_date'))
-    years = range(start_date, end_date)
+    years = range(start_date, end_date+1)
 
     # TODO: Deal with collections of varying lengths
 
@@ -48,5 +49,14 @@ def render_custom_chart(request):
     columns.append({"type": "float64", "name": "total", "order": abs(start_date-end_date) + 1})
 
     chart_data = {'data': data, 'columns': columns}
-    response_fields = {'status': "success", 'results': chart_data}
+
+    metadata = {'countries': countries,
+                'count': len(countries),
+                'query_time': str(datetime.now())}
+
+    response_fields = {'status': "success",
+                       'metadata': metadata,
+                       'results': chart_data}
+
+
     return Response(response_fields, status=status.HTTP_200_OK)

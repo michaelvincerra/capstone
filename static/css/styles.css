@@ -30,6 +30,7 @@ li {
 	font-weight: 300;
 	line-height: 25px;
 }
+    /*align-self: flex-start;*/
 
 h5 {
     padding-top: 2%;
@@ -213,8 +214,27 @@ body {
     color: darkblue;
     border-radius: 10px;
 }
-
-#introtext{
+#background_grad_about{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+    /*align-content: left;*/
+    padding-top: 10px;
+    margin-top:;
+    background:#E8F5F6;
+    color: #003973;
+    padding: 8px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius: 10px;
+    background-color: #E8F5F6; /* #E5F9FC * For browsers that do not support gradients    06aae0 */
+    background: -webkit-linear-gradient(#FFFFFF, #E8F5F6); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#FFFFFF, #E8F5F6); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#FFFFFF, #E8F5F6); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#FFFFFF, #E8F5F6); /* Standard syntax */
+}
+#background_grad{
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -330,7 +350,8 @@ font: 10px sans-serif;
 .svg-container1{
     display: flex;
     flex-direction: row;
-    /*justify-content: flex-end;*/
+    padding-left: 10%;
+    justify-content: flex-end;
     height: 100%;
     width: 100%;
 

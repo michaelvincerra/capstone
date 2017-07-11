@@ -27,13 +27,8 @@ function filter_date (min, max){
         });
     });
     data = newdata;
-    console.log(data);
+    // console.log(data);
 }
-
-//
-// let minYear = data.data.year[0];
-// let maxYear = data.data.year[1];
-
 
 $("#slider-range").slider({
     range: true,
@@ -43,7 +38,7 @@ $("#slider-range").slider({
     values: [1975, 2015],
 
     slide: function (event, ui) {
-        $("#amount").val(ui.values[0] + ' - ' + ui.values[1]);
+        $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
         // data.year=val;
     },
     stop: function (event, ui) {
@@ -55,6 +50,15 @@ $("#slider-range").slider({
     }
 ,
 });
+
+
+
+
+
+// data.data = Year, VALUE, type
+//
+// data.column = Year
+
 
 
 
@@ -228,7 +232,7 @@ function StackedBar() {
     //console.log(display_data);
 
     var tmp = display_data.map(function(row){
-           console.log(row);
+           // console.log(row);
            // var name = get_key(row);
           //  var name =
            var values = x_values.map(function(key){
@@ -307,9 +311,9 @@ function StackedBar() {
 
            // 1. Flatten the data....
           var flatten = data.map(function(obj){
-              console.log(obj.type);
+              // console.log(obj.type);
               return obj.values.map(function(item){
-                  console.log(obj);
+                  // console.log(obj);
                   item.color = color_index['fdi'];
                   return item;
               });
@@ -718,10 +722,10 @@ function plot_area(){
                     .config(config)
                     .margin({top: 30, right: 20, bottom: 20, left: 60})
                     .x(d3.scale.ordinal())
-                    .y(d3.scale.linear())
+                    .y(d3.scale.linear());
 
 
-  console.log(data['data']);
+  // console.log(data['data']);
   d3.select("#two_panini").datum(data).call(chart);
 
 }
