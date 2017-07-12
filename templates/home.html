@@ -17,6 +17,7 @@
 {% include "nav.html" %}
 </nav>
 
+
 {% block title %}
             <title>Home</title>
 {% endblock %}
@@ -80,13 +81,13 @@
 
 
 
- {% endblock %}
+{% endblock %}
 
 {# BOTTOM #}
 {% block footer %}
     <section class="row3">
         <footer>
-            <button id="signup">Sign Up!</button>
+            <button id="signup"><a href="{% url 'accounts:register'%}">Sign Up!</button>
         </footer>
     </section>
 {% endblock %}

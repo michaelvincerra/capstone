@@ -14,12 +14,12 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = UserCreationForm.Meta.fields + ('nickname','email',)
 
-
-    def clean_nickname(self):
-        data = self.cleaned_data.get('nickname')
-        if len(data) < 10:
-            raise forms.ValidationError('Please enter at least 10 characters')
-        return data
+    #
+    # def clean_nickname(self):
+    #     data = self.cleaned_data.get('nickname')
+    #     if len(data) < 10:
+    #         raise forms.ValidationError('Please enter at least 10 characters')
+    #     return data
 
 # class CustomeUserChangeForm(UserChangeForm):
 #     class Meta(UserChangeForm):

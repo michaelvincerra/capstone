@@ -72,9 +72,15 @@ class Collection(models.Model):
     def generate_title(self):
         now = datetime.now()
 
-        title_data = self.viewer.values_list('country__name', 'type', flat=True)
-        import pdb; pdb.set_trace()
-        title = f'{now}-{self.id}'
+        title_data = set(self.viewer.values_list('country__code', 'type'))
+        result = ''
+        for code, ind in title_data:
+            result += f'{code}{ind}|'
+        else:
+            result += now.year
+        # import pdb; pdb.set_trace()
+        self.title = result
+        return
 
 
     def save(self, *args, **kwargs):

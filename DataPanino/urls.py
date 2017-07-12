@@ -21,7 +21,7 @@ from django.contrib import admin
 from analytics.views import home
 from rest_framework import routers
 from accounts.api import UserViewSet
-from accounts.views import profile, login, logout
+from accounts.views import profile, login, logout, register
 from analytics.api import EconomicSnapshotViewSet, render_custom_chart, get_country_codes
 from analytics.views import list_economic_snapshots, list_country_composite, make_panini, about
 
@@ -36,8 +36,8 @@ urlpatterns = [
 
     # Accounts
     url(r'accounts/', include('accounts.urls', namespace='accounts')),
-    url(r'^accounts/login', login, name='login'),
-    # url(r'^accounts/login', login, name='login'),   # TODO: Complete login.html page
+    # url(r'^accounts/login', login, name='login'),
+    # url(r'^accounts/register', register, name='register'),   # TODO: Complete login.html page
 
     # API
     url(r'^admin/', admin.site.urls),

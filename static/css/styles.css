@@ -276,6 +276,9 @@ body {
     box-shadow: black;
 }
 
+#signup:visited{
+    color: white;
+}
 
 form {
   font-family: "Signika", Verdana, Arial, sans-serif;
