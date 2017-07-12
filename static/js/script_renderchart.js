@@ -4,6 +4,23 @@
 
 /* rangeRoundBands([width, 0], .1); */
 
+function save_collection(collections){
+    // Saves user snapshots to a user collection. //
+    "use strict";
+
+    let request_params = {'snapshot_ids': snapshot_ids}; // snapshot_ids is const on country_panini
+
+
+    $.ajax({
+    url: '/api/v1/collections',
+    method: 'POST',
+    data: request_params,
+    success: function(response_fields) {
+        console.log(response_fields);
+    }
+
+    });
+}
 
 
 $( "#tags" ).autocomplete({
@@ -28,7 +45,6 @@ $( "#tags" ).autocomplete({
 });
 
 
-
 function fetch_data(countries, start_date, end_date) {
     /* Returns chart date from the API */
 
@@ -36,7 +52,6 @@ function fetch_data(countries, start_date, end_date) {
                             'start_date': start_date,
                             'end_date': end_date,
                            };
-
     $.ajax({
         url: '/api/v1/snapshots/',
         method: 'GET',
@@ -56,8 +71,6 @@ function fetch_data(countries, start_date, end_date) {
         }
 });
 }
-
-
 
  $('.iso_btn').on('click', function(evt){
      "use strict";

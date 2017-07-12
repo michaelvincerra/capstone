@@ -61,7 +61,7 @@ class EconomicSnapshot(models.Model):
 class Collection(models.Model):
     title = models.CharField(max_length=100)  # title = title of saved collection.
     updated = models.DateField(auto_now=True)
-    viewer = models.ManyToManyField(EconomicSnapshot, related_name='collections')
+    slides = models.ManyToManyField(EconomicSnapshot, blank=True)
 
     class Meta:
         ordering = ('-updated',)
@@ -72,20 +72,19 @@ class Collection(models.Model):
     def generate_title(self):
         now = datetime.now()
 
-        title_data = set(self.viewer.values_list('country__code', 'type'))
+        title_data = set(self.slides.values_list('country__code', 'type'))
         result = ''
         for code, ind in title_data:
             result += f'{code}{ind}|'
         else:
             result += now.year
-        # import pdb; pdb.set_trace()
         self.title = result
         return
 
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-
+        self.generate_title()
         super().save(*args, **kwargs)
 
 

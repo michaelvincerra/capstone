@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from .serializers import EconomicSnapshotSerializer
-from .models import EconomicSnapshot, Country
+from .models import EconomicSnapshot, Country, Collection
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -17,7 +17,7 @@ class EconomicSnapshotViewSet(viewsets.ModelViewSet):
 
 
 
-@api_view(['GET'])
+@api_view(['GET']) # 1st Endpoint
 def render_custom_chart(request):
     """
     Returns 1 chart, with countries compared and with a user-selected date range.
@@ -62,7 +62,7 @@ def render_custom_chart(request):
     return Response(response_fields, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])    # Endpoint
+@api_view(['GET'])    # 2nd Endpoint
 def get_country_codes(request):
     """
     Returns a list of country codes.
@@ -72,3 +72,22 @@ def get_country_codes(request):
                        'codes': codes}
 
     return Response(response_fields, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])    # 3rd Endpoint
+def save_collection(request):
+    """
+    Returns a list of country codes.
+    """
+
+    snapshot_ids = request.POST.get('snapshot_ids')
+
+    snapshots = EconomicSnapshot.objects.filter(id__in=snapshot_ids)
+    collection = Collection()
+    collection.viewer.add(*snapshots)
+    collection.save()
+
+    response_fields = ()
+
+    return Response(response_fields, status=status.HTTP_201_CREATED)
+
