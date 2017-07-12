@@ -22,7 +22,7 @@ from analytics.views import home
 from rest_framework import routers
 from accounts.api import UserViewSet
 from accounts.views import profile, login, logout
-from analytics.api import EconomicSnapshotViewSet, render_custom_chart
+from analytics.api import EconomicSnapshotViewSet, render_custom_chart, get_country_codes
 from analytics.views import list_economic_snapshots, list_country_composite, make_panini, about
 
 
@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v1/snapshots/', render_custom_chart, name='render_custom_chart'),
-
+    url(r'^api/v1/codes/', get_country_codes, name='get_country_codes'),
     # url(r'^api/v1/', include(router.urls)),
 
     # Pages

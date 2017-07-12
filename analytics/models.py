@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from .countries import country_codes, FLAGS
+from datetime import datetime
 # from accounts.models import User
 
 
@@ -62,11 +63,19 @@ class Collection(models.Model):
     updated = models.DateField(auto_now=True)
     viewer = models.ManyToManyField(EconomicSnapshot, related_name='collections')
 
+    class Meta:
+        ordering = ('-updated',)
+
     def __str__(self):
         return self.title
 
-    class Meta:
-        ordering = ('-updated',)
+    def generate_title(self):
+        now = datetime.now()
+
+        title_data = self.viewer.values_list('country__name', 'type', flat=True)
+        import pdb; pdb.set_trace()
+        title = f'{now}-{self.id}'
+
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

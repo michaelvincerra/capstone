@@ -8,6 +8,17 @@ body{
     margin-right: auto;
 }
 
+#title {
+  display: flex;
+  justify-content: center;
+  padding-top: -5%;
+  font-size: 30px;
+  font-family: Signika;
+  align-items: center;
+  color: #003973;
+
+}
+
 .btn-group-lg {
     /*display: flex;*/
     /*flex-direction: row;*/
@@ -18,19 +29,45 @@ body{
     /*justify-content: space-around;*/
 }
 
+
 .iso_btn {
+    position: relative;
+	/*display: inline-block;*/
+	/*padding: 5px 5px;*/
     width: 75px;
     display: flex;
     justify-content: center;
     margin:0 20px;
     /*font-size: larger ;*/
-    background-color: #A9A9A9; /* #E5F9FC * For browsers that do not support gradients    06aae0 */
-    background: -webkit-linear-gradient(#FFFFFF, #A9A9A9); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#FFFFFF, #A9A9A9); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#FFFFFF, #A9A9A9); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#FFFFFF, #A9A9A9); /* Standard syntax */
-    border-radius: 15px;
+    background-color: #C0C0C0; /* #E5F9FC * For browsers that do not support gradients    06aae0 */
+    background: -webkit-linear-gradient(#FFFFFF, #C0C0C0); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#FFFFFF, #C0C0C0); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#FFFFFF, #C0C0C0); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#FFFFFF, #C0C0C0); /* Standard syntax */
+    text-decoration: none;
+	color: #003366;
+	font-size: 25px;
+	font-family: Signika;
+	font-weight: 200;
+    border-radius: 10px;
+    box-shadow: 0px 1px 4px -2px #333;
+    text-shadow: 0px -1px #333;
 }
+
+.iso_btn:after{
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: calc(100% - 4px);
+	height: 50%;
+	background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+}
+
+.iso_btn:hover{
+	background: linear-gradient(#E8F5F6,#808080);
+}
+
 
 .country_code{
     /*!*width: 100%;*!*/
@@ -73,13 +110,20 @@ shape-rendering: crispEdges;
     /*/*[footer-left] "nav  foot" 30px [footer-right]*/
     /*/ 120px 1fr;   !* 120px 1fr; *!*/
     }
+#year_range_box{
+    padding-left: 5%;
+}
 
 #year_range{
     /*display: flex;*/
+    /*margin-left: 10px;*/
+    width: 80%;
+    height: 80%;
+    font: Signika;
     font-size: x-large;
+	color: #003973;
     /*justify-content: center;*/
     text-align: center;
-    color: #003366 ;
     vertical-align: middle;
     border-radius: 10px;
 }
@@ -91,7 +135,6 @@ shape-rendering: crispEdges;
     height: 100%;
     width: 100%;
 }
-
 
 
 .wrapper2 {
@@ -124,7 +167,7 @@ shape-rendering: crispEdges;
     display: grid;
     /*justify-content:flex-start;*/
     width: 100% ;   /*1280px*/
-    height: 90%;   /*720px*/
+    height: 88%;   /*720px*/
     /*padding-left: 5%;*/
     /*grid-column: 1 / 41;*/
     /*grid-row: 10 / 10;*/
@@ -142,18 +185,24 @@ shape-rendering: crispEdges;
 .three_panini {
     display:flex;
     flex-direction: row;
-    vertical-align: top;
+    /*vertical-align: top;*/
     justify-content: space-around;
-
-    /*justify-content: flex-start;*/
-    /*align-items: center;*/
-    padding-top: 1%;
-    padding-bottom: 1%;
+    /*vertical-align: middle;*/
+    align-items: center;
+    padding-left: 9%;
+    padding-right: 9%;
+    padding-top: 3%;
+    padding-bottom: 3%;
     /*grid-row: 2 / 7;*/
     /*grid-column: 1;*/
-    background-color: #E8F5F6;  /* 45879B 9ad6ad 95c9a5 a9e5bc d5efe8 8DC8C7 */
     color: #FFFFFF;
     border-radius: 5px;
+    background-color: #E8F5F6; /* #E5F9FC * For browsers that do not support gradients    06aae0 */
+    background: -webkit-linear-gradient(#FFFFFF, #E8F5F6); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#FFFFFF, #E8F5F6); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#FFFFFF, #E8F5F6); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#FFFFFF, #E8F5F6); /* Standard syntax */
+
     /*opacity: .8;*/
 }
 
@@ -175,3 +224,24 @@ shape-rendering: crispEdges;
     /*border-radius: 5px;*/
     /*!*opacity: .7;*!*/
 /*}*/
+
+
+/*
+BODY TEXT W/ BACKGROUND.
+E8F5F6  background for blue text;
+003366  dark navy blue; body text IF! background:#E8F5F6; otherwise body text black
+003973  dark blue headers
+647AD5  periwinkle blue
+
+45879b  turquoise dark
+ADD8E6  lightblue, BODY
+6ACBEA  toy blue, accents
+2E5966  emerald green, dark accents
+87A8B3  sea blue, bars/dividers
+58CB75  chartreuse, bright
+8DC8C7  mint green
+85BEAD  sage green
+/////////
+#F29D35   terracotta
+#f0ad4e   light orange
+*/

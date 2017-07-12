@@ -4,7 +4,32 @@
 
 /* rangeRoundBands([width, 0], .1); */
 
-function fetch_data(country, start_date, end_date) {
+
+
+$( "#tags" ).autocomplete({
+  source: function(request, response) {
+      $.ajax({
+          url: '/api/v1/codes',
+          // dataType: 'json',
+          data: {
+              q: request.term
+          },
+          success: function (data) {
+              "use strict";
+              response(data);
+          }
+      });
+  },
+  minLength: 2,
+  select: function( event, ui ) {
+     let message = ui.item.value;
+    console.log(message);
+  }
+});
+
+
+
+function fetch_data(countries, start_date, end_date) {
     /* Returns chart date from the API */
 
     const request_params = {'countries': 'france, italy',    /*  TODO: Replace with variable */
@@ -23,7 +48,8 @@ function fetch_data(country, start_date, end_date) {
             console.log(response_fields.metadata);
             // clearAll();
             //  x.domain(x_values).rangeRoundBands([width, 0], .1);
-            plot_area()
+            plot_area();
+            // StackedBar();
         },
         error: function(err){
             console.log(err);

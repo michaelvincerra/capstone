@@ -38,10 +38,35 @@
 
 <div class="wrapper1">
 
-  <div class="one"> FR    {# TODO: How to programatically match 2-digit country code with URL page? #}
-        {#    {%  for country  in countries %}  #}
-        {#    {{ country.code }}#}
-        {#    {%  endfor %}#}
+  <div class="one">   {# TODO: How to programatically match 2-digit country code with URL page? #}
+
+
+
+
+
+        <div class="ui-widget">
+        <label for="tags">Country Code:</label>
+        <input id="tags">
+        </div>
+
+{#      {{ country.code }}#}
+
+
+
+{#        <form action="/action_page.php">#}
+{#            <select name="Country">#}
+{#            {% for country in countries %}#}
+{#                <option id="{{ country.code }}">#}
+{#                        {{ country.code }}#}
+{#                </option>#}
+{#            </select>#}
+{#            {%  endfor %}#}
+{#        <br><br>#}
+{#        <input type="submit">#}
+{#</form>#}
+
+
+
   </div>
 
   <div class="two">
@@ -61,12 +86,12 @@
 
   </div>
 
-  <div class="three indicator">
+  <div class="three indicator" id="indicators">
 {#Three#}
       {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
-          <div>
-            {{ indicator }} &nbsp
-            <input type="checkbox" class="indicator_checkbox">
+          <div id="{{ indicator }}">
+            {{ indicator }} &nbsp;
+            <input type="checkbox" class="indicator_checkbox" {% if type == indicator %} checked="true" {% endif %}>
           </div>
       {% endfor %}
   </div>

@@ -60,3 +60,15 @@ def render_custom_chart(request):
 
 
     return Response(response_fields, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])    # Endpoint
+def get_country_codes(request):
+    """
+    Returns a list of country codes.
+    """
+    codes = Country.objects.all().values_list('code', flat=True)
+    response_fields = {'status': "success",
+                       'codes': codes}
+
+    return Response(response_fields, status=status.HTTP_200_OK)

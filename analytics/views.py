@@ -61,6 +61,7 @@ def list_economic_snapshots(request, country, type):    # country_code,
                'countries': countries,
                'indicators': indicators,
                'latest_year': latest_year,
+               'type': type,
                }
     # Key: 'selection'; only changes the param in the template
     return render(request, 'country.html', context)

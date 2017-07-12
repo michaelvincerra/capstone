@@ -4,9 +4,13 @@
 {% block content  %}
 
 <section id="page">
-{#<header>#}
-{#</header>#}
+<header>
+</header>
 <section class=".wrapper2">
+
+        <item id="title">
+            DataDeli
+        </item>
 
         {% autoescape off %}
             <script>
@@ -17,11 +21,9 @@
         <div id="two_panini">
             <svg viewBox="0 0 1230 675" class="svg-container2"></svg>
         </div>
-
+        <div class="slider-container">
         <div id="slider-range"></div>
-
-
-    <item class="three_panini">
+        </div>
 
 {#        <p>#}
 {#          <label for="year_range">Year Range</label>#}
@@ -29,13 +31,14 @@
 {#        </p>#}
 
     <article class="three_panini">
+        <item id="year_range_box">
             <label for="year_range"></label>  <!--Year Range-->
             <input type="text" id="year_range" value="1975-2015" readonly style="font-weight:bold;" >
-
+        </item>
 
         {% for country in countries %}
             <div class="btn-group-lg" role="group" aria-label="...">
-              <button type="button" class="iso_btn btn btn-default" data-country="{{ country.slug }}">{{ country.code }}{{ country.flag }}</button>
+              <button type="button" class="iso_btn" data-country="{{ country.slug }}">{{ country.code }}{{ country.flag }}</button>
              <!--'data-country' is an HTML data attribute--https://www.w3schools.com/tags/att_global_data.asp-->
             </div>
         {% endfor %}

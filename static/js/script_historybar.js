@@ -393,8 +393,8 @@ function StackedBar() {
             focus.append("foreignObject")
                   .attr("width", 200)
                   .attr("height", 100)
-                  .attr("x", 10)
-                  .attr("y", 0)
+                  .attr("x", 20)
+                  .attr("y", 20)
                   .append("xhtml:body")
                   .html("");
 
