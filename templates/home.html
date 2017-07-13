@@ -25,8 +25,21 @@
 
 {# TOP #}
 {% block headline %}
-    <section class="row1">
-    </section>
+
+<section class="row1"> <b>Don't just crunch your data. Munch your data. </b>
+</section>
+
+    <article id="sandwichbox">
+    <item id="sandwich_wrapper">
+        <div id="bread"></div>
+            <div id="IP"><span id="hider">IP</span></div>
+            <div id="GDP"><span id="hider">GDP</span></div>
+            <div id="GNI"><span id="hider">GNI</span></div>
+            <div id="FDI"><span id="hider">FDI</span></div>
+        <div id="bread"></div>
+    </item>
+    </article>
+
 
 {% endblock %}
 
@@ -35,22 +48,32 @@
     <section class="row2">
 
 <div class="carousel">
-    <div><img src="static/img/france_full_sample.png" alt=""  style="width:100%"> <div class="headline">France: IP Sales 1975-2015</div></div>
-    <div><img src="static/img/italy_full_sample.png" alt="" style="width:100%"> <div class=" headline">Italy: IP Sales 1975-2015</div></div>
-    <div><img src="static/img/uk_full_sample.png" alt="" style="width:100%"> <div class="headline">United-Kingdom(GB): IP Sales 1975-2015</div></div>
+    <div>
+        <img src="static/img/france_full_sample.png" alt=""  style="width:100%">
+        <div class="headline">France: IP/GDP/GNI/FDI Growth 1975-2015</div>
+        <div id="copywriting"><b>Visit our DataDeli to create your own DataPanino.</b></div>
+    </div>
+    <div><img src="static/img/italy_full_sample.png" alt="" style="width:100%">
+        <div class=" headline">Italy: IP/GDP/GNI/FDI Gowth 1975-2015</div>
+        <div id="copywriting"><b>Identify trends and discover insights &mdash;<i>to make better investment decisions.</i></b> </div>
+    </div>
+    <div>
+        <img src="static/img/uk_full_sample.png" alt="" style="width:100%"> <div class="headline">United-Kingdom(GB): IP/GDP/GNI/FDI Gowth 1975-2015</div>
+        <div id="copywriting"> <b> Learn how IP stacks up with other economic indicators&mdash;like GDP.</b></div>
+    </div>
 </div>
 
-     <article id="background_grad">
-
-            <b>Don't just crunch your data. Munch your data. </b><p>DataPanino provides a tool for analyzing
-            trends in intellectual property in context of other economic indicators. We understand "number crunching" can be tedious.
-            That's why our unique visualization tool helps you make custom views of economic data.
-            Our focus is on intellectual property (IP) sales in 7 European Union countries from 1975 to 2015.
-            DataPanino's "DataDeli" lets you stack IP with other major economic indicators &mdash;like GDP&mdash;<i>helping you
-            to identify IP trends and make more informed decisions</i>. Visit our DataDeli to create and save your own DataPanino.
+{#     <article class="background_grad">#}
+{##}
+{#            <p>DataPanino provides a tool for analyzing#}
+{#            trends in intellectual property in context of other economic indicators. We understand "number crunching" can be tedious.#}
+{#            That's why our unique visualization tool helps you make custom views of economic data.#}
+{#            Our focus is on intellectual property (IP) sales in 7 European Union countries from 1975 to 2015.#}
+{#            DataPanino's "DataDeli" lets you stack IP with other major economic indicators &mdash;like GDP&mdash;<i>helping you#}
+{#            to identify IP trends and make more informed decisions</i>. Visit our DataDeli to create and save your own DataPanino.#}
 {#               {#<i>Now you can make more informed decisions</i>  Create your own data sandwich.#}
-            </p>
-     </article>
+{#            </p>#}
+{#     </article>#}
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

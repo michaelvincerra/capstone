@@ -7,23 +7,17 @@ from rest_framework.response import Response
 from datetime import datetime
 
 
-
-
 class EconomicSnapshotViewSet(viewsets.ModelViewSet):
     model = EconomicSnapshot
     queryset = EconomicSnapshot.objects.all()
     serializer_class = EconomicSnapshotSerializer
 
 
-
-
 @api_view(['GET']) # 1st Endpoint
 def render_custom_chart(request):
     """
     Returns 1 chart, with countries compared and with a user-selected date range.
-
     """
-
     countries = request.GET.get('countries').split(',')
     start_date = int(request.GET.get('start_date'))
     end_date = int(request.GET.get('end_date'))
@@ -77,17 +71,17 @@ def get_country_codes(request):
 @api_view(['POST'])    # 3rd Endpoint
 def save_collection(request):
     """
-    Returns a list of country codes.
+    Returns a collection to a user.
     """
-
     snapshot_ids = request.POST.get('snapshot_ids')
 
-    snapshots = EconomicSnapshot.objects.filter(id__in=snapshot_ids)
+    snapshots = EconomicSnapshot.objects.filter(id__in=snapshot_ids)    # Filters by the primary key of the database object
     collection = Collection()
-    collection.viewer.add(*snapshots)
+    collection.slides.add(*snapshots)
     collection.save()
 
-    response_fields = ()
+    response_fields = {'status': "success",
+                       'codes': snapshots}
 
     return Response(response_fields, status=status.HTTP_201_CREATED)
 

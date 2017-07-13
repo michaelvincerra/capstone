@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import EconomicSnapshot, Country
+from .models import EconomicSnapshot, Country, Collection
 
 
 
@@ -13,6 +13,10 @@ class EconomicSnapshotSerializer(serializers.ModelSerializer):
     country = CountrySerializer()
     class Meta:
         model = EconomicSnapshot
-        fields = ('year', 'country', 'type', 'value', 'description','source_url', 'id',)   # 'slug', removed: 06/20/2017
+        fields = ('year', 'country', 'type', 'value', 'description','source_url', 'id',)   # 'slug', removed: 06.20.2017
 
 
+class CollectionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Collection
+        fields = ('title', 'updated', 'slides')  # Added 07.12.17

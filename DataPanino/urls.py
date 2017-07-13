@@ -22,7 +22,7 @@ from analytics.views import home
 from rest_framework import routers
 from accounts.api import UserViewSet
 from accounts.views import profile, login, logout, register
-from analytics.api import EconomicSnapshotViewSet, render_custom_chart, get_country_codes
+from analytics.api import EconomicSnapshotViewSet, render_custom_chart, get_country_codes, save_collection
 from analytics.views import list_economic_snapshots, list_country_composite, make_panini, about
 
 
@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/v1/snapshots/', render_custom_chart, name='render_custom_chart'),
     url(r'^api/v1/codes/', get_country_codes, name='get_country_codes'),
+    url(r'^api/vi/collections', save_collection, name='save_collection'),
     # url(r'^api/v1/', include(router.urls)),
 
     # Pages
@@ -52,7 +53,7 @@ urlpatterns = [
     # url(r'^contact', contact, name='contact'),      # TODO: Complete contact.html page
 
     # Analytics
-    url(r'^detail/(?P<slug>\w+)/$', home, name='home'),  # URL parameter capturing using a kwarg
+    url(r'^deta il/(?P<slug>\w+)/$', home, name='home'),  # URL parameter capturing using a kwarg
     url(r'^country_overview/$', list_country_composite, name='composite'),  # see 'def list_country_composite in views.
     url(r'^country/(?P<country>[\w-]+)/(?P<type>\w{0,5})/$', list_economic_snapshots, name='economic_snapshots'),
     url(r'^country_panini/(?P<slug>[a-zA-Z\-]+)$', make_panini, name='make_panini'),
