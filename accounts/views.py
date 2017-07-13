@@ -10,6 +10,7 @@ from django.contrib.auth import login as django_login
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.core.mail import send_mail
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 #Django email: https://docs.djangoproject.com/en/1.11/topics/email/#quick-example
@@ -17,6 +18,7 @@ from django.contrib.auth.decorators import login_required
 def login(request):
     if request.method == 'GET':
         form = AuthenticationForm()
+
     elif request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
 
@@ -44,6 +46,7 @@ def register(request):
     elif request.method == 'POST':
         form = CustomUserCreationForm(data=request.POST)
         if form.is_valid():
+             # We can make any last second changes.
             user = form.save(commit=False)
 
             send_mail(
@@ -59,6 +62,9 @@ def register(request):
             # https://docs.djangoproject.com/en/1.11/topics/email/#mail-managers
             user.save()
 
+            messages.add_message(request, messages.SUCCESS, 'Account created. Welcome to DataPanino.')
+
+
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
@@ -66,11 +72,12 @@ def register(request):
 
             return redirect('/')   # TODO: Find a better redirect
 
-
-
-
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
+
+
+
+
 
 @login_required(login_url='/accounts/login/')
 def profile(request):

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm, PasswordResetForm
 from .models import User
 
-
+#
 
 class CustomUserCreationForm(UserCreationForm):
     nickname = forms.RegexField(label=("Nickname"), max_length=250,

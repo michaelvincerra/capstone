@@ -90,7 +90,7 @@ DATABASES = {
 }
 
 # https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#substituting-a-custom-user-model
-
+# Note: Seeting this references a custom model: accounts.User.
 AUTH_USER_MODEL = 'accounts.User'
 
 

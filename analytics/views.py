@@ -16,6 +16,13 @@ def about(request):
     """
     return render(request, 'about.html')
 
+# def gallery(request):
+#     """
+#     Returns gallery page of sample charts.
+#     """
+#     return render(request, 'gallery.html')
+
+
 # def login(request):
 #     """
 #     Landing page template view

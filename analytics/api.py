@@ -73,15 +73,18 @@ def save_collection(request):
     """
     Returns a collection to a user.
     """
-    snapshot_ids = request.POST.get('snapshot_ids')
 
-    snapshots = EconomicSnapshot.objects.filter(id__in=snapshot_ids)    # Filters by the primary key of the database object
-    collection = Collection()
-    collection.slides.add(*snapshots)
+    snapshot_ids = request.POST.getlist('snapshot_ids[]')
+    # Filters by the primary key of the database object
+    snapshots = EconomicSnapshot.objects.filter(id__in=snapshot_ids)
+
+    collection = Collection(title='llamas')
     collection.save()
 
+    collection.slides.add(*snapshots)
+
     response_fields = {'status': "success",
-                       'codes': snapshots}
+                       'message': "Successfully created a collection"}
 
     return Response(response_fields, status=status.HTTP_201_CREATED)
 

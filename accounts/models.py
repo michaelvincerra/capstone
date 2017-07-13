@@ -12,6 +12,8 @@ class User(AbstractUser):
     collections = models.ManyToManyField('accounts.User', related_name='users', blank=True)
     REQUIRED_FIELDS = ['nickname', 'email']
 
+    def __str__(self):
+        return self.username
 
 
 

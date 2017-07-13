@@ -37,20 +37,20 @@ urlpatterns = [
     # Accounts
     url(r'accounts/', include('accounts.urls', namespace='accounts')),
     # url(r'^accounts/login', login, name='login'),
-    # url(r'^accounts/register', register, name='register'),   # TODO: Complete login.html page
 
     # API
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/v1/snapshots/', render_custom_chart, name='render_custom_chart'),
-    url(r'^api/v1/codes/', get_country_codes, name='get_country_codes'),
-    url(r'^api/vi/collections', save_collection, name='save_collection'),
+    url(r'^api/v1/snapshots/$', render_custom_chart, name='render_custom_chart'),
+    url(r'^api/v1/codes/$', get_country_codes, name='get_country_codes'),
+    url(r'^api/v1/collection/save/$', save_collection, name='save_collection'),
     # url(r'^api/v1/', include(router.urls)),
 
     # Pages
     url(r'^$', home, name='home'),
     url(r'^about$', about, name='about'),
     # url(r'^contact', contact, name='contact'),      # TODO: Complete contact.html page
+    # url(r'gallery/', gallery, name='gallery'),
 
     # Analytics
     url(r'^deta il/(?P<slug>\w+)/$', home, name='home'),  # URL parameter capturing using a kwarg

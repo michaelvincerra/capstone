@@ -84,7 +84,7 @@ class Collection(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        self.generate_title()
+        # self.generate_title()
         super().save(*args, **kwargs)
 
 

@@ -31,13 +31,13 @@
                         <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
 
+
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
-{#                            <!--href="{% url 'login' %}"-->#}
+                        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
                         </li>
                     {% endif %}
 

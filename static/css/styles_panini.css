@@ -229,7 +229,7 @@ shape-rendering: crispEdges;
     /*!*opacity: .7;*!*/
 }
 
-.save_collection {
+#save_collection {
     width: 90px;
     height: 50px;
     font-family: "Signika", Verdana, Arial, sans-serif;

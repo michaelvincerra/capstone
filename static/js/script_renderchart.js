@@ -4,24 +4,41 @@
 
 /* rangeRoundBands([width, 0], .1); */
 
-function save_collection(collections){
+console.log(snapshot_ids);
+
+/* ============== Save Collection ====================== */
+
+function save_collection(){
     // Saves user snapshots to a user collection. //
     "use strict";
 
-    let request_params = {'snapshot_ids': snapshot_ids}; // snapshot_ids is const on country_panini
+
+    let request_params = Object({"snapshot_ids": snapshot_ids}); // snapshot_ids is const on country_panini
 
 
     $.ajax({
-    url: '/api/v1/collections',
-    method: 'POST',
-    data: request_params,
-    success: function(response_fields) {
-        console.log(response_fields);
-    }
+        url: '/api/v1/collection/save/',
+        ContentType: 'application/json',
+        type: 'POST',
+        data: request_params,
+        success: function(response_fields) {
+            console.log(response_fields);
+        },
+        error: function(err) {
+            console.log(err);
+        }
 
     });
 }
 
+$('#save_collection').on('click', function(){
+    "use strict";
+    save_collection();
+    console.log('success')
+    });
+
+
+/* ============== Autocomplete Country Code ====================== */
 
 $( "#tags" ).autocomplete({
   source: function(request, response) {
@@ -43,6 +60,9 @@ $( "#tags" ).autocomplete({
     console.log(message);
   }
 });
+
+
+/* ============== Get Country Snapshots ====================== */
 
 
 function fetch_data(countries, start_date, end_date) {
@@ -71,6 +91,9 @@ function fetch_data(countries, start_date, end_date) {
         }
 });
 }
+
+/* ============== Button to Set Range of Years ====================== */
+
 
  $('.iso_btn').on('click', function(evt){
      "use strict";

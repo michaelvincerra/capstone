@@ -32,10 +32,10 @@
     <article id="sandwichbox">
     <item id="sandwich_wrapper">
         <div id="bread"></div>
-            <div id="IP"><span id="hider">IP</span></div>
-            <div id="GDP"><span id="hider">GDP</span></div>
-            <div id="GNI"><span id="hider">GNI</span></div>
-            <div id="FDI"><span id="hider">FDI</span></div>
+            <div id="IP"><span id="reveal">IP</span></div>
+            <div id="GDP"><span id="reveal">GDP</span></div>
+            <div id="GNI"><span id="reveal">GNI</span></div>
+            <div id="FDI"><span id="reveal">FDI</span></div>
         <div id="bread"></div>
     </item>
     </article>
@@ -48,20 +48,22 @@
     <section class="row2">
 
 <div class="carousel">
-    <div>
+    <div class="carousel_manager">
         <img src="static/img/france_full_sample.png" alt=""  style="width:100%">
         <div class="headline">France: IP/GDP/GNI/FDI Growth 1975-2015</div>
         <div id="copywriting"><b>Visit our DataDeli to create your own DataPanino.</b></div>
     </div>
-    <div><img src="static/img/italy_full_sample.png" alt="" style="width:100%">
+    <div class="carousel_manager">
+        <img src="static/img/italy_full_sample.png" alt="" style="width:100%">
         <div class=" headline">Italy: IP/GDP/GNI/FDI Gowth 1975-2015</div>
         <div id="copywriting"><b>Identify trends and discover insights &mdash;<i>to make better investment decisions.</i></b> </div>
     </div>
-    <div>
+    <div class="carousel_manager">
         <img src="static/img/uk_full_sample.png" alt="" style="width:100%"> <div class="headline">United-Kingdom(GB): IP/GDP/GNI/FDI Gowth 1975-2015</div>
         <div id="copywriting"> <b> Learn how IP stacks up with other economic indicators&mdash;like GDP.</b></div>
     </div>
 </div>
+    </section>
 
 {#     <article class="background_grad">#}
 {##}
@@ -108,11 +110,21 @@
 
 {# BOTTOM #}
 {% block footer %}
+
+
     <section class="row3">
+
+{#        <div class="home_links"> <a href={% url 'gallery'%}> Gallery </a> </div>#}
+
         <footer>
             <button id="signup"><a href="{% url 'accounts:register'%}">Sign Up!</button>
         </footer>
+
+{#        <div class="home_links"><a href={% url 'country/(?P<country>[\w-]+)/(?P<type>\w{0,5})/'%}> Latest Year </a> </div>#}
+
     </section>
+
+
 {% endblock %}
 
 

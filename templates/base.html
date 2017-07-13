@@ -39,6 +39,16 @@
 
     <body>
 
+    {#Django Messages Framework#}
+        {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {#End Messages#}
+
         <!-- Navigation -->
         {%  include "nav.html" %}
 
@@ -69,28 +79,6 @@
             {% block country %}
             {% endblock %}
 
-{#            {% block france %}#}
-{#            {%  endblock %}#}
-{##}
-{#            {% block germany %}#}
-{#            {%  endblock %}#}
-{##}
-{#            {% block italy %}#}
-{#            {%  endblock %}#}
-{##}
-{#            {% block netherlands %}#}
-{#            {% endblock %}#}
-{##}
-{#            {% block spain %}#}
-{#            {% endblock%}#}
-{##}
-{#            {% block switzerland %}#}
-{#            {% endblock %}#}
-{##}
-{#            {% block united_kingdom %}#}
-{#            {%  endblock %}#}
-
-
 
         {% block main %}
         {% endblock %}
@@ -108,6 +96,8 @@
         <!-- Bootstrap core JavaScript -->
         <script src= "{% static 'vendor/jquery/jquery.js' %}"></script>
         {#    <script src="static/vendor/jquery/jquery.min.js"></script>#}
+
+        <script src= "{% static 'js/csrf.js' %}"></script>
 
         <script src= "{% static 'vendor/tether/tether.js' %}"></script>
         {#    <script src="static/vendor/tether/tether.min.js"></script>#}
