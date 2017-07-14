@@ -65,6 +65,7 @@ h5 {
     justify-content: center;
     font-size:  xx-large ;
 	font-family: Signika;
+    padding-top: 3%;
 	/*font-size: 35px;*/
 	font-style: normal;
     color: #013E85;
@@ -245,6 +246,64 @@ body {
     /*color: darkblue;*/
     /*border-radius: 10px;*/
 }
+
+.row1_gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1%;
+    color: #003366;
+    /*border: 2px solid darkblue;*/
+    border-radius: 10px;
+}
+
+.row2_gallery{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /*align-content: center;*/
+    position: relative;
+    margin-top: 5%;
+    /*color: ;*/
+    /*color: ;*/
+    /*border: 2px solid darkblue;*/
+    border-radius: 10px;
+
+}
+
+.square{
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    margin: 5px;
+    padding: 5px 10px 10px;
+    padding-bottom: 5px;
+    align-content: center;
+    border-radius: 10px;
+    background-color: #E8F5F6; /* #E5F9FC * For browsers that do not support gradients    06aae0 */
+    background: -webkit-linear-gradient(#FFFFFF, #E8F5F6); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#FFFFFF, #E8F5F6); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#FFFFFF, #E8F5F6); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#FFFFFF, #E8F5F6); /* Standard syntax */
+}
+
+.square:hover{
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    margin: 5px;
+    padding: 5px 10px 10px;
+    padding-bottom: 5px;
+    align-content: center;
+    background-color: #E8F5F6; /* #E5F9FC * For browsers that do not support gradients    06aae0 */
+    background: -webkit-linear-gradient(#FFFFFF, #E8F5F6); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#FFFFFF, #E8F5F6); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#FFFFFF, #E8F5F6); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#FFFFF6, #E8F5F6); /* Standard syntax */
+}
+
 #background_grad_about{
     display:flex;
     flex-direction: column;
@@ -252,7 +311,7 @@ body {
     align-items: left;
     /*align-content: left;*/
     padding-top: 10px;
-    margin-top:;
+    margin-top: 10px;
     background:#E8F5F6;
     color: #003973;
     padding: 8px;
@@ -324,12 +383,17 @@ label {
 }
 
 
-.indicator {
-
-    text-align: justify;
-    text-indent: 25px;
-    vertical-align: text-top;
-    color: #45879b;
+.indicator div{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 45%;
+    text-transform: uppercase;
+    /*align-content:flex-start;*/
+    /*text-align: justify;*/
+    /*text-indent: 25px;*/
+    /*vertical-align: text-top;*/
+    /*color: #FFFFFF;*/
 }
 
 .chart {
@@ -411,8 +475,10 @@ svg text.label {
 
 
 .indicator_checkbox {
+    padding-top: 10px ;
+    vertical-align: middle;
     /*display: flex;*/
-    text-align: end ;
+    /*veritical-align: text-top ;*/
 
 }
 
@@ -536,84 +602,47 @@ svg text.label {
     transition:width 300ms ease-in-out, height 300ms ease-in-out;
     border-radius: 20px;
 }
-
-#IP {
+#sandwich_wrapper div:not(#bread){
     display: flex;
     justify-content: center;
     padding-bottom: 2px;
     margin-bottom: 1px;
     width: 50px;
     height: 5px;
+    border-radius: 10px;
+    font: Signika;
+    -webkit-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+    -moz-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+    -o-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+    transition:width 300ms ease-in-out, height 300ms ease-in-out;
+}
+
+#IP_logo {
     background: #45879B;
-    border-radius: 10px;
-    font: Signika;
-    -webkit-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    -moz-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    -o-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    transition:width 300ms ease-in-out, height 300ms ease-in-out;
 }
 
-#GDP {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 2px;
-    margin-bottom: 1px;
-    width: 50px;
-    height: 5px;
+#GDP_logo {
     background: #87A8B3;
-    border-radius: 10px;
-    font: Signika;
-    -webkit-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    -moz-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    -o-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    transition:width 300ms ease-in-out, height 300ms ease-in-out;
 }
 
-#GNI {
-    display: flex;
-    justify-content: center;
-    padding-bottom: 2px;
-    margin-bottom: 1px;
-    width: 50px;
-    height: 5px;
+#GNI_logo {
     background: #85BEAD;
-    border-radius: 10px;
-    font: Signika;
-    -webkit-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    -moz-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    -o-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    transition:width 300ms ease-in-out, height 300ms ease-in-out;
-}
 
+}
+#FDI_logo {
+    background: #6ACBEA;
+}
 
 #reveal{
     opacity: 0;
 
 }
 
-#FDI {
 
-    display: flex;
-    justify-content: center;
-    padding-bottom: 2px;
-    margin-bottom:1px;
-    width: 50px;
-    height: 5px;
-    background: #6ACBEA;
-    border-radius: 10px;
-    font: Signika;
-    -webkit-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    -moz-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    -o-transition:width 300ms ease-in-out, height 300ms ease-in-out;
-    transition:width 300ms ease-in-out, height 300ms ease-in-out;
+#sandwich_wrapper #IP_logo:hover, #sandwich_wrapper #GDP_logo:hover, #sandwich_wrapper #GNI_logo:hover, #sandwich_wrapper #FDI_logo:hover{
+    width: 100px;
+    height: 20px;
 }
-
-
-
-/*#IP:hover, #GDP:hover, #GNI:hover, #FDI:hover{*/
-    /*width: 100px;*/
-    /*height: 20px;*/
-/*}*/
 
 /*#CH:focus, #DE:focus, #ES:focus, #FR:focus, #IT:focus, #NL:focus, #UK:focus, #reveal {*/
     /*width: 100px;*/
@@ -623,27 +652,17 @@ svg text.label {
 
 
 
-#IP:hover #reveal {
+#IP_logo:hover #reveal, #GDP_logo:hover #reveal, #GNI_logo:hover #reveal, #FDI_logo:hover #reveal{
   opacity: 1;
 }
 
-#GDP:hover #reveal {
-  opacity: 1;
-}
-
-#GNI:hover #reveal {
-  opacity: 1;
-}
-
-#FDI:hover #reveal {
-  opacity: 1;
-}
 
 .home_links {
     font-family: "Signika", Verdana, Arial, sans-serif;
     font-size: x-large;
 	font-weight: 100;
-    color: #013E85;
+    padding-top: 1%;
+    color: #003366;
     margin-right: 2%;
     margin-left: 2%;
 

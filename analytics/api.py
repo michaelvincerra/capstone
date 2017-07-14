@@ -78,7 +78,10 @@ def save_collection(request):
     # Filters by the primary key of the database object
     snapshots = EconomicSnapshot.objects.filter(id__in=snapshot_ids)
 
-    collection = Collection(title='llamas')
+    title = ''
+    title += snapshots[0].country.flag
+
+    collection = Collection(title=title)
     collection.save()
 
     collection.slides.add(*snapshots)

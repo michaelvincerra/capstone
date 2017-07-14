@@ -40,20 +40,9 @@
 
   <div class="one"> {# TODO: How to programatically match 2-digit country code with URL page? #}
 
-<article id="sandwichbox">
-    <item id="country_wrapper">
-        <div id="bread"></div>
-            <a id="CH"><span id="reveal">CH</span></a>
-            <a id="DE"><span id="reveal">DE</span></a>
-            <a id="ES"><span id="reveal">ES</span></a>
-            <a id="FR"><span id="reveal">FR</span></a>
-            <a id="IT"><span id="reveal">IT</span></a>
-            <a id="NL"><span id="reveal">NL</span></a>
-            <a id="UK"><span id="reveal">UK</span></a>
-        <div id="bread"></div>
-    </item>
-    </article>
-
+{#    {% for country in countries %}#}
+    {{selection}}
+{#    {% endfor %}#}
 
 {##}
 {##}
@@ -100,11 +89,12 @@
 
   </div>
 
-  <div class="three indicator" id="indicators">
+  <div class="three indicator">
 {#Three#}
+
       {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
           <div id="{{ indicator }}">
-            {{ indicator }} &nbsp;
+        <label>{{ indicator }}</label>
             <input type="checkbox" class="indicator_checkbox" {% if type == indicator %} checked="true" {% endif %}>
           </div>
       {% endfor %}
@@ -114,7 +104,6 @@
   <div class="four">
     {{ latest_year }}    <!--TODO: Change variable to match data retrieved for specific year.-->
   </div>
-
 
 {% endblock %}
 

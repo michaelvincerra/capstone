@@ -11,7 +11,7 @@ body{
 #title {
   display: flex;
   justify-content: center;
-  padding-top: -5%;
+  padding-top: 1%;
   font-size: 30px;
   font-family: Signika;
   align-items: center;
@@ -167,7 +167,8 @@ shape-rendering: crispEdges;
     display: grid;
     /*justify-content:flex-start;*/
     width: 100% ;   /*1280px*/
-    height: 82%;   /*720px*/
+    height: 78%;   /*720px*/
+    padding-top: -10%;
     /*padding-left: 5%;*/
     /*grid-column: 1 / 41;*/
     /*grid-row: 10 / 10;*/

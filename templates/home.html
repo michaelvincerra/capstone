@@ -32,10 +32,10 @@
     <article id="sandwichbox">
     <item id="sandwich_wrapper">
         <div id="bread"></div>
-            <div id="IP"><span id="reveal">IP</span></div>
-            <div id="GDP"><span id="reveal">GDP</span></div>
-            <div id="GNI"><span id="reveal">GNI</span></div>
-            <div id="FDI"><span id="reveal">FDI</span></div>
+            <div id="IP_logo"><span id="reveal">IP</span></div>
+            <div id="GDP_logo"><span id="reveal">GDP</span></div>
+            <div id="GNI_logo"><span id="reveal">GNI</span></div>
+            <div id="FDI_logo"><span id="reveal">FDI</span></div>
         <div id="bread"></div>
     </item>
     </article>
@@ -114,13 +114,13 @@
 
     <section class="row3">
 
-{#        <div class="home_links"> <a href={% url 'gallery'%}> Gallery </a> </div>#}
+        <div class="home_links"> <a href={% url 'gallery'%}> Gallery </a> </div>
 
         <footer>
             <button id="signup"><a href="{% url 'accounts:register'%}">Sign Up!</button>
         </footer>
 
-{#        <div class="home_links"><a href={% url 'country/(?P<country>[\w-]+)/(?P<type>\w{0,5})/'%}> Latest Year </a> </div>#}
+        <div class="home_links"><a href="/country/france/gdp/"> Latest Year </a> </div>
 
     </section>
 

@@ -34,7 +34,7 @@
 
                     {% if request.user.is_authenticated %}
                         <li class="nav-item">
-                        <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>    <!--Only 'include' requires the : colon"-->
                     {% else %}
                         <li class="nav-item">
                         <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>

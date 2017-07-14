@@ -55,7 +55,7 @@ def list_economic_snapshots(request, country, type):    # country_code,
     indicators = OrderedDict()
 
     for snapshot in composite:
-        indicator = snapshot[1]
+        indicator = snapshot[1].lower()
         try:
             indicators[indicator].append(snapshot)
         except KeyError:
@@ -72,7 +72,6 @@ def list_economic_snapshots(request, country, type):    # country_code,
                }
     # Key: 'selection'; only changes the param in the template
     return render(request, 'country.html', context)
-
 
 
 def list_country_composite(request):
@@ -140,26 +139,34 @@ def make_panini(request, slug):
     return render(request, "country_panini.html", context)
 
 
-
-def make_custom_panini(request, slug):
+def collection_gallery(request):
     """
-    CRUDL: CREATE
-    Returns 1 country for a user-defined range of years with type (indicators) selected.
+
     """
-    # Item.objects.create()
-    #
-    # bracketed = EconomicSnapshot.objects.get()
-    #
+
+    collections = Collection.objects.all()
+    context = {'collections': collections}
 
 
-    # viewfinder =  ...  TODO: Need to learn how to call make_panini and save a custom view from it.
-
-    context = {'chart_custom', chart_custom}
-    return make_panini(request, "customview.html", context)
-    # make_panini()    TODO: Invoke changed view from above?
+    return render(request, "gallery.html", context)
 
 
-
+# def make_custom_panini(request, slug):
+#     """
+#     CRUDL: CREATE
+#     Returns 1 country for a user-defined range of years with type (indicators) selected.
+#     """
+#     # Item.objects.create()
+#     #
+#     # bracketed = EconomicSnapshot.objects.get()
+#     #
+#
+#
+#     # viewfinder =  ...  TODO: Need to learn how to call make_panini and save a custom view from it.
+#
+#     context = {'chart_custom', chart_custom}
+#     return make_panini(request, "customview.html", context)
+#     # make_panini()    TODO: Invoke changed view from above?
 
 
 def create(request):
