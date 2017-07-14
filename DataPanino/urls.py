@@ -34,7 +34,7 @@ router.register(r'snapshots', EconomicSnapshotViewSet)
 urlpatterns = [
 
     # Accounts
-    url(r'accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     # url(r'^accounts/login', login, name='login'),
 
     # API

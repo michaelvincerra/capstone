@@ -26,7 +26,8 @@
 {# TOP #}
 {% block headline %}
 
-<section class="row1"> <b>Don't just crunch your data. Munch your data. </b>
+<section class="row1"> <b>Don't just crunch your data. Munch your data.
+{#    <sup id="TM">™</sup></b>#}
 </section>
 
     <article id="sandwichbox">
@@ -114,13 +115,13 @@
 
     <section class="row3">
 
-        <div class="home_links"> <a href={% url 'gallery'%}> Gallery </a> </div>
+        <div class="home_links"> <a href={% url 'gallery'%}> Gallery </a> </div> <!--TODO: fix styles-->
 
-        <footer>
+        <footer id="footer_box">
             <button id="signup"><a href="{% url 'accounts:register'%}">Sign Up!</button>
         </footer>
 
-        <div class="home_links"><a href="/country/france/gdp/"> Latest Year </a> </div>
+        <div class="home_links"><a href="{% url 'composite' %}"> DataDeli </a> </div> <!--TODO: fix styles-->
 
     </section>
 

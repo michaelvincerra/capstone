@@ -1,34 +1,37 @@
+{% extends 'base.html' %}
 
-{# This is the registration page #}
-{# You need to learn the native bootstrap CLASSES in order to override them in the templates!!! #}
-{#  https://www.w3schools.com/bootstrap/bootstrap_ref_all_classes.asp #}
+{% load static %}
 
-
-
-{% extends "base.html" %}
-
-
-
-{% block headline %}
-
-{#   <div class="text-center"> Thank you for registering! </div>#}
+{% block extra_head %}
 
 {% endblock %}
 
-
 {% block content %}
-    <div class='row'>
 
-    {{ form.errors }}
 
-    <form action="" method="POST">
 
-        {% csrf_token %}    {# cross site request forgery; prohibits making a fake token #}
+    <div class='profile_form'>
 
-        {{ form.as_p }}
+{#        {% if form.errors %}    #}
+            {% for field, errors in form.errors.items %}
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <strong>{{ field }}</strong> {% for error in errors %}{{ error }}{% endfor %}
+                </div>
+            {% endfor %}
+{#        {% endif %}#}
 
-    <button class=".active .btn">Register</button>
+        <form action="" method="POST">
 
-    </form>
+            {% csrf_token %} {# cross site request forgery; prohibits making a fake token #}
+
+            {{ form.as_p }}
+
+            <button class=".active .btn">Register</button>
+
+        </form>
     </div>
+
+
 {% endblock %}

@@ -17,16 +17,25 @@
 
 
 <div class="row1_gallery">
-<h2 style="text-align:center">DataDeli Gallery</h2>
+<h2 style="text-align:center" id="copywriting">Gallery</h2>
 </div>
+
+    <section id="headline" class="center">
+        <div>
+            <p>
+            Check out our public gallery! Get inspired by a DataPanino that someone else created.
+            </p>
+        </div>
+    </section>
 
 <div class="row2_gallery">
 
 
     {% for collection in collections %}
       <div class="square">
-          {{ collection.title }}
-          {{ collection.slides.all|length }}
+        {{ collection }}
+          {{ collection.start }} | {{ collection.end }}
+{#        {{ country.title }} TODO: Resolve/fix why the flag automatically attaches to the country object; #}
       </div>
     {% endfor %}
 

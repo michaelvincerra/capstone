@@ -70,7 +70,8 @@ def register(request):
             user = authenticate(username=username, password=raw_password)
             django_login(request, user)
 
-            return redirect('/')   # TODO: Find a better redirect
+            return redirect('composite')   # TODO: Option 2
+            # return redirect('country.html')   # TODO: Option 1: Program this!
 
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
@@ -85,5 +86,5 @@ def profile(request):
     form = CustomUserUpdateForm(instance=request.user)
 
     context = {'form': form, 'password_form': password_form}
-    return render(request, 'profile.html', context)
+    return render(request, 'accounts/profile.html', context)
 

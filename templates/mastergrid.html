@@ -1,24 +1,37 @@
 {% extends "base.html" %}
 {% load static %}
+
+
+{% block headline %}
+                    <div id="copywriting"> DataDeli </div><br/>
+
+{% endblock %}
+
 {% block content %}
 
+
+<section class="row1">
+
+    <div id="table_header">
+        <p> Welcome to the DataDeli. Start building your DataPanino. But first, what kind of bread would you like?
+            Select the country's flag that corresponds to the economic indicator where you wish to start.
+            It's the basis on which you add more ingredients&mdash;or economic indicators&mdash;like GDP.
+        </p>
+
+    </div>
+
+</section>
 
     <table class="table_mastergrid">
 
 	    <thead>
-            <tr>
-                 <H4>Countries Overview: Economic Indicators</H4><br/>
-
-                <th colspan="8">
-                    Start building your DataPanino. Select the country's flag that corresponds to the desired
-                    economic indicator.  Think of this as the type of bread you want for your data sandwich.
-                    It's the basis on which you add other ingredients.
-                </th>
-
-            </tr>
-            <tr>
-
-            </tr>
+{#            <tr class="">#}
+{##}
+{#                <th colspan="8">#}
+{##}
+{#                </th>#}
+{##}
+{#            </tr>#}
                 <tr>
                     <th>
                         <div>&nbsp</div>
@@ -26,7 +39,7 @@
                     {% for country in countries %}
 
                         <th>
-                        {{ country|title }}
+                        {{ country.name|title }}
 
                         </th>
 
@@ -41,10 +54,12 @@
                     {{ indicator_name }}
                 </td>
                 {% for country, indicator, flag in data %}
-                <td>
-                    <a href="/country/{{ country|slugify }}/{{ indicator }}/">{{ flag }}</a>   {# TODO: increase size of flags #}
+
+                 <td class="table_center">
+                    <a href="/country/{{ country|slugify }}/{{ indicator }}/"><div id="flag">{{ flag }}</div></a>
                 </td>
                 {% endfor %}
+
             </tr>
             <tr>
                     <td>
@@ -55,7 +70,7 @@
 
     </table>
 
-
+{#</section>#}
 
 
 {% endblock %}

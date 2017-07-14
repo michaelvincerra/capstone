@@ -12,7 +12,7 @@ class Country(models.Model):
     flag = models.CharField(max_length=5, null=True, blank=True)    #TODO: Verify this works; or use a models. structure?
 
     def __str__(self):
-        return self.name
+        return f'{self.name} {self.flag}'
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -62,12 +62,20 @@ class Collection(models.Model):
     title = models.CharField(max_length=100)  # title = title of saved collection.
     updated = models.DateField(auto_now=True)
     slides = models.ManyToManyField(EconomicSnapshot, blank=True)
+    start = models.IntegerField(null=True, blank=True)
+    end = models.IntegerField(null=True, blank=True)
 
     class Meta:
         ordering = ('-updated',)
 
     def __str__(self):
-        return self.title
+        queryset = self.slides.all()
+        count = queryset.count()
+        names_flags = set(es.country for es in queryset)
+        result = f'{self.title} {count}|'
+        for nf in names_flags:
+            result += f' {nf}'
+        return result
 
     def generate_title(self):
         now = datetime.now()
@@ -84,6 +92,10 @@ class Collection(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
+        queryset = self.slides.all()
+        start = max(queryset, key=lambda es: es.year)
+        end = min(queryset, key=lambda es: es.year)
+        self.start, self.end = start, end
         # self.generate_title()
         super().save(*args, **kwargs)
 

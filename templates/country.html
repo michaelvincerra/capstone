@@ -8,16 +8,16 @@
 	    <thead>
             <tr>
                 <td>
-                <H5> Build Your Own DataPanino</H5>
+                <div id="copywriting"> Build Your Own DataPanino</div>
                 </td>
             </tr>
             <tr class="table_header">
                 <th>
-                    <div>
-                    One economic indicator is selected by default for a country.
-                    </div>
                     <p>
-                    Select a checkbox to add another indicator to see correlations between data for one year.
+                        This chart shows all economic indicators for one country for one year. Your default is selected.
+                        To change the country, select the country-code button at top. To change the year, select the year in the upper right.
+                    </p>
+                    <p>
                     </p>
                 </th>
             </tr>
@@ -44,9 +44,7 @@
     {{selection}}
 {#    {% endfor %}#}
 
-{##}
-{##}
-{##}
+{#====== INTERFACE FOR COUNTRY SELECTOR=====#}
 {#        <div class="ui-widget">#}
 {#        <label for="tags">Country Code:</label>#}
 {#        <input id="tags">#}
@@ -95,15 +93,19 @@
       {% for indicator, data in indicators.items %}  {# ordered_indicators accessed from views #}
           <div id="{{ indicator }}">
         <label>{{ indicator }}</label>
-            <input type="checkbox" class="indicator_checkbox" {% if type == indicator %} checked="true" {% endif %}>
+            <input type="checkbox" class="indicator_checkbox" {% if type|lower == indicator %} checked="true" {% endif %}>
           </div>
       {% endfor %}
   </div>
 
 
   <div class="four">
-    {{ latest_year }}    <!--TODO: Change variable to match data retrieved for specific year.-->
+    {{ latest_year }}    <!--TODO: Change variable to match one of many years retrieved.-->
   </div>
+
+   <div class="five">
+        <div id="copywriting"><a href="{% url 'make_panini' slug="france" %}"> Next </a> </div> <!--TODO: Program this!!-->
+   </div>
 
 {% endblock %}
 
