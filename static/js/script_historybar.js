@@ -77,7 +77,15 @@ function StackedBar() {
   // var svg1 = d3.select("#c20")
   // var colores = ["#45879B", "647AD5", "58CB75", "#f0ad4e"]
 
-  var color_index = {'fdi': '#45879B', 'gdp': '#80D3ED', 'gni': '#85BEAD', 'ip': '#f0AD4E' };
+    var color_index = ['#45879B', '#80D3ED', '#85BEAD', '#f0AD4E'];
+
+    var color = d3.scale.ordinal(color_index)
+
+
+  // var color_index = {'fdi': '#45879B', 'gdp': '#80D3ED', 'gni': '#85BEAD', 'ip': '#f0AD4E' }; 07.15.17
+  //
+  // var color =
+  // style call
 
   var margin = {top: 0, right: 5, bottom: 20, left: 50},
       width = 400 - margin.left - margin.right,
@@ -314,10 +322,14 @@ function StackedBar() {
               // console.log(obj.type);
               return obj.values.map(function(item){
                   // console.log(obj);
-                  item.color = color_index['fdi'];
+                  item.color = color(obj.name);   /*  TODO:
                   return item;
               });
            });
+
+                    // item.color = color(obj.name);
+                    // return item;
+
 
            barStack(flatten);
            flatten = _.flatten(flatten)
