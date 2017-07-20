@@ -82,12 +82,16 @@ function StackedBar() {
         height = 300 - margin.top - margin.bottom;
 
     var duration = 1000;
-    var color_index = ['#45879B', '#80D3ED', '#85BEAD', '#f0AD4E'];
+    // var color_index = ['#45879B', '#80D3ED', '#85BEAD', '#f0AD4E'];
 
-    var color = d3.scale.ordinal(color_index)
-    // .range([d3.rgb('#45879B'), d3.rgb('#80D3ED'), d3.rgb('#85BEAD'), d3.rgb('#f0AD4E')]);
+    // var color = d3.scale.ordinal([d3.rgb('#45879B'), d3.rgb('#80D3ED'), d3.rgb('#85BEAD'), d3.rgb('#f0AD4E')]);
+    // // .range([d3.rgb('#45879B'), d3.rgb('#80D3ED'), d3.rgb('#85BEAD'), d3.rgb('#f0AD4E')]);
+    //
+    // // var color = d3.scale.ordinal(color_index)
 
-    // var color = d3.scale.ordinal(color_index)
+    var color = d3.scale.ordinal()
+    .domain("#45879B", "647AD5", "58CB75", "#f0ad4e");
+
     var x = d3.scale.ordinal();
     var y = d3.scale.linear();
 
@@ -99,8 +103,8 @@ function StackedBar() {
     var y_voronoi = d3.scale.linear();
 
     // COLORS! 07.08.17
-    var length = 4;
-    var color = d3.scale.ordinal(color_index);
+    // var length = 4;
+    // var color = d3.scale.ordinal(color_index);
 
         // .domain([1, length]);
     // .range(["#45879B", "#45879B", "#B13C3D", "#CCB40C"]);
@@ -118,8 +122,8 @@ function StackedBar() {
     var yAxis = d3.svg.axis();
 
     // var color = d3.scale.category10().domain(d3.range(0, 10));
-    // var myColors = d3.scale.ordinal()
-    //     .domain(["#45879B", "647AD5", "58CB75", "#f0ad4e"])
+    // var color = d3.scale.ordinal()
+    //     .domain(["#45879B", "647AD5", "58CB75", "#f0ad4e"]);
 
     // var xAxis = d3.svg.axis();
     // var yAxis = d3.svg.axis();
@@ -334,17 +338,46 @@ function StackedBar() {
             var data = prepare_data(tmp);
             //  pos_data = _.filter(tmp, function(item))
             var total = prepare_total(data);
-
+            var simpleColors = ["#45879B", "#80D3ED", "#f0AD4E", "#647AD5"];    /* TODO: Write for loop to simplify */
+            // #45879B, #003366, #F0AD4E, #647AD5
+            console.log(data);
             // 1. Flatten the data....
             var flatten = data.map(function (obj) {
                 // console.log(obj.type);
-                return obj.values.map(function (item) {
-                    // console.log(obj);
-                    item.color = color(obj.name);
-                    /*  TODO: Fix color rendering here. */
-                    return item;
-                });
+                if(obj === data[0]){
+                   return obj.values.map(function (item) {
+                            // console.log(obj);
+                            item.color = simpleColors[0];
+                            /*  TODO: Fix color rendering here. */
+                            return item;
+                        });
+                } else if(obj === data[1]){
+                   return obj.values.map(function (item) {
+                            // console.log(obj);
+                            item.color = simpleColors[1];
+                            /*  TODO: Fix color rendering here. */
+                            return item;
+                        });
+                } else if(obj === data[2]){
+                   return obj.values.map(function (item) {
+                            // console.log(obj);
+                            item.color = simpleColors[2];
+                            /*  TODO: Fix color rendering here. */
+                            return item;
+                        });
+                } else if(obj === data[3]){
+                   return obj.values.map(function (item) {
+                            // console.log(obj);
+                            item.color = simpleColors[3];
+                            /*  TODO: Fix color rendering here. */
+                            return item;
+                        });
+                };
+
             });
+
+                // var color_index = ['#45879B', '#80D3ED', '#85BEAD', '#f0AD4E'];
+
 
             // item.color = color(obj.name);
             // return item;
@@ -363,7 +396,8 @@ function StackedBar() {
             y.domain(d3.extent(y_flat_values.concat(y_values))).range([height, 0]);
             x.domain(x_values).rangeRoundBands([width, 0], .1);
             /* prev: ([0, width], .1); 07.06.17    */
-
+            // var y = d3.scale.linear()
+            //     .range([h, 0]);
 
             yAxis.scale(y)
                 .orient("left")
@@ -770,7 +804,7 @@ function plot_area() {
         .y(d3.scale.linear());
 
 
-    console.log(data['data']);
+    // console.log(data['data']);
     d3.select("#two_panini").datum(data).call(chart);
 
 }
