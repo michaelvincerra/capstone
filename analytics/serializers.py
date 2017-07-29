@@ -19,4 +19,4 @@ class EconomicSnapshotSerializer(serializers.ModelSerializer):
 class CollectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Collection
-        fields = ('title', 'updated', 'slides')  # Added 07.12.17
+        fields = ('title', 'updated', 'slides')

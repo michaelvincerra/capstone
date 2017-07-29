@@ -244,7 +244,10 @@ shape-rendering: crispEdges;
     box-shadow: black;
 }
 
-
+.legend rect {
+  fill:white;
+  stroke:black;
+  opacity:0.8;}
 
 /* font {
   font: Signika;

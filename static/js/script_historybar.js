@@ -11,89 +11,123 @@
 /* http://api.jquery.com/jquery.each/ */
 
 
-function filter_date(min, max) {
 
-    let newdata = [];
-    /* List building pattern  */
-    $.each(data.data, function (index, bar) {     /* for each to find the date via the data key */
-        "use strict";
+  function zoom(begin, end) {
+    x.domain([begin, end - 1]);
 
-        let newbar = Object();
-        $.each(bar, function (year, value) {      /* for loop within a for loop to extract */
-            if (year >= min && year <= max) {
-                newbar[year] = year;
-                newbar[value] = value;
+    var t = svg.transition().duration(0);
+
+    var size = end - begin;
+    var step = size / 10;
+    var ticks = [];
+    for (var i = 0; i <= 10; i++) {
+      ticks.push(Math.floor(begin + step * i));
+    }
+
+    xAxis.tickValues(ticks);
+
+    t.select(".x.axis").call(xAxis);
+    t.select('.path').attr("d", chart(data));
+  }
+
+  $(function() {
+        $( "#slider-range").slider({
+            range: true,
+            min: 1975,
+            max: 2015,
+            values: [ 1975, 2015 ],
+
+
+            slide: function( event, ui ) {
+              var begin = d3.min([ui.values[0], data.length]);
+              var end = d3.max([ui.values[1], 0]);
+
+              console.log("begin:", begin, "end:", end);
+              zoom(begin, end);
             }
-            newdata.push(newbar)
         });
     });
-    data = newdata;
-    // console.log(data);
-}
-
-$("#slider-range").slider({
-    range: true,
-    step: 1,
-    min: 1975, /* minYear TODO: Program value based on JSON min date; not hardcoded */
-    max: 2015, /*maxYear TODO: Program value based on JSON max date; not hardcoded */
-    values: [1975, 2015],
-
-    slide: function (event, ui) {
-        $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
-        // data.year=val;
-    },
-    stop: function (event, ui) {
-        console.log('Slider dropped');
-        $("svg").empty();
-        filter_date(ui.values[0], ui.values[1]);
-        plot_area();
-
-    }
-    ,
-});
 
 
-// data.data = Year, VALUE, type
+// function filter_date(min, max) {
 //
-// data.column = Year
-
-
-// function time_filter() {
-//     "use strict";
-//     _.filter()    /* takes an iterable, then function*/
+//     let newdata = [];
+//     /* List building pattern  */
+//     $.each(data.data, function (index, bar) {     /* for each to find the date via the data key */
+//         "use strict";
 //
+//         let newbar = Object();
+//         $.each(bar, function (year, value) {      /* for loop within a for loop to extract */
+//             if (year >= min && year <= max) {
+//                 newbar[year] = year;
+//                 newbar[value] = value;
+//             }
+//             newdata.push(newbar)
+//         });
+//     });
+//     data = newdata;
+//     // console.log(data);
 // }
+//
+// $("#slider-range").slider({
+//     range: true,
+//     step: 1,
+//     min: 1975,
+//     max: 2015,
+//     values: [1975, 2015],
+//
+//     slide: function (event, ui) {
+//         $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
+//         // data.year=val;
+//     },
+//     stop: function (event, ui) {
+//         console.log('Slider dropped');
+//         // $("svg").empty();
+//         filter_date(ui.values[0], ui.values[1]);
+//         plot_area();
+//
+//     },
+// });
 
+// function chart() {
+//
+//     $("#slider-range").slider({
+//       range: true,
+//       min: 1975,
+//       max: 2015,
+//       values: [1975, 2015],
+//       slide: function(event, ui) {
+//         $("#amount").val(ui.values[0] + " - " + ui.values[1]);
+//         chart.xAxis[0].setExtremes(ui.values[0] - 1975, ui.values[1] - 1975)
+//       },
+//         stop: function (event, ui) {
+//             console.log('Slider dropped');
+//             // $("svg").empty();
+//             // plot_area();
+//
+//             $("#amount").val($("#slider-range").slider("values", 0) +
+//                 " - " + $("#slider-range").slider("values", 1));
+//         }
+// });
 
 function StackedBar() {
-
-    // var c20 = d3.scale.category20();
-    // var svg1 = d3.select("#c20")
-    // var colores = ["#45879B", "647AD5", "58CB75", "#f0ad4e"]
-
-
-    // var color_index = {'fdi': '#45879B', 'gdp': '#80D3ED', 'gni': '#85BEAD', 'ip': '#f0AD4E' }; 07.15.17
-    //
-    // var color =
-    // style call
 
     var margin = {top: 0, right: 5, bottom: 20, left: 50},
         width = 400 - margin.left - margin.right,
         height = 300 - margin.top - margin.bottom;
 
     var duration = 1000;
-    // var color_index = ['#45879B', '#80D3ED', '#85BEAD', '#f0AD4E'];
-
-    // var color = d3.scale.ordinal([d3.rgb('#45879B'), d3.rgb('#80D3ED'), d3.rgb('#85BEAD'), d3.rgb('#f0AD4E')]);
-    // // .range([d3.rgb('#45879B'), d3.rgb('#80D3ED'), d3.rgb('#85BEAD'), d3.rgb('#f0AD4E')]);
-    //
-    // // var color = d3.scale.ordinal(color_index)
 
     var color = d3.scale.ordinal()
-    .domain("#45879B", "647AD5", "58CB75", "#f0ad4e");
+        // .domain(d3.keys(data[0]).filter(function(key) { return key === "name"; }));
 
-    var x = d3.scale.ordinal();
-    var y = d3.scale.linear();
+        // .domain("FDI", "GDP", "GNI", "IP");
+        // .domain([d3.rgb("#45879B"), d3.rgb("#80D3ED"), d3.rgb("#F0AD4E"), d3.rgb("#678EC4")]);
+
+    var x = d3.scale.ordinal().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+    // Restart here //
 
 
     var columns;
@@ -102,97 +136,9 @@ function StackedBar() {
     var x_voronoi = d3.scale.linear();
     var y_voronoi = d3.scale.linear();
 
-    // COLORS! 07.08.17
-    // var length = 4;
-    // var color = d3.scale.ordinal(color_index);
-
-        // .domain([1, length]);
-    // .range(["#45879B", "#45879B", "#B13C3D", "#CCB40C"]);
-    // .range([d3.rgb('#45879B'), d3.rgb('#80D3ED'), d3.rgb('#85BEAD'), d3.rgb('#f0AD4E')]);
-
-
-    // console.log(color.domain());
-    // console.log(color(1));
-    // console.log(color(2));
-    // console.log(color(3));
-    // console.log(color(4));
-
     // var color = d3.scale.category20();
     var xAxis = d3.svg.axis();
     var yAxis = d3.svg.axis();
-
-    // var color = d3.scale.category10().domain(d3.range(0, 10));
-    // var color = d3.scale.ordinal()
-    //     .domain(["#45879B", "647AD5", "58CB75", "#f0ad4e"]);
-
-    // var xAxis = d3.svg.axis();
-    // var yAxis = d3.svg.axis();
-
-    // var colors = ["#58CB75", "#58CB75", "#647AD5", "#85BEAD",];
-    // var color = d3.scale.category20().domain(d3.range(0,3));
-    //      // for (color = 0; color < 5; color++){
-    //      // }
-
-    // var color = d3.scale.category10().domain(d3.range(0,10));
-    // for (var i =0; i < 10; i++){
-    //     color(i)
-    // var color = d3.scale.category10().domain(d3.range(0,10));
-    // var domain = ["bbb", "ddd", "ccc", "23", "hello"];
-
-    // var color = d3.scale.ordinal()
-    //     .domain("IP", "GDP", "GNI", "IP", "total", "score")
-    //     .range(["#2E5966", "#647AD5", "#6ACBEA","#F0AD4E", "#8DC8C7", "#80D3ED"]);
-
-
-// var color = d3.scale.quantile()
-//     .domain([0, colors.length - 1, d3.max(data, function(d) {
-//     return d;
-//     })])
-//     .range(colors);
-
-
-    // function redraw(data) {
-    //     var color = d3.scale.category20(); //< NOT USED HERE
-    //     var svg = d3.select("svg");
-    //     var circles = svg.selectAll("rect")
-    //         .data(data).enter().append("rect")
-    //         .style("fill", function () {
-    //             return $color(getRandomInt(0, 19));
-    //         });
-
-    // var color = d3.scale.ordinal()                             07.06.17
-    //     .domain(["FDI", "GDP", "GNP", "IP"])
-    //     .range(["#2E5966", "#647AD5", "#6ACBEA","#F0AD4E"]);   07.06.17
-
-    //   // selection.style('fill', function(d, i) {return color(i);});
-    //   .domain([1, 2, 3, 4, 5, 6])
-    //   .range([color_index]);
-    //   .range(["#2E5966", "#647AD5", "#6ACBEA", "#F0AD4E", "#58CB75", "#85BEAD"]);
-
-
-    // var color = d3.scale.ordinal()
-    //       .domain([d3.min(data), (d3.max(data)-d3.min(data))/2, d3.max(data)])
-    //
-
-
-    // var color = d3.scale.ordinal()
-    //   .domain(["FDI", "FDI", "GDP", "IP"])
-    //   .range(["#45879B", "#6ACBEA" , "#647AD5", "#F0AD4E"]);
-    // var xAxis = d3.svg.axis();
-    // var yAxis = d3.svg.axis();
-
-
-// 647AD5  periwinkle blue
-// 45879b  turquoise dark
-// ADD8E6  lightblue, BODY
-// 80D3ED  toy blue, accents
-// 2E5966  emerald green, dark accents
-// 87A8B3  sea blue, bars/dividers
-// 58CB75  chartreuse, bright
-// 8DC8C7  mint green
-// 85BEAD  sage green
-// #F29D35 terracotta
-// #f0ad4e light orange
 
 
     var stack_area = d3.svg.area()
@@ -313,22 +259,22 @@ function StackedBar() {
     }
 
     var barStack = function (d) {
-        var l = d[0].length
-        while (l--) {
-            var posBase = 0, negBase = 0;
-            d.forEach(function (d) {
-                d = d[l]
-                d.size = Math.abs(d.y)
-                if (d.y < 0) {
-                    d.y0 = negBase
-                    negBase -= d.size
-                } else {
-                    d.y0 = posBase = posBase + d.size
-                }
-            })
-        }
-        return d
-    };
+            var l = d[0].length
+            while (l--) {
+                var posBase = 0, negBase = 0;
+                d.forEach(function (d) {
+                    d = d[l]
+                    d.size = Math.abs(d.y)
+                    if (d.y < 0) {
+                        d.y0 = negBase
+                        negBase -= d.size
+                    } else {
+                        d.y0 = posBase = posBase + d.size
+                    }
+                })
+            }
+            return d
+        };
 
 
     function chart(selection) {
@@ -338,49 +284,40 @@ function StackedBar() {
             var data = prepare_data(tmp);
             //  pos_data = _.filter(tmp, function(item))
             var total = prepare_total(data);
-            var simpleColors = ["#45879B", "#80D3ED", "#f0AD4E", "#647AD5"];    /* TODO: Write for loop to simplify */
-            // #45879B, #003366, #F0AD4E, #647AD5
+            var simpleColors = ["#45879B", "#80D3ED", "#f0AD4E", "#678EC4"];
             console.log(data);
-            // 1. Flatten the data....
+            // 1. Flatten the data....   TODO: Rewrite as a for loop.
             var flatten = data.map(function (obj) {
                 // console.log(obj.type);
+
                 if(obj === data[0]){
                    return obj.values.map(function (item) {
                             // console.log(obj);
                             item.color = simpleColors[0];
-                            /*  TODO: Fix color rendering here. */
                             return item;
                         });
                 } else if(obj === data[1]){
                    return obj.values.map(function (item) {
                             // console.log(obj);
                             item.color = simpleColors[1];
-                            /*  TODO: Fix color rendering here. */
                             return item;
                         });
                 } else if(obj === data[2]){
                    return obj.values.map(function (item) {
                             // console.log(obj);
                             item.color = simpleColors[2];
-                            /*  TODO: Fix color rendering here. */
                             return item;
                         });
-                } else if(obj === data[3]){
-                   return obj.values.map(function (item) {
-                            // console.log(obj);
-                            item.color = simpleColors[3];
-                            /*  TODO: Fix color rendering here. */
-                            return item;
-                        });
+                } else if(obj === data[3]) {
+                    return obj.values.map(function (item) {
+                        // console.log(obj);
+                        item.color = simpleColors[3];
+                        return item;
+                    });
                 };
 
             });
 
-                // var color_index = ['#45879B', '#80D3ED', '#85BEAD', '#f0AD4E'];
-
-
-            // item.color = color(obj.name);
-            // return item;
 
 
             barStack(flatten);
@@ -407,7 +344,8 @@ function StackedBar() {
 
             d3.select(this).selectAll("svg").remove();
 
-            var svg = d3.select(this).selectAll("svg").data([data]);
+            var svg = d3.select(this).selectAll("svg").data([data])
+                  // .attr("data-legend",function(d) { return d.name});
 
             var gEnter = svg.enter().append("svg").append("g");
 
@@ -451,6 +389,8 @@ function StackedBar() {
             g.select(".axis--y").call(yAxis);
             g.select(".axis--x").call(xAxis);
 
+
+
             //----------- This is for the tool tip --------------------------
             var focus = g.select(".focus");
             focus.select("foreignObject").remove();
@@ -478,6 +418,54 @@ function StackedBar() {
             var bars_enter = g.select(".bars")
                 .selectAll("rect")
                 .data(flatten);
+
+                //
+            const indicator_type = svg.selectAll(data.columns)
+                .text(function (d){return d;});
+
+                color.domain(d3.keys(data[0]).filter(function(key) {
+                return key !== "id";
+                }));
+
+            // data.columns().selectAll("rect")
+            //     .data(function(d) {return d.data.columns; })
+            //     .enter().append("rect")
+            //     .attr("width", x.rangeBand())
+            //     .attr("y", function(d) {return y(d.y1); })
+            //     .attr("height", function(d) { return (y(d.y0) - y(d.y1)); })
+            //     .style("fill", function(d) {return color(d.name); });
+
+
+
+            var legend = svg.selectAll(".legend")
+                .data(color.domain().slice())
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+
+                legend.append("rect")
+                .attr("x", width - 18)
+                .attr("width", 30)
+                .attr("height", 20)
+                .style("fill", color);
+
+                legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                .text(function (d) { return d; })
+                .text(indicator_type);
+
+                // data.columns[1].type; this shows the economic indicator type.
+
+
+
+
+
+
+
+
 
             bars_enter.enter()
                 .append("rect")
@@ -564,47 +552,11 @@ function StackedBar() {
 
             bars_enter.on("mouseout", function (d) {
                 focus.style("display", "none");
-            })
-
-
-            // .attr("d", function(d) { return stack_area(d.values); })
-            // .attr("width", x.rangeBand())
-            // .attr("y", function(d) {
-            //   console.log(x(d.x), y(d.y), y(d.y0));
-            //   return y(d.y); })
-            // .attr("height", function(d) { return y(d.y0) + y(d.y); })
-            // .style("fill", function(d) { return color(d.name); })
-            // .style("stroke", function(d) { return color(d.name); } )
-            // .style("fill-opacity", 0.7)
-            // .style("stroke-opacity", 0.2)
-            // .style("stroke-width", 0.05)
-            // .attr("id", function(d) { return d.name; });
-            //
-            //          layer.selectAll("rect")
-            //   .data(function(d) { return d; })
-            // .enter().append("rect")
-            //   .attr("x", function(d) { return x(d.x); })
-            //   .attr("y", function(d) { return y(d.y + d.y0); })
-            //   .attr("height", function(d) { return y(d.y0) - y(d.y + d.y0); })
-            //   .attr("width", x.rangeBand() - 1);
-            //
-            //
-            //    // ==============================================================
-            //    Update
-            //    // ==============================================================
-            //    bars_enter.transition()
-            //              .attr("d", function(d) { return stack_area(d.values); })
-            //
-            //
-            //
-            //    // ==============================================================
-            //    exit
-            //    // ==============================================================
-            //    bars_enter.exit().remove();
-
+            });
 
         });
     }
+
 
     chart.duration = function (_) {
         if (!arguments.length) return duration;
@@ -644,7 +596,7 @@ function StackedBar() {
 
     chart.width = function (_) {
         if (!arguments.length) return width;
-        width = _ - margin.left - margin.right
+        width = _ - margin.left - margin.right;
         return chart;
     };
 
@@ -786,6 +738,57 @@ function StackedBar() {
 // };
 
 
+/*----------> A LEGEND APPEARS HERE<----------*/
+
+//     var legend = svg.selectAll(".legend")
+//         .data(color.domain().slice().reverse())
+//         .enter().append("g")
+//         .attr("class", "legend")
+//         .attr("transform", function (d, i) {
+//             return "translate(0," + i * 20 + ")";
+//         });
+//
+//     legend.append("rect")
+//         .attr("x", w - 18)
+//         .attr("y", 4)
+//         .attr("width", 10)
+//         .attr("height", 10)
+//         .style("fill", color);
+//
+//     legend.append("text")
+//         .attr("x", w - 24)
+//         .attr("y", 9)
+//         .attr("dy", ".35em")
+//         .style("text-anchor", "end")
+//         .text(function (d) {
+//             return d; });
+//
+//
+// var labels = svg.append("g")
+//        .attr("class","labels")
+//
+//   labels.append("text")
+//       .attr("transform", "rotate(-90)")
+//       .attr("x", 50)
+//       .attr("y", -20)
+//       .attr("dy", ".71em")
+//       .style("text-anchor", "end")
+//       .text("Economic Indicator");
+//
+//   var title = svg.append("g")
+//       .attr("class","title")
+//
+//   title.append("text")
+//       .attr("x", (w / 2))
+//       .attr("y", -30 )
+//       .attr("text-anchor", "middle")
+//       .style("font-size", "22px")
+//       .text("A Stacked Bar Chart");
+//
+
+
+
+
 function plot_area() {
 
     var config = {};
@@ -810,20 +813,7 @@ function plot_area() {
 }
 
 plot_area();
+
 /*TODO: You can insert 'data' as param, and it has NO effect. */
-
-
-
-// var q = d3.queue();
-//     q.defer(plot_area());
-//     q.await(function(error) {
-//       if (error) throw error;
-//       console.log("Queue Completed!");
-//     });
-
-// d3.json(data, function(error, d) {
-//   data = d;
-//   plot_area(data);
-// });
 
 

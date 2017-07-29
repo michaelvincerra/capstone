@@ -4,8 +4,6 @@
 
 /* rangeRoundBands([width, 0], .1); */
 
-console.log(snapshot_ids);
-
 /* ============== Save Collection ====================== */
 
 function save_collection(){
@@ -14,6 +12,7 @@ function save_collection(){
 
 
     let request_params = Object({"snapshot_ids": snapshot_ids}); // snapshot_ids is const on country_panini
+    console.log(snapshot_ids);
 
 
     $.ajax({
@@ -92,7 +91,7 @@ function fetch_data(countries, start_date, end_date) {
 });
 }
 
-/* ============== Button to Set Range of Years ====================== */
+/* ============== Button to Select 1 Country with Range of Years ====================== */
 
 
  $('.iso_btn').on('click', function(evt){

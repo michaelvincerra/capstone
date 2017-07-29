@@ -14,7 +14,7 @@ class CustomUserCreationForm(UserCreationForm):
         model = User
         fields = UserCreationForm.Meta.fields + ('nickname','email',)
 
-    #
+    # TODO: To be used later to validate the user with nickname.
     # def clean_nickname(self):
     #     data = self.cleaned_data.get('nickname')
     #     if len(data) < 10:

@@ -90,7 +90,7 @@ DATABASES = {
 }
 
 # https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#substituting-a-custom-user-model
-# Note: Seeting this references a custom model: accounts.User.
+# Note: Setting this references a custom model: accounts.User (in accounts folder).
 AUTH_USER_MODEL = 'accounts.User'
 
 
@@ -167,7 +167,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # TODO: Fix this.
 # if DEBUG:
-#     DEFAULT_FROM_EMAIL = ('michael.vincerra@gmail.com')
+#     DEFAULT_FROM_EMAIL = ('m*********a@gmail.com')
 # else:
 #     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackends'
 

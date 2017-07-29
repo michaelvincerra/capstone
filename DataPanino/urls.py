@@ -43,7 +43,6 @@ urlpatterns = [
     url(r'^api/v1/snapshots/$', render_custom_chart, name='render_custom_chart'),  # This is the callable variable in template tag
     url(r'^api/v1/codes/$', get_country_codes, name='get_country_codes'),
     url(r'^api/v1/collection/save/$', save_collection, name='save_collection'),
-    # url(r'^api/v1/', include(router.urls)),
 
     # Pages
     url(r'^$', home, name='home'),
