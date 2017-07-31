@@ -10,6 +10,8 @@ class Country(models.Model):
     slug = models.SlugField(max_length=100)
     code = models.CharField(max_length=2)
     flag = models.CharField(max_length=5, null=True, blank=True)    #TODO: Verify this works; or use a models. structure?
+    # start_year = models.IntegerField()
+    # end_year = models.IntegerField()
 
     def __str__(self):
         return f'{self.name} {self.flag}'

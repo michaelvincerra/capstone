@@ -16,6 +16,8 @@
             <script>
               var data = {{ chart_data }};
               const snapshot_ids = {{ snapshot_ids }};
+              var GStart_year = {{ GStart_year }};
+              var GEnd_year = {{ GEnd_year }};
             </script>
         {% endautoescape %}
 
@@ -33,7 +35,8 @@
     <article class="three_panini">
         <item id="year_range_box">
             <label for="year_range"></label>  <!--Year Range-->
-            <input type="text" id="year_range" value="1975-2015" readonly style="font-weight:bold;" >
+             <input type="text" id="year_range" value="" style="font-weight:bold;" >
+{#           <input type="text" id="year_range" value="1975-2015" readonly style="font-weight:bold;" >#}
         </item>
 
         {% for country in countries %}

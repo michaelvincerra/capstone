@@ -106,16 +106,34 @@ def make_panini(request, slug):
     View includes a slider bar to select a time range.
     1 dataset shows: country name, country code, type, years-range, and stacked values of IP, GDP, GNI, FDI
     """
-
     country = Country.objects.get(slug=slug)
+    # country = Country.objects.get(slug=slug, start_year=Gstartyear, end_year=Gend_year)
     # economicsnapshot = EconomicSnapshot.objects.get(slug=slug)
     # reordered= selection.snapshots.aggregate(reversed('year'))
+
+
+    GStart_year = 1975          ## TODO: Recreate GStart_year, GEnd_year values as a variable.
+    GEnd_year = 2015
+
+
 
     data, snapshot_ids = list(), list(),
     for indicator_code in ('FDI', 'GNI', 'GDP', 'IP'):
         snapshots = country.snapshots.filter(type=indicator_code)    # reverse fk lookup: snapshots to EconomicSnapshot
 
-        dataset = {es.year: es.value for es in snapshots}
+        composite = EconomicSnapshot.objects.all().values_list('year', flat=True)
+        GStart_year, GEnd_year = min(composite), max(composite)
+
+        range_years = range(GStart_year, GEnd_year+1)
+
+        dataset1 = snapshots.all().filter(year__in=range_years)
+
+
+        # if(snapshots.year>=GStart_year and snapshots.year<=GEnd_year). Option 2: Use conditional to derive year values.
+
+
+
+        dataset = {es.year: es.value for es in dataset1}
         [snapshot_ids.append(s.id) for s in snapshots]
         dataset.update({"total": "42", "store": f'{slug}', "code": country.name})          # TODO: Finish this!! How is indicator_code used?
         data.append(dataset)
@@ -135,7 +153,11 @@ def make_panini(request, slug):
     countries = Country.objects.all().order_by('code')
     context = {'chart_data': chart_data,
                'countries': countries,
-               'snapshot_ids': snapshot_ids}
+               'snapshot_ids': snapshot_ids,
+               'GStart_year': GStart_year,
+               'GEnd_year': GEnd_year,
+               }
+
     return render(request, "country_panini.html", context)
 
 

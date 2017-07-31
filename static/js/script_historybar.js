@@ -12,82 +12,84 @@
 
 
 
-  function zoom(begin, end) {
-    x.domain([begin, end - 1]);
+  // function zoom(begin, end) {
+  //   x.domain([begin, end - 1]);
+  //
+  //   var t = svg.transition().duration(0);
+  //
+  //   var size = end - begin;
+  //   var step = size / 10;
+  //   var ticks = [];
+  //   for (var i = 0; i <= 10; i++) {
+  //     ticks.push(Math.floor(begin + step * i));
+  //   }
+  //
+  //   xAxis.tickValues(ticks);
+  //
+  //   t.select(".x.axis").call(xAxis);
+  //   t.select('.path').attr("d", chart(data));
+  // }
+  //
+  // $(function() {
+  //       $( "#slider-range").slider({
+  //           range: true,
+  //           min: 1975,
+  //           max: 2015,
+  //           values: [ 1975, 2015 ],
+  //
+  //
+  //           slide: function( event, ui ) {
+  //             var begin = d3.min([ui.values[0], data.length]);
+  //             var end = d3.max([ui.values[1], 0]);
+  //
+  //             console.log("begin:", begin, "end:", end);
+  //             zoom(begin, end);
+  //           }
+  //       });
+  //   });
 
-    var t = svg.transition().duration(0);
+var GStart_year = 0;
+var GEnd_year = 0;
 
-    var size = end - begin;
-    var step = size / 10;
-    var ticks = [];
-    for (var i = 0; i <= 10; i++) {
-      ticks.push(Math.floor(begin + step * i));
-    }
+function filter_date(min, max) {
 
-    xAxis.tickValues(ticks);
+    let newdata = [];
+    /* List building pattern  */
+    $.each(data.data, function (index, bar) {     /* for each to find the date via the data key */
+        "use strict";
 
-    t.select(".x.axis").call(xAxis);
-    t.select('.path').attr("d", chart(data));
-  }
-
-  $(function() {
-        $( "#slider-range").slider({
-            range: true,
-            min: 1975,
-            max: 2015,
-            values: [ 1975, 2015 ],
-
-
-            slide: function( event, ui ) {
-              var begin = d3.min([ui.values[0], data.length]);
-              var end = d3.max([ui.values[1], 0]);
-
-              console.log("begin:", begin, "end:", end);
-              zoom(begin, end);
+        let newbar = Object();
+        $.each(bar, function (year, value) {      /* for loop within a for loop to extract */
+            if (year >= min && year <= max) {
+                newbar[year] = year;
+                newbar[value] = value;
             }
+            newdata.push(newbar)
         });
     });
+    data = newdata;
+    // console.log(data);
+}
+
+$("#slider-range").slider({
+    range: true,
+    step: 1,
+    Gstartyear: 1975,
+    Gendyear: 2015,
+    values: [1975, 2015],
+
+    slide: function (event, ui) {
+        $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
+    },
+    stop: function (event, ui) {
+        console.log('Slider dropped');
+        // $("svg").empty();
+        filter_date(ui.values[0], ui.values[1]);
+        plot_area();
 
 
-// function filter_date(min, max) {
-//
-//     let newdata = [];
-//     /* List building pattern  */
-//     $.each(data.data, function (index, bar) {     /* for each to find the date via the data key */
-//         "use strict";
-//
-//         let newbar = Object();
-//         $.each(bar, function (year, value) {      /* for loop within a for loop to extract */
-//             if (year >= min && year <= max) {
-//                 newbar[year] = year;
-//                 newbar[value] = value;
-//             }
-//             newdata.push(newbar)
-//         });
-//     });
-//     data = newdata;
-//     // console.log(data);
-// }
-//
-// $("#slider-range").slider({
-//     range: true,
-//     step: 1,
-//     min: 1975,
-//     max: 2015,
-//     values: [1975, 2015],
-//
-//     slide: function (event, ui) {
-//         $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
-//         // data.year=val;
-//     },
-//     stop: function (event, ui) {
-//         console.log('Slider dropped');
-//         // $("svg").empty();
-//         filter_date(ui.values[0], ui.values[1]);
-//         plot_area();
-//
-//     },
-// });
+    },
+});
 
 // function chart() {
 //
@@ -259,14 +261,15 @@ function StackedBar() {
     }
 
     var barStack = function (d) {
-            var l = d[0].length
+            // debugger
+            var l = d[0].length;        // 07.31.17: TODO: Note prev.: var l = d[0].length
             while (l--) {
                 var posBase = 0, negBase = 0;
                 d.forEach(function (d) {
-                    d = d[l]
-                    d.size = Math.abs(d.y)
+                    d = d[l];
+                    d.size = Math.abs(d.y);
                     if (d.y < 0) {
-                        d.y0 = negBase
+                        d.y0 = negBase;
                         negBase -= d.size
                     } else {
                         d.y0 = posBase = posBase + d.size
