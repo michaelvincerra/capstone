@@ -48,8 +48,8 @@
   //       });
   //   });
 
-var start_year = 0;
-var end_year = 0;
+// var start_year = 0;
+// var end_year = 0;
 
 function filter_date(min, max) {
 
@@ -74,9 +74,9 @@ function filter_date(min, max) {
 $("#slider-range").slider({
     range: true,
     step: 1,
-    Gstartyear: 1975,
-    Gendyear: 2015,
-    values: [1975, 2015],
+    min: start_year,
+    max: end_year,
+    values: [start_year, end_year],
 
     slide: function (event, ui) {
         $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
@@ -84,8 +84,8 @@ $("#slider-range").slider({
     stop: function (event, ui) {
         console.log('Slider dropped');
         // $("svg").empty();
-        filter_date(ui.values[0], ui.values[1]);
-        plot_area();
+        // filter_date(ui.values[0], ui.values[1]);
+        // plot_area();
 
 
     },
