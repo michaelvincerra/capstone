@@ -23,12 +23,6 @@ def about(request):
 #     return render(request, 'gallery.html')
 
 
-# def login(request):
-#     """
-#     Landing page template view
-#     """
-#     return render(request, 'login.html')
-#
 # def contact(request):
 #     """
 #     Landing page template view
@@ -114,8 +108,6 @@ def make_panini(request, slug):
 
     GStart_year = 1975          ## TODO: Recreate GStart_year, GEnd_year values as a variable.
     GEnd_year = 2015
-
-
 
     data, snapshot_ids = list(), list(),
     for indicator_code in ('FDI', 'GNI', 'GDP', 'IP'):
