@@ -48,8 +48,8 @@
   //       });
   //   });
 
-var GStart_year = 0;
-var GEnd_year = 0;
+var start_year = 0;
+var end_year = 0;
 
 function filter_date(min, max) {
 

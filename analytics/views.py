@@ -106,22 +106,22 @@ def make_panini(request, slug):
     # reordered= selection.snapshots.aggregate(reversed('year'))
 
 
-    GStart_year = 1975          ## TODO: Recreate GStart_year, GEnd_year values as a variable.
-    GEnd_year = 2015
+    start_year = 1975          ## TODO: Recreate start_year, end_year values as a variable.
+    end_year = 2015
 
     data, snapshot_ids = list(), list(),
     for indicator_code in ('FDI', 'GNI', 'GDP', 'IP'):
         snapshots = country.snapshots.filter(type=indicator_code)    # reverse fk lookup: snapshots to EconomicSnapshot
 
         composite = EconomicSnapshot.objects.all().values_list('year', flat=True)
-        GStart_year, GEnd_year = min(composite), max(composite)
+        start_year, GEnd_year = min(composite), max(composite)
 
-        range_years = range(GStart_year, GEnd_year+1)
+        range_years = range(start_year, GEnd_year+1)
 
         dataset1 = snapshots.all().filter(year__in=range_years)
 
 
-        # if(snapshots.year>=GStart_year and snapshots.year<=GEnd_year). Option 2: Use conditional to derive year values.
+        # if(snapshots.year>=start_year and snapshots.year<=GEnd_year). Option 2: Use conditional to derive year values.
 
 
 
@@ -146,8 +146,8 @@ def make_panini(request, slug):
     context = {'chart_data': chart_data,
                'countries': countries,
                'snapshot_ids': snapshot_ids,
-               'GStart_year': GStart_year,
-               'GEnd_year': GEnd_year,
+               'start_year': start_year,
+               'end_year': end_year,
                }
 
     return render(request, "country_panini.html", context)
