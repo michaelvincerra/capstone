@@ -1,55 +1,18 @@
 // "use strict";
 
-// function colores_google(n) {
-//   var colores_g = ["#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22aa99", "#aaaa11", "#6633cc", "#e67300", "#8b0707", "#651067", "#329262", "#5574a6", "#3b3eac"];
-//   return colores_g[n % colores_g.length];
-
 // https://gist.github.com/mlunacek/8431eed93c26c3a30434dd5e02a1652c#file-d3-v3-min-js
-//ta.scale.category10=function(){return ta.scale.ordinal().range(bl)},
-//ta.scale.category20=function(){return ta.scale.ordinal().range(_l)},//
-
 /* http://api.jquery.com/jquery.each/ */
+//
+// var x;
+// var y;
+//
+// var svg;
+// var xAxis;
+// var tickValues = 0;
 
 
-
-  // function zoom(begin, end) {
-  //   x.domain([begin, end - 1]);
-  //
-  //   var t = svg.transition().duration(0);
-  //
-  //   var size = end - begin;
-  //   var step = size / 10;
-  //   var ticks = [];
-  //   for (var i = 0; i <= 10; i++) {
-  //     ticks.push(Math.floor(begin + step * i));
-  //   }
-  //
-  //   xAxis.tickValues(ticks);
-  //
-  //   t.select(".x.axis").call(xAxis);
-  //   t.select('.path').attr("d", chart(data));
-  // }
-  //
-  // $(function() {
-  //       $( "#slider-range").slider({
-  //           range: true,
-  //           min: 1975,
-  //           max: 2015,
-  //           values: [ 1975, 2015 ],
-  //
-  //
-  //           slide: function( event, ui ) {
-  //             var begin = d3.min([ui.values[0], data.length]);
-  //             var end = d3.max([ui.values[1], 0]);
-  //
-  //             console.log("begin:", begin, "end:", end);
-  //             zoom(begin, end);
-  //           }
-  //       });
-  //   });
-
-// var start_year = 0;
-// var end_year = 0;
+var start_year = 0;
+var end_year = 0;
 
 function filter_date(min, max) {
 
@@ -68,8 +31,9 @@ function filter_date(min, max) {
         });
     });
     data = newdata;
-    // console.log(data);
+    console.log(data);
 }
+
 
 $("#slider-range").slider({
     range: true,
@@ -83,14 +47,18 @@ $("#slider-range").slider({
     },
     stop: function (event, ui) {
         console.log('Slider dropped');
-        // $("svg").empty();
-        // filter_date(ui.values[0], ui.values[1]);
-        // plot_area();
-
+        $("svg").empty();
+        filter_date(ui.values[0], ui.values[1]);
+        plot_area();
 
     },
 });
 
+
+
+// ------------JQUERY ORIGINAL EXAMPLE FOLLOWED------------------//
+// https://jqueryui.com/slider/#range
+//
 // function chart() {
 //
 //     $("#slider-range").slider({
@@ -112,6 +80,8 @@ $("#slider-range").slider({
 //         }
 // });
 
+
+
 function StackedBar() {
 
     var margin = {top: 0, right: 5, bottom: 20, left: 50},
@@ -120,14 +90,14 @@ function StackedBar() {
 
     var duration = 1000;
 
-    var color = d3.scale.ordinal()
+    var color = d3.scale.ordinal();
         // .domain(d3.keys(data[0]).filter(function(key) { return key === "name"; }));
 
         // .domain("FDI", "GDP", "GNI", "IP");
         // .domain([d3.rgb("#45879B"), d3.rgb("#80D3ED"), d3.rgb("#F0AD4E"), d3.rgb("#678EC4")]);
 
-    var x = d3.scale.ordinal().range([0, width]);
-    var y = d3.scale.linear().range([height, 0]);
+    x = d3.scale.ordinal().range([0, width]);
+    y = d3.scale.linear().range([height, 0]);
 
     // Restart here //
 
@@ -176,7 +146,6 @@ function StackedBar() {
             return (d.y);
         });
 
-
     var prepare_data = function (data) {
 
         var key_columns = _.filter(columns, function (c) {
@@ -195,7 +164,7 @@ function StackedBar() {
             });
             // console.log(values);
             return _.join(values, "::");
-        }
+        };
 
         var display_data = _.filter(data.data, function (item) {
             return item;
@@ -222,11 +191,11 @@ function StackedBar() {
             values = _.sortBy(values, function (o) {
                 return o.x;
             });
-            return {'name': name, 'values': values};
+            return {'indicator_type': name, 'values': values,};
         });
 
         return tmp;
-    }
+    };
 
     var prepare_total = function (data) {
 
@@ -258,7 +227,7 @@ function StackedBar() {
         });
 
         return {'name': 'total', 'values': totals_list};
-    }
+    };
 
     var barStack = function (d) {
             // debugger
@@ -318,7 +287,6 @@ function StackedBar() {
                         return item;
                     });
                 };
-
             });
 
 
@@ -347,7 +315,7 @@ function StackedBar() {
 
             d3.select(this).selectAll("svg").remove();
 
-            var svg = d3.select(this).selectAll("svg").data([data])
+            svg = d3.select(this).selectAll("svg").data([data])
                   // .attr("data-legend",function(d) { return d.name});
 
             var gEnter = svg.enter().append("svg").append("g");
@@ -402,7 +370,7 @@ function StackedBar() {
             focus.append("foreignObject")
                 .attr("width", 200)
                 .attr("height", 100)
-                .attr("x", 20)
+                .attr("x", 20)      // TODO: Change tooltip to appear directly above the object on  mouse-over
                 .attr("y", 20)
                 .append("xhtml:body")
                 .html("");
@@ -422,7 +390,11 @@ function StackedBar() {
                 .selectAll("rect")
                 .data(flatten);
 
-                //
+
+            //==============================================================
+            // Legend
+            // =============================================================
+
             const indicator_type = svg.selectAll(data.columns)
                 .text(function (d){return d;});
 
@@ -450,25 +422,18 @@ function StackedBar() {
                 .attr("x", width - 18)
                 .attr("width", 30)
                 .attr("height", 20)
-                .style("fill", color);
+                .style("fill", color);     //TODO: Match with simpleColors
 
                 legend.append("text")
                 .attr("x", width - 24)
                 .attr("y", 9)
                 .attr("dy", ".35em")
                 .style("text-anchor", "end")
-                .text(function (d) { return d; })
-                .text(indicator_type);
+                .text(indicator_type)
+                .text(function (d) { return d; });
+
 
                 // data.columns[1].type; this shows the economic indicator type.
-
-
-
-
-
-
-
-
 
             bars_enter.enter()
                 .append("rect")
@@ -817,6 +782,44 @@ function plot_area() {
 
 plot_area();
 
-/*TODO: You can insert 'data' as param, and it has NO effect. */
 
-
+//   function zoom(start_year, end_year) {
+//     x.domain([start_year, end_year - 1]);
+//
+//     var t = svg.transition().duration(0);
+//     // var t = graph.transition().duration(0);
+//
+//
+//     var size = end_year - start_year;
+//     var step = size / 10;
+//     var ticks = [];
+//     for (var i = 0; i <= data.length; i++) {
+//       ticks.push(Math.floor(start_year + step * i));
+//     }
+//
+//
+// // 08.01.2017: TODO: Redefine xAxis as a global variable.
+//
+//     xAxis.tickValues(ticks);    // TODO: How to include #year_range data here.
+//
+//     t.select(".x.axis").call(xAxis);
+//     t.select('.path').attr("d", chart(data));
+//   }
+//
+//   $(function() {
+//         $("#slider-range").slider({
+//             range: true,
+//             min: 1975,
+//             max: 2015,
+//             values: [ 1975, 2015 ],
+//
+//
+//             slide: function( event, ui ) {
+//               var start_year = d3.min([ui.values[0], data.length]);
+//               var end_year = d3.max([ui.values[1], 0]);
+//
+//               console.log("start_year:", start_year, "end_year:", end_year);
+//               zoom(start_year, end_year);
+//             }
+//         });
+//     });
