@@ -6,7 +6,7 @@
 // Restart here  07.29.17  Next Step: Solve range slider bar; find replacement for StackedBard variable. //
 
 
-
+// 08.05.17 TODO: Resolve error with 'tmp'.
 "use strict";
 
 
@@ -46,6 +46,43 @@ $(function () {
     });
 });
 
+
+//
+// function zoom(begin, end) {
+//     x.domain([begin, end - 1]);
+//
+//     var t = svg.transition().duration(0);
+//
+//     var size = end - begin;
+//     var step = size / 10;
+//     var ticks = [];
+//     for (var i = 0; i <= 10; i++) {
+//         ticks.push(Math.floor(begin + step * i));
+//     }
+//
+//     xAxis.tickValues(ticks);
+//
+//     t.select(".x.axis").call(xAxis);
+//     t.select('.path').attr("d", chart(data));
+// }
+//
+// $(function () {
+//     $("#slider-range").slider({
+//         range: true,
+//         min: 1975,
+//         max: 2015,
+//         values: [1975, 2015],
+//
+//
+//         slide: function (event, ui) {
+//             var begin = d3.min([ui.values[0], data.length]);
+//             var end = d3.max([ui.values[1], 0]);
+//
+//             console.log("begin:", begin, "end:", end);
+//             zoom(begin, end);
+//         }
+//     });
+// });
 
 // StackedBar() TODO: StackedBar was prev. name of following function.
 

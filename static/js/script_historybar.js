@@ -11,8 +11,8 @@
 // var tickValues = 0;
 
 
-var start_year = 0;
-var end_year = 0;
+// var start_year = 0;
+// var end_year = 0;
 
 function filter_date(min, max) {
 
@@ -49,8 +49,7 @@ $("#slider-range").slider({
         console.log('Slider dropped');
         $("svg").empty();
         filter_date(ui.values[0], ui.values[1]);
-        plot_area();
-
+        // plot_area();
     },
 });
 
@@ -781,6 +780,20 @@ function plot_area() {
 }
 
 plot_area();
+
+
+
+function master_refresh(start_year, end_year) {
+    "use strict";
+    // Purpose: Culminate and capture the call to the chart building functions previous
+    // take in the start_date, end_year
+    // call plot_area() with an input of the subset of the data
+    // reference the global?
+    // as result of the ajax call
+}
+
+master_refresh(2000, 2015);
+
 
 
 //   function zoom(start_year, end_year) {

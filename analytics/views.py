@@ -105,7 +105,6 @@ def make_panini(request, slug):
     # economicsnapshot = EconomicSnapshot.objects.get(slug=slug)
     # reordered= selection.snapshots.aggregate(reversed('year'))
 
-
     start_year = 1975          ## TODO: Recreate start_year, end_year values as a variable.
     end_year = 2015
 
@@ -114,17 +113,12 @@ def make_panini(request, slug):
         snapshots = country.snapshots.filter(type=indicator_code)    # reverse fk lookup: snapshots to EconomicSnapshot
 
         composite = EconomicSnapshot.objects.all().values_list('year', flat=True)
-        start_year, GEnd_year = min(composite), max(composite)
+        start_year, end_year = min(composite), max(composite)
 
-        range_years = range(start_year, GEnd_year+1)
+        range_years = range(start_year, end_year+1)
 
         dataset1 = snapshots.all().filter(year__in=range_years)
-
-
         # if(snapshots.year>=start_year and snapshots.year<=GEnd_year). Option 2: Use conditional to derive year values.
-
-
-
         dataset = {es.year: es.value for es in dataset1}
         [snapshot_ids.append(s.id) for s in snapshots]
         dataset.update({"total": "42", "store": f'{slug}', "code": country.name})          # TODO: Finish this!! How is indicator_code used?
