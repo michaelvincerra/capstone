@@ -31,7 +31,7 @@ function filter_date(min, max) {
         });
     });
     data = newdata;
-    console.log(data);
+    // console.log(data);
 }
 
 
