@@ -788,21 +788,7 @@ master_refresh(2000, 2015);
 
 
 
-//   function zoom(start_year, end_year) {
-//     x.domain([start_year, end_year - 1]);
-//
-//     var t = svg.transition().duration(0);
-//     // var t = graph.transition().duration(0);
-//
-//
-//     var size = end_year - start_year;
-//     var step = size / 10;
-//     var ticks = [];
-//     for (var i = 0; i <= data.length; i++) {
-//       ticks.push(Math.floor(start_year + step * i));
-//     }
-//
-//
+
 // // 08.01.2017: TODO: Redefine xAxis as a global variable.
 //
 //     xAxis.tickValues(ticks);    // TODO: How to include #year_range data here.
