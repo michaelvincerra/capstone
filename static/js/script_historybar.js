@@ -785,6 +785,9 @@ plot_area();
 
 function master_refresh(start_year, end_year) {
     "use strict";
+    plot_area();
+    filter_date(start_year, end_year);
+
     // Purpose: Culminate and capture the call to the chart building functions previous
     // take in the start_date, end_year
     // call plot_area() with an input of the subset of the data
