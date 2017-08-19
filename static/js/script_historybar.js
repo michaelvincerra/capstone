@@ -2,17 +2,6 @@
 
 // https://gist.github.com/mlunacek/8431eed93c26c3a30434dd5e02a1652c#file-d3-v3-min-js
 /* http://api.jquery.com/jquery.each/ */
-//
-// var x;
-// var y;
-//
-// var svg;
-// var xAxis;
-// var tickValues = 0;
-
-
-// var start_year = 0;
-// var end_year = 0;
 
 function filter_date(min, max) {
 
