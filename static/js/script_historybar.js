@@ -20,8 +20,9 @@ function filter_date(min, max) {
         });
     });
     data = newdata;
-    // console.log(data);
+    console.log(data);
 }
+
 
 
 $("#slider-range").slider({
@@ -36,9 +37,10 @@ $("#slider-range").slider({
     },
     stop: function (event, ui) {
         console.log('Slider dropped');
-        $("svg").empty();
+        // $("svg").empty();
+
         filter_date(ui.values[0], ui.values[1]);
-        // plot_area();
+        master_refresh();
     },
 });
 
@@ -772,19 +774,19 @@ plot_area();
 
 
 
-function master_refresh(start_year, end_year) {
-    "use strict";
-    plot_area();
-    filter_date(start_year, end_year);
-
+function master_refresh(min, max) {
     // Purpose: Culminate and capture the call to the chart building functions previous
     // take in the start_date, end_year
     // call plot_area() with an input of the subset of the data
     // reference the global?
     // as result of the ajax call
+    // how to call the range slider?
+
+    filter_date(min, max);
+
 }
 
-master_refresh(2000, 2015);
+master_refresh(2000, 2001);
 
 
 
