@@ -780,7 +780,7 @@ function master_refresh(min, max) {
     // call plot_area() with an input of the subset of the data
     // reference the global?
     // as result of the ajax call
-    // how to call the range slider?
+    // how to call the range slider? TODO: Determine dates min and max as variables to be passed, not hardcoded as below
 
     filter_date(min, max);
 
