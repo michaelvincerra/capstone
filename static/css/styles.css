@@ -448,9 +448,12 @@ label {
 }
 
 .chart text {
+  display: flex;
+  justify-content: center;
   color: black;
-  font: 10px sans-serif;
-  text-anchor: end;
+  font: 14px sans-serif;
+  text-anchor: start;
+
 }
 
 
@@ -483,12 +486,14 @@ font: 10px sans-serif;
 }
 
 .svg-container1{
+
     display: flex;
     flex-direction: row;
-    padding-left: 10%;
+    padding-left: 20%;
     justify-content: flex-end;
     height: 100%;
     width: 100%;
+    overflow: hidden;
 
  }
 

@@ -3,6 +3,11 @@
 // https://gist.github.com/mlunacek/8431eed93c26c3a30434dd5e02a1652c#file-d3-v3-min-js
 /* http://api.jquery.com/jquery.each/ */
 
+/*
+26.07.17: 'tmp' as a param, is not discoverable; that is a problem because it's the root of the error of data.length.
+ */
+
+
 function filter_date(min, max) {
 
     let newdata = [];
@@ -37,11 +42,11 @@ $("#slider-range").slider({
     },
     stop: function (event, ui) {
         console.log('Slider dropped');
-        // $("svg").empty();
-
-        filter_date(ui.values[0], ui.values[1]);
-        master_refresh();
-    },
+        // $("svg").empty();                    // 24.08.17: Literally empties the chart; unused.
+        plot_area(data);
+        // master_refresh(ui.values[0], ui.values[1]);
+        filter_date(ui.values[0], ui.values[1]);  //previous ver: 24.08.17
+        },
 });
 
 
@@ -221,7 +226,8 @@ function StackedBar() {
 
     var barStack = function (d) {
             // debugger
-            var l = d[0].length;        // 07.31.17: TODO: Note prev.: var l = d[0].length
+            // debugger
+            var l = d[0].length;               // 07.31.17: TODO: Note prev.: var l = d[0].length
             while (l--) {
                 var posBase = 0, negBase = 0;
                 d.forEach(function (d) {
@@ -230,7 +236,8 @@ function StackedBar() {
                     if (d.y < 0) {
                         d.y0 = negBase;
                         negBase -= d.size
-                    } else {
+                    } else
+                    {
                         d.y0 = posBase = posBase + d.size
                     }
                 })
@@ -250,8 +257,6 @@ function StackedBar() {
             console.log(data);
             // 1. Flatten the data....   TODO: Rewrite as a for loop.
             var flatten = data.map(function (obj) {
-                // console.log(obj.type);
-
                 if(obj === data[0]){
                    return obj.values.map(function (item) {
                             // console.log(obj);
@@ -278,6 +283,7 @@ function StackedBar() {
                     });
                 };
             });
+
 
 
 
@@ -746,7 +752,6 @@ function StackedBar() {
 
 
 
-
 function plot_area() {
 
     var config = {};
@@ -765,7 +770,8 @@ function plot_area() {
         .y(d3.scale.linear());
 
 
-    // console.log(data['data']);
+        console.log("Data:")
+    console.log(data['data']);
     d3.select("#two_panini").datum(data).call(chart);
 
 }
@@ -773,20 +779,22 @@ function plot_area() {
 plot_area();
 
 
-
-function master_refresh(min, max) {
-    // Purpose: Culminate and capture the call to the chart building functions previous
-    // take in the start_date, end_year
-    // call plot_area() with an input of the subset of the data
-    // reference the global?
-    // as result of the ajax call
-    // how to call the range slider? TODO: Determine dates min and max as variables to be passed, not hardcoded as below
-
-    filter_date(min, max);
-
-}
-
-master_refresh(2000, 2001);
+//
+// function master_refresh(min, max) {
+// //     // Purpose: Culminate and capture the call to the chart building functions previous
+// //     // take in the start_date, end_year
+// //     // call plot_area() with an input of the subset of the data
+// //     // reference the global?
+// //     // as result of the ajax call
+// //     // how to call the range slider? TODO: Determine dates min and max as variables to be passed, not hardcoded as below
+//
+//
+//     filter_date(min, max);
+//     plot_area();
+//
+// }
+//
+// // master_refresh(2000, 2001);
 
 
 

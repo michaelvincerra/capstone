@@ -2,6 +2,30 @@
 {% load static %}
 {% block content %}
 
+<!--
+Le traduzioni delle frase in Italiano:
+
+GDP: PIL: Prodotto Interno Lordo:
+ Misura il valore di mercato aggregato di tutte le merci finite e
+ di tutti i servizi prodotti nei confini di una nazione in un dato periodo di tempo.
+
+GNI: RNL: Reddito Nazionale Lordo di un paese viene calcolato sommando al prodotto interno lordo (PIL),
+o sottraendo da esso, vari flussi di reddito tra paesi.
+
+
+FDI: IDE: Investimento Diretoo all'estero.
+Contabilità nazionale nella quale vengono indicati i trasferimenti
+di capitale e di tecnologie da un paese all'altro.
+
+
+IP Sales.
+Le vendite della proprietà intellettuale.
+
+-->
+
+
+
+
 
 <table class="table_country_detail" colspan="8">   {#  #}
 
@@ -83,6 +107,8 @@
 
       <div class="svg-container1">  <!--preserveAspectRatio="xMaxYMax meet"  -->
         <svg viewBox="0 0 960 500" class="chart">
+
+
       </svg>
       </div>
 
@@ -105,7 +131,7 @@
   </div>
 
    <div class="five">
-        <div id="copywriting"><a href="{% url 'make_panini' slug="france" %}"> Next </a> </div> <!--TODO: Program this!!-->
+        <div id="copywriting"><a href="{% url 'make_panini' slug="italy" %}"> Next </a> </div> <!--TODO: Program this!!-->
    </div>
 
 {% endblock %}

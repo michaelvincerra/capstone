@@ -90,13 +90,32 @@ var svg = d3.select(".chart").append("svg")
         .attr("width", function (d) {
             return Math.abs(x(d.value) - x(0));
         })
-        .attr("height", y.rangeBand());
+        .attr("height", y.rangeBand())
+       .attr("preserveAspectRatio", "xMinYMin meet")
+       .attr("viewBox", "0 0 960 500");
 
        svg.append("text")      // text label for the x axis
         .attr("x", 135 )
         .attr("y",  100 )
         .style("text-anchor", "middle")
         .text("IP");
+
+      svg.append("text")      // text label for the x axis
+        .attr("x", 135 )
+        .attr("y",  200 )
+        .style("text-anchor", "middle")
+        .text("GDP");
+
+      svg.append("text")      // text label for the x axis
+        .attr("x", 135 )
+        .attr("y",  300 )
+        .style("text-anchor", "middle")
+        .text("GNI");
+      svg.append("text")      // text label for the x axis
+        .attr("x", 135 )
+        .attr("y",  400 )
+        .style("text-anchor", "middle")
+        .text("FDI");
 
 
     // bar.append("text")
