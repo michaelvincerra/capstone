@@ -58,7 +58,7 @@ def register(request):
             )
 
             # make any final changes to the user here.
-            # TODO: Ad a mail_managers function here. Per doc below:
+            # TODO: Add a mail_managers function here. Per doc below:
             # https://docs.djangoproject.com/en/1.11/topics/email/#mail-managers
             user.save()
 

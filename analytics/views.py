@@ -1,13 +1,22 @@
-from django.shortcuts import render, redirect
-from .models import EconomicSnapshot, Country, Collection
 from collections import OrderedDict
+
 from django.db.models import Max
+from django.shortcuts import render
+
 # from accounts.models import User
+from capstone.DataPanino.DataPanino.local_settings import SECRET_KEY
+from .models import EconomicSnapshot, Country, Collection
+
+
+# TODO: Fix the unused variable above.
+
 
 def home(request):
     """
     Landing page template view
     """
+
+    print(SECRET_KEY)
     return render(request, 'home.html')
 
 def about(request):

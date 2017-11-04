@@ -23,7 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '$n)qk_$eg(gjqq=p4v9&n(6ln%&=#0=ao%v@lg6wb7c_r(!s*f'
+# SECRET_KEY = '$n)qk_$eg(gjqq=p4v9&n(6ln%&=#0=ao%v@lg6wb7c_r(!s*f'             # TODO: Remove secret key
+from capstone.DataPanino.DataPanino.local_settings import SECRET_KEY            # TODO: Review .gitignore file
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

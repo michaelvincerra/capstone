@@ -10,10 +10,8 @@
 
 function filter_date(min, max) {
 
-    let newdata = [];
-    /* List building pattern  */
+    let newData = [];
     $.each(data.data, function (index, bar) {     /* for each to find the date via the data key */
-        "use strict";
 
         let newbar = Object();
         $.each(bar, function (year, value) {      /* for loop within a for loop to extract */
@@ -21,15 +19,16 @@ function filter_date(min, max) {
                 newbar[year] = year;
                 newbar[value] = value;
             }
-            newdata.push(newbar)
+            newData.push(newbar)
         });
     });
-    data = newdata;
+    data = newData;
+    // Redefining 'data' here may cause problems. 'data' variable does not enter, unless global
     console.log(data);
 }
 
 
-
+// 29.10.17
 $("#slider-range").slider({
     range: true,
     step: 1,
@@ -38,18 +37,48 @@ $("#slider-range").slider({
     values: [start_year, end_year],
 
     slide: function (event, ui) {
+        // innerHTML
         $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
-    },
-    stop: function (event, ui) {
+        },
+
+    stop: function (event, ui, ) {   // Replace the onSliderStop function
         console.log('Slider dropped');
+
         // $("svg").empty();                    // 24.08.17: Literally empties the chart; unused.
-        plot_area(data);
         // master_refresh(ui.values[0], ui.values[1]);
+        plot_area(data);
+        // plot_area(data);
         filter_date(ui.values[0], ui.values[1]);  //previous ver: 24.08.17
         },
+
 });
 
-
+// 29.10.2017 ATTEMPT
+// $(function() {
+//     $("#slider-range").slider({
+//         range: true,
+//         // step: 1,
+//         min: start_year,
+//         max: end_year-1,
+//         values: [start_year, end_year],
+//
+//         slide: function (event, ui) {
+//             let maxvalue = d3.min([ui.values[1], data.length]);
+//             let minvalue = d3.max([ui.values[0], 0]);
+//
+//             x.domain([minvalue, maxvalue - 1]);
+//
+//             chart.transition().duration(750)
+//                 .select(".x.axis").call(xAxis);
+//
+//             chart.transition().duration(750)
+//                 .select(".path").attr("d", line(data));
+//
+//             filter_date(ui.values[0], ui.values[1]);  //previous ver: 24.08.17
+//             plot_area(data)
+//         }
+//     });
+// });
 
 // ------------JQUERY ORIGINAL EXAMPLE FOLLOWED------------------//
 // https://jqueryui.com/slider/#range
@@ -170,7 +199,7 @@ function StackedBar() {
 
         var tmp = display_data.map(function (row) {
             // console.log(row);
-            // var name = get_key(row);
+            var name = get_key(row);
             //  var name =
             var values = x_values.map(function (key) {
                 var y_val = +_.get(row, key, 0);
@@ -186,7 +215,7 @@ function StackedBar() {
             values = _.sortBy(values, function (o) {
                 return o.x;
             });
-            return {'indicator_type': name, 'values': values,};
+            return { 'indicator_type': name, 'values': values};
         });
 
         return tmp;
@@ -227,7 +256,7 @@ function StackedBar() {
     var barStack = function (d) {
             // debugger
             // debugger
-            var l = d[0].length;               // 07.31.17: TODO: Note prev.: var l = d[0].length
+            var l = d[0].length;               /*07.31.17: TODO: Note prev.: var l = d[0].length*/
             while (l--) {
                 var posBase = 0, negBase = 0;
                 d.forEach(function (d) {
@@ -245,6 +274,8 @@ function StackedBar() {
             return d
         };
 
+    const simpleColors = ["#45879B", "#80D3ED", "#f0AD4E", "#678EC4"];
+
 
     function chart(selection) {
         selection.each(function (tmp) {
@@ -253,7 +284,6 @@ function StackedBar() {
             var data = prepare_data(tmp);
             //  pos_data = _.filter(tmp, function(item))
             var total = prepare_total(data);
-            var simpleColors = ["#45879B", "#80D3ED", "#f0AD4E", "#678EC4"];
             console.log(data);
             // 1. Flatten the data....   TODO: Rewrite as a for loop.
             var flatten = data.map(function (obj) {
@@ -311,7 +341,7 @@ function StackedBar() {
 
             d3.select(this).selectAll("svg").remove();
 
-            svg = d3.select(this).selectAll("svg").data([data])
+            svg = d3.select(this).selectAll("svg").data([data])                 // TODO: Global variable for SVG
                   // .attr("data-legend",function(d) { return d.name});
 
             var gEnter = svg.enter().append("svg").append("g");
@@ -346,7 +376,8 @@ function StackedBar() {
             // add the tool tip
             gEnter.append("g")
                 .attr("class", "focus")
-                .style("display", "none");
+                .style("display", "none")
+
 
             // Main group translate everything above...
             var g = svg.select("g")
@@ -359,6 +390,7 @@ function StackedBar() {
 
 
             //----------- This is for the tool tip --------------------------
+
             var focus = g.select(".focus");
             focus.select("foreignObject").remove();
             focus.select("circle").remove();
@@ -367,14 +399,17 @@ function StackedBar() {
                 .attr("width", 200)
                 .attr("height", 100)
                 .attr("x", 20)      // TODO: Change tooltip to appear directly above the object on  mouse-over
-                .attr("y", 20)
+                .attr("y", 50)
                 .append("xhtml:body")
                 .html("");
 
+
             focus.append("circle")
                 .style("fill", "none")
-                .style("stroke", "black")
+                .style("stroke", "#aaff32")
                 .attr("r", 4);
+
+
 
 
             //==============================================================
@@ -391,42 +426,54 @@ function StackedBar() {
             // Legend
             // =============================================================
 
-            const indicator_type = svg.selectAll(data.columns)
-                .text(function (d){return d;});
-
-                color.domain(d3.keys(data[0]).filter(function(key) {
-                return key !== "id";
-                }));
-
-            // data.columns().selectAll("rect")
-            //     .data(function(d) {return d.data.columns; })
-            //     .enter().append("rect")
-            //     .attr("width", x.rangeBand())
-            //     .attr("y", function(d) {return y(d.y1); })
-            //     .attr("height", function(d) { return (y(d.y0) - y(d.y1)); })
-            //     .style("fill", function(d) {return color(d.name); });
+            let legend_indicators = ["FDI", "GDP", "GNI", "IP"];
+            // let legend_indicators = ["FDI/ IDE", "GDP/PIL", "GNI/PNL", "IP"];    TODO: Fai la traduzione in Italiano.
 
 
+            let colorize = d3.scale.ordinal()
+                .domain(legend_indicators)
+                .range(simpleColors)
 
-            var legend = svg.selectAll(".legend")
-                .data(color.domain().slice())
+
+            let legend = svg.selectAll(".legend")
+                .data(legend_indicators)
                 .enter().append("g")
                 .attr("class", "legend")
-                .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+                .attr("transform", function (d, i)
+                { return "translate(-999," + i * 20 + ")"; });  //where -1000 is x value // TODO: Restart here 3/11/2017
+                // // .attr("transform", function (d, i) { return "translate(0," + i * 20 + ")"; });
+
 
                 legend.append("rect")
-                .attr("x", width - 18)
-                .attr("width", 30)
-                .attr("height", 20)
-                .style("fill", color);     //TODO: Match with simpleColors
+                .attr("x", width - 20)
+                .attr("width", 25)
+                .attr("height", 15)
+                .style("fill", colorize)
+                .style("stroke", "#aaff32");
 
                 legend.append("text")
                 .attr("x", width - 24)
                 .attr("y", 9)
                 .attr("dy", ".35em")
                 .style("text-anchor", "end")
-                .text(indicator_type)
+                // .text(indicator_type, "FDI")         // TODO: Follow up/clean up references to 'indicator_type'
                 .text(function (d) { return d; });
+
+
+
+
+                // $(legend).css({top: 200, left: 200, position:'absolute'}); //jQuery solution; doesn't work.
+
+                // let indicatorColor = color.domain().map(function(legends_indicator) {
+                //     return {
+                //         values: legends_indicator.map(function(d) {
+                //             return {simpleColors};
+                //         })
+                //     };
+                //
+                // });
+
+
 
 
                 // data.columns[1].type; this shows the economic indicator type.
@@ -483,9 +530,9 @@ function StackedBar() {
                 var info = d.name.split("::");
 
                 var txt = "<strong>" + info + "</strong><br>"
-                txt += Math.round(d.y).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                txt += Math.round(d.y).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");        // Review regex
 
-                var fo = focus.select("foreignObject")
+                var fo = focus.select("foreignObject")                  // Tool tip / tooltip link to foreignObject
                 fo.html(txt);
 
                 if (x(d.x) > width - 150) {
@@ -750,9 +797,13 @@ function StackedBar() {
 //       .text("A Stacked Bar Chart");
 //
 
+let chart;
 
 
 function plot_area() {
+    if(chart) {
+    chart.remove()}
+    console.log(chart);
 
     var config = {};
     config.query = {};
@@ -760,7 +811,7 @@ function plot_area() {
     config.query.select = ['code'];
 
     // Plots the data as an area chart
-    var chart = StackedBar()
+    chart = StackedBar()
         .width(1230)            /* 820  original*/
         .height(675)            /* 450  original*/
         .columns(data.columns)
@@ -770,31 +821,32 @@ function plot_area() {
         .y(d3.scale.linear());
 
 
-        console.log("Data:")
-    console.log(data['data']);
+    //     console.log("Data:")
+    // console.log(data['data']);
     d3.select("#two_panini").datum(data).call(chart);
-
 }
+
+
 
 plot_area();
 
 
 //
-// function master_refresh(min, max) {
+function master_refresh(min, max) {
 // //     // Purpose: Culminate and capture the call to the chart building functions previous
 // //     // take in the start_date, end_year
 // //     // call plot_area() with an input of the subset of the data
 // //     // reference the global?
 // //     // as result of the ajax call
 // //     // how to call the range slider? TODO: Determine dates min and max as variables to be passed, not hardcoded as below
-//
-//
+// //
+// //
 //     filter_date(min, max);
 //     plot_area();
-//
-// }
-//
-// // master_refresh(2000, 2001);
+
+}
+
+master_refresh(2000, 2001);
 
 
 
