@@ -114,7 +114,7 @@ def make_panini(request, slug):
     # economicsnapshot = EconomicSnapshot.objects.get(slug=slug)
     # reordered= selection.snapshots.aggregate(reversed('year'))
 
-    start_year = 1975          ## TODO: Recreate start_year, end_year values as a variable.
+    start_year = 1975                                        # TODO: Recreate start_year, end_year values as a variable.
     end_year = 2015
 
     data, snapshot_ids = list(), list(),

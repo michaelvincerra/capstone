@@ -3,10 +3,113 @@
 // https://gist.github.com/mlunacek/8431eed93c26c3a30434dd5e02a1652c#file-d3-v3-min-js
 /* http://api.jquery.com/jquery.each/ */
 
-/*
-26.07.17: 'tmp' as a param, is not discoverable; that is a problem because it's the root of the error of data.length.
- */
+/*26.07.17: 'tmp' as a param, is not discoverable; that is a problem because it's the root of the error of data.length.*/
 
+
+//////// 04.11.2017 ////////   EURO DATE       CHANGES ON HOLD
+
+                    /// MATTHEW'S RECOMMENDATIONS   ///
+
+// window.onload = __init__;
+//
+// let svg, slider, rangeLabel;
+//
+// function __init__() {
+//     // Purpose: Initialize slider
+//     // Call plot() with default values for start and stop
+//
+//     // Initialize the code
+//     // function init() {
+//     // Create the slider
+//     slider = $('#slider-range').slider({       // NOTE: I used my HTML element ID here: <div id="slider-range"></div>
+//         range: true,
+//         min: start_year,
+//         max: end_year,
+//         step: 1,
+//         values: [start_year, end_year],
+//
+//         slide: function (event, ui) {
+//             // On slide, display selected values
+//             updateLabel(...ui.values)
+//         },
+//
+//         stop: function (event, ui) {
+//             // On stop, redraw the chart
+//             plot(...ui.values);
+//             console.log('Slider dropped');
+//         }
+//     });
+//
+//
+//     // Update label
+//     rangeLabel = document.getElementById('range-label');
+//     updateLabel(...slider.slider('option', 'values'));
+//
+//     // Plot chart
+//     plot(...slider.slider('option', 'values'));
+//
+//     window.onresize = () => {
+//         plot(...slider.slider('option', 'values'));
+//     }
+//
+// }
+//
+//     // Update labels so users know which dates are selected.
+//     function updateLabel(start_year, end_year) {
+//         rangeLabel.innerHTML = `Start: ${start_year} End: ${end_year}`;
+//     }
+//
+//     // Plot chart
+//     function plot(start, end) {
+//
+//          // svg = d3.select(this).selectAll("svg").data([data]) // MICHAEL ADDED FOR REF.
+//
+//          // Overall chart size
+//         const chartWidth = window.innerWidth / 2;
+//         const chartHeight = window.innerHeight / 2;
+//
+//
+//         let values = data
+//             .filter((elem) => {return elem.year >= start && elem.year <= end})
+//             .map((elem) => {return elem.year});
+//
+//         let years = data
+//             .filter((elem) => {return elem.year >= start && elem.year <= end})
+//             .map((elem) => {return elem.year});
+//
+//         // Initialize D3 SVG
+//
+//         if (!svg) {
+//             svg = d3.select('#two_panini').append('svg')     // NOTE: I added my HTML id here: <div id="two_panini">
+//                 .attr('height', chartHeight)
+//                 .attr('width', '100vw');
+//         }
+//
+//         // Remove old data
+//         svg.selectAll('rect').remove();
+//         svg.selectAll('text').remove();
+//
+//
+//         // Draw chart with NEW DATA
+//         svg.selectAll('rect')                    // TODO: Check plot_area() for conflicts/overlap
+//             .data(values)
+//             .enter().append('rect')
+//                 // Set data point height and width
+//             .attr('height', function(d) {return d/ 2})
+//             .attr('width', chartWidth / values.length - 10)
+//                 // Set data point x and y positions
+//             .attr('x', function(d, i) {return i * (chartWidth / values.length)})
+//             .attr('y', chartHeight);
+//
+//     }
+//
+//     __init__();
+
+//////// 04.11.2017 ////////  EURO DATE       CHANGES ON HOLD
+
+
+
+//////// 04.11.2017 //////// EURO DATE       PREVIOUS CODE ON HOLD
 
 function filter_date(min, max) {
 
@@ -28,7 +131,6 @@ function filter_date(min, max) {
 }
 
 
-// 29.10.17
 $("#slider-range").slider({
     range: true,
     step: 1,
@@ -37,21 +139,25 @@ $("#slider-range").slider({
     values: [start_year, end_year],
 
     slide: function (event, ui) {
-        // innerHTML
         $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
         },
 
-    stop: function (event, ui, ) {   // Replace the onSliderStop function
+    stop: function (event, ui, ) {               // Should replace with the onSliderStop function?
         console.log('Slider dropped');
 
         // $("svg").empty();                    // 24.08.17: Literally empties the chart; unused.
         // master_refresh(ui.values[0], ui.values[1]);
-        plot_area(data);
+        plot_area();
         // plot_area(data);
         filter_date(ui.values[0], ui.values[1]);  //previous ver: 24.08.17
         },
 
 });
+
+//////// 04.11.2017 ////////  EURO DATE       PREVIOUS CODE ON HOLD
+
+
+
 
 // 29.10.2017 ATTEMPT
 // $(function() {
@@ -460,24 +566,6 @@ function StackedBar() {
                 .text(function (d) { return d; });
 
 
-
-
-                // $(legend).css({top: 200, left: 200, position:'absolute'}); //jQuery solution; doesn't work.
-
-                // let indicatorColor = color.domain().map(function(legends_indicator) {
-                //     return {
-                //         values: legends_indicator.map(function(d) {
-                //             return {simpleColors};
-                //         })
-                //     };
-                //
-                // });
-
-
-
-
-                // data.columns[1].type; this shows the economic indicator type.
-
             bars_enter.enter()
                 .append("rect")
                 .attr("x", function (d) {
@@ -797,7 +885,7 @@ function StackedBar() {
 //       .text("A Stacked Bar Chart");
 //
 
-let chart;
+let chart;              // ADDED 04.11.2017
 
 
 function plot_area() {
@@ -821,32 +909,31 @@ function plot_area() {
         .y(d3.scale.linear());
 
 
-    //     console.log("Data:")
+    // console.log("Data:")
     // console.log(data['data']);
     d3.select("#two_panini").datum(data).call(chart);
 }
-
 
 
 plot_area();
 
 
 //
-function master_refresh(min, max) {
-// //     // Purpose: Culminate and capture the call to the chart building functions previous
-// //     // take in the start_date, end_year
-// //     // call plot_area() with an input of the subset of the data
-// //     // reference the global?
-// //     // as result of the ajax call
-// //     // how to call the range slider? TODO: Determine dates min and max as variables to be passed, not hardcoded as below
-// //
-// //
-//     filter_date(min, max);
-//     plot_area();
-
-}
-
-master_refresh(2000, 2001);
+// function master_refresh(min, max) {
+// // //     // Purpose: Culminate and capture the call to the chart building functions previous
+// // //     // take in the start_date, end_year
+// // //     // call plot_area() with an input of the subset of the data
+// // //     // reference the global?
+// // //     // as result of the ajax call
+// // //     // how to call the range slider? TODO: Determine dates min and max as variables to be passed, not hardcoded as below
+// // //
+// // //
+// //     filter_date(min, max);
+// //     plot_area();
+//
+// }
+//
+// master_refresh(2000, 2001);
 
 
 

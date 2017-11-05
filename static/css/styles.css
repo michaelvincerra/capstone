@@ -491,7 +491,7 @@ font: 10px sans-serif;
 
     display: flex;
     flex-direction: row;
-    padding-left: 20%;
+    /*padding-left: 20%;*/
     justify-content: flex-end;
     height: 100%;
     width: 100%;
