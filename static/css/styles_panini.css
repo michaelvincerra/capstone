@@ -118,6 +118,17 @@ shape-rendering: crispEdges;
     /*/*[footer-left] "nav  foot" 30px [footer-right]*/
     /*/ 120px 1fr;   !* 120px 1fr; *!*/
     }
+
+
+#range-label {
+
+    font: Signika;
+    color: #003973; /* #45879B */
+}
+
+
+
+
 #year_range_box{
     padding-left: 5%;
 }

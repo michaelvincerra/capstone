@@ -5,186 +5,231 @@
 
 /*26.07.17: 'tmp' as a param, is not discoverable; that is a problem because it's the root of the error of data.length.*/
 
+let svg, slider, rangeLabel, chart;
 
-//////// 04.11.2017 ////////   EURO DATE       CHANGES ON HOLD
+
+// TODO: In original code 'chart' is a function (not var). Not sure of intent in using chart as global variable.
+
 
                     /// MATTHEW'S RECOMMENDATIONS   ///
 
-// window.onload = __init__;
-//
-// let svg, slider, rangeLabel;
-//
-// function __init__() {
-//     // Purpose: Initialize slider
-//     // Call plot() with default values for start and stop
-//
-//     // Initialize the code
-//     // function init() {
-//     // Create the slider
-//     slider = $('#slider-range').slider({       // NOTE: I used my HTML element ID here: <div id="slider-range"></div>
-//         range: true,
-//         min: start_year,
-//         max: end_year,
-//         step: 1,
-//         values: [start_year, end_year],
-//
-//         slide: function (event, ui) {
-//             // On slide, display selected values
-//             updateLabel(...ui.values)
-//         },
-//
-//         stop: function (event, ui) {
-//             // On stop, redraw the chart
-//             plot(...ui.values);
-//             console.log('Slider dropped');
-//         }
-//     });
-//
-//
-//     // Update label
-//     rangeLabel = document.getElementById('range-label');
-//     updateLabel(...slider.slider('option', 'values'));
-//
-//     // Plot chart
-//     plot(...slider.slider('option', 'values'));
-//
-//     window.onresize = () => {
-//         plot(...slider.slider('option', 'values'));
-//     }
-//
-// }
-//
-//     // Update labels so users know which dates are selected.
-//     function updateLabel(start_year, end_year) {
-//         rangeLabel.innerHTML = `Start: ${start_year} End: ${end_year}`;
-//     }
-//
-//     // Plot chart
-//     function plot(start, end) {
-//
-//          // svg = d3.select(this).selectAll("svg").data([data]) // MICHAEL ADDED FOR REF.
-//
-//          // Overall chart size
-//         const chartWidth = window.innerWidth / 2;
-//         const chartHeight = window.innerHeight / 2;
-//
-//
-//         let values = data
-//             .filter((elem) => {return elem.year >= start && elem.year <= end})
-//             .map((elem) => {return elem.year});
-//
-//         let years = data
-//             .filter((elem) => {return elem.year >= start && elem.year <= end})
-//             .map((elem) => {return elem.year});
-//
-//         // Initialize D3 SVG
-//
-//         if (!svg) {
-//             svg = d3.select('#two_panini').append('svg')     // NOTE: I added my HTML id here: <div id="two_panini">
-//                 .attr('height', chartHeight)
-//                 .attr('width', '100vw');
-//         }
-//
-//         // Remove old data
-//         svg.selectAll('rect').remove();
-//         svg.selectAll('text').remove();
-//
-//
-//         // Draw chart with NEW DATA
-//         svg.selectAll('rect')                    // TODO: Check plot_area() for conflicts/overlap
-//             .data(values)
-//             .enter().append('rect')
-//                 // Set data point height and width
-//             .attr('height', function(d) {return d/ 2})
-//             .attr('width', chartWidth / values.length - 10)
-//                 // Set data point x and y positions
-//             .attr('x', function(d, i) {return i * (chartWidth / values.length)})
-//             .attr('y', chartHeight);
-//
-//     }
-//
-//     __init__();
+// References function that builds default chart on page load
+window.onload = __init__;
 
-//////// 04.11.2017 ////////  EURO DATE       CHANGES ON HOLD
+function __init__() {
+    // Purpose: Initialize slider and code with data
+    // Call plot() with default values for start and stop
 
+    function init() {
+        // Create the slider
+        slider = $('#slider').slider({       // NOTE: I used my HTML element ID here: <div id="slider-range"></div>
+            range: true,
+            min: start_year,
+            max: end_year,
+            step: 1,
+            values: [start_year, end_year],
 
+            // On slide, update the labels to reflect new year-range
+            slide: function (event, ui) {
+                // On slide, display selected values
+                updateLabel(...ui.values)
+            },
 
-//////// 04.11.2017 //////// EURO DATE       PREVIOUS CODE ON HOLD
-
-function filter_date(min, max) {
-
-    let newData = [];
-    $.each(data.data, function (index, bar) {     /* for each to find the date via the data key */
-
-        let newbar = Object();
-        $.each(bar, function (year, value) {      /* for loop within a for loop to extract */
-            if (year >= min && year <= max) {
-                newbar[year] = year;
-                newbar[value] = value;
+            // On stop, call plot() function in order to redraw the chart based on user selection.
+            stop: function (event, ui) {
+                plot(...ui.values);
+                console.log('Slider dropped');
             }
-            newData.push(newbar)
         });
-    });
-    data = newData;
-    // Redefining 'data' here may cause problems. 'data' variable does not enter, unless global
-    console.log(data);
+        // Call DOM to access ID 'range-label'
+        rangeLabel = document.getElementById('range-label');
+        // Call function updateLabel() to update labels based on user selection
+        updateLabel(...slider.slider('option', 'values'));
+
+        // Call function plot, then update data based on user selection of slider
+        plot(...slider.slider('option', 'values'));
+
+        // On window resize, call function plot and update chart based on user selection
+        window.onresize = () => {
+            plot(...slider.slider('option', 'values'));
+        }
+    }
+
+// Update labels so user sees dates that are selected.
+function updateLabel(start, end) {
+    rangeLabel.innerHTML = `From: ${start} To: ${end} `;
+}
+
+// Plot chart TODO: REFACTOR plot() by integrating function plot_area()
+function plot(start_year, end_year) {
+
+    // Overall chart size
+    const chartWidth = window.innerWidth / 2;
+    const chartHeight = window.innerHeight / 2;
+
+    let values = data
+        .filter((elem) => {
+        // Remove data that's not in selected range
+        return elem.year >= start_year && elem.year <= end_year
+    })
+        .map((elem) => {
+            return elem.year
+        });
+
+    let years = data
+        .filter((elem) => {
+        // Remove data that's not in selected range
+        return elem.year >= start_year && elem.year <= end_year
+    })
+        .map((elem) => {
+            return elem.year
+        });
+
+    // Initialize D3 SVG | HYBRID SOLUTION  05.11.2017
+    if (!svg) {
+        // svg = d3.select("#two_panini").datum(data).call(chart).append('svg')
+        // svg = d3.select("#two_panini").datum(data).call(chart);
+        // svg = d3.select("#chart").append('svg')               // TODO: Matthew's example
+        svg = d3.select('#two_panini').append('svg')            // I added my own id:<div id="two_panini">
+            .attr('height', chartHeight)                        // TODO: TEST 1414; REMOVE TEMPORARILY
+            .attr('width', '100vw');
+
+            var config = {};
+            config.query = {};
+            config.number_of_rows = 10;
+            config.query.select = ['code'];
+
+            chart = StackedBar()        //  StackedBar() must be called to prep chart data.
+                .width(1230)            //  820  original
+                .height(675)            //  450  original
+                .columns(data.columns)
+                .config(config)
+                .margin({top: 30, right: 20, bottom: 20, left: 60})
+                .x(d3.scale.ordinal())
+                .y(d3.scale.linear());
+
+        // svg = d3.select("#two_panini").datum(data).call(chart);
+
+        }
+
+        // Remove old data
+        svg.selectAll('rect').remove();
+        svg.selectAll('text').remove();
+
+        // Draw chart with NEW DATA
+        plot_area();
+        svg.selectAll('rect')                                  // TODO: Check plot_area() for conflicts/overlap
+            .data(values)
+            .enter().append('rect')
+        // Set data point height and width
+            .attr('height', function (d) {
+                return d / 2
+            })
+            .attr('width', chartWidth / values.length - 10)
+            // Set data point x and y positions
+            .attr('x', function (d, i) {
+                return i * (chartWidth / values.length)
+            })
+            .attr('y', function (d) {
+                return chartHeight - 15 - d / 2
+            });
+
+        svg.selectAll("text")
+            .data(years)
+            .enter().append("text")
+            .text(function (d) {return d})
+            .attr('x', function (d, i) {return i * (chartWidth / values.length)})
+            .attr('y', chartHeight);
+
+    }
+init();
 }
 
 
-$("#slider-range").slider({
-    range: true,
-    step: 1,
-    min: start_year,
-    max: end_year,
-    values: [start_year, end_year],
+//////// 04.11.2017 ////////  EURO DATE       CHANGES ON HOLD
+//////// 05.11.2017 ////////   EURO DATE       CHANGES ON HOLD
 
-    slide: function (event, ui) {
-        $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
-        },
+//
+//
+// function plot_area() {
+//     if(chart) {             // TODO: REVISE IF CONFLICT
+//     chart.remove()}         // TODO: REVISE IF CONFLICT
+//     console.log(chart);     // TODO: REVISE IF CONFLICT
+//
+//     var config = {};
+//     config.query = {};
+//     config.number_of_rows = 10;
+//     config.query.select = ['code'];
+//
+//     // Plots the data as an area chart
+//     chart = StackedBar()
+//         .width(1230)            /* 820  original*/
+//         .height(675)            /* 450  original*/
+//         .columns(data.columns)
+//         .config(config)
+//         .margin({top: 30, right: 20, bottom: 20, left: 60})
+//         .x(d3.scale.ordinal())
+//         .y(d3.scale.linear());
+//
+//
+//     // console.log("Data:")
+//     // console.log(data['data']);
+//     d3.select("#two_panini").datum(data).call(chart);
+// }
+//
+// plot_area();
 
-    stop: function (event, ui, ) {               // Should replace with the onSliderStop function?
-        console.log('Slider dropped');
 
-        // $("svg").empty();                    // 24.08.17: Literally empties the chart; unused.
-        // master_refresh(ui.values[0], ui.values[1]);
-        plot_area();
-        // plot_area(data);
-        filter_date(ui.values[0], ui.values[1]);  //previous ver: 24.08.17
-        },
 
-});
+
+
+//////// 04.11.2017 ////////   SLIDER BAR     EURO DATE       PREVIOUS CODE ON HOLD
+
+// function filter_date(min, max) {
+//
+//     let newData = [];
+//     $.each(data.data, function (index, bar) {     /* for each to find the date via the data key */
+//
+//         let newbar = Object();
+//         $.each(bar, function (year, value) {      /* for loop within a for loop to extract */
+//             if (year >= min && year <= max) {
+//                 newbar[year] = year;
+//                 newbar[value] = value;
+//             }
+//             newData.push(newbar)
+//         });
+//     });
+//     data = newData;
+//     // Redefining 'data' here may cause problems. 'data' variable does not enter, unless global
+//     console.log(data);
+// }
+//
+//
+// $("#slider-range").slider({
+//     range: true,
+//     step: 1,
+//     min: start_year,
+//     max: end_year,
+//     values: [start_year, end_year],
+//
+//     slide: function (event, ui) {
+//         $("#year_range").val(ui.values[0] + ' - ' + ui.values[1]);
+//         },
+//
+//     stop: function (event, ui, ) {               // Should replace with the onSliderStop function?
+//         console.log('Slider dropped');
+//
+//         // $("svg").empty();                    // 24.08.17: Literally empties the chart; unused.
+//         // master_refresh(ui.values[0], ui.values[1]);
+//         plot_area();
+//         // plot_area(data);
+//         filter_date(ui.values[0], ui.values[1]);  //previous ver: 24.08.17
+//         },
+//
+// });
 
 //////// 04.11.2017 ////////  EURO DATE       PREVIOUS CODE ON HOLD
 
-
-
-
-// 29.10.2017 ATTEMPT
-// $(function() {
-//     $("#slider-range").slider({
-//         range: true,
-//         // step: 1,
-//         min: start_year,
-//         max: end_year-1,
-//         values: [start_year, end_year],
-//
-//         slide: function (event, ui) {
-//             let maxvalue = d3.min([ui.values[1], data.length]);
-//             let minvalue = d3.max([ui.values[0], 0]);
-//
-//             x.domain([minvalue, maxvalue - 1]);
-//
-//             chart.transition().duration(750)
-//                 .select(".x.axis").call(xAxis);
-//
-//             chart.transition().duration(750)
-//                 .select(".path").attr("d", line(data));
-//
-//             filter_date(ui.values[0], ui.values[1]);  //previous ver: 24.08.17
-//             plot_area(data)
-//         }
-//     });
-// });
 
 // ------------JQUERY ORIGINAL EXAMPLE FOLLOWED------------------//
 // https://jqueryui.com/slider/#range
@@ -228,8 +273,6 @@ function StackedBar() {
 
     x = d3.scale.ordinal().range([0, width]);
     y = d3.scale.linear().range([height, 0]);
-
-    // Restart here //
 
 
     var columns;
@@ -382,7 +425,7 @@ function StackedBar() {
 
     const simpleColors = ["#45879B", "#80D3ED", "#f0AD4E", "#678EC4"];
 
-
+    // PREPARES chart for rendering with colors, labels, and all X, Y coordinates for SVG
     function chart(selection) {
         selection.each(function (tmp) {
 
@@ -885,37 +928,42 @@ function StackedBar() {
 //       .text("A Stacked Bar Chart");
 //
 
-let chart;              // ADDED 04.11.2017
 
 
-function plot_area() {
-    if(chart) {
-    chart.remove()}
-    console.log(chart);
+/////  ON HOLD 05.11.2017 /////
 
-    var config = {};
-    config.query = {};
-    config.number_of_rows = 10;
-    config.query.select = ['code'];
+// function plot_area() {
+//     // if(chart) {
+//     // chart.remove()}
+//     // console.log(chart);
+//
+//     var config = {};
+//     config.query = {};
+//     config.number_of_rows = 10;
+//     config.query.select = ['code'];
+//
+//     // Plots the data as chart by calling function StackedBar()
+//     chart = StackedBar()
+//         .width(1230)            /* 820  original*/
+//         .height(675)            /* 450  original*/
+//         .columns(data.columns)
+//         .config(config)
+//         .margin({top: 30, right: 20, bottom: 20, left: 60})
+//         .x(d3.scale.ordinal())
+//         .y(d3.scale.linear());
+//
+//
+//     // console.log("Data:")
+//     // console.log(data['data']);
+//     d3.select("#two_panini").datum(data).call(chart);
+//
+// }
+//
+// plot_area();
 
-    // Plots the data as an area chart
-    chart = StackedBar()
-        .width(1230)            /* 820  original*/
-        .height(675)            /* 450  original*/
-        .columns(data.columns)
-        .config(config)
-        .margin({top: 30, right: 20, bottom: 20, left: 60})
-        .x(d3.scale.ordinal())
-        .y(d3.scale.linear());
+/////  ON HOLD 05.11.2017 /////
 
 
-    // console.log("Data:")
-    // console.log(data['data']);
-    d3.select("#two_panini").datum(data).call(chart);
-}
-
-
-plot_area();
 
 
 //
